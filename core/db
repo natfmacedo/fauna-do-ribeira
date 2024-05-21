@@ -1,0 +1,26 @@
+{
+  "animals": [
+    {
+      "id": "57479134-90f9-42f3-a042-a3cfe056282f",
+      "date": "2024-05-20T13:23:51.127Z",
+      "name": "Maria-leque-do-sudeste",
+      "image": "",
+      "scientificName": "",
+      "characteristics": "",
+      "eating": "",
+      "location": "",
+      "iucnState": ""
+    },
+    {
+      "id": "35b81306-2800-4992-bfc0-c7137ef8f53c",
+      "date": "2024-05-20T13:23:51.136Z",
+      "name": "Tucano-de-bico-preto",
+      "image": "",
+      "scientificName": "",
+      "characteristics": "",
+      "eating": "",
+      "location": "",
+      "iucnState": ""
+    }
+  ]
+}
