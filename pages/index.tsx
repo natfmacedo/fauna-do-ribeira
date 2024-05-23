@@ -1,9 +1,11 @@
+import React from "react";
+
 function HomePage() {
     return (
-    <div>
-        <h1>Fauna do Ribeira</h1>
-    </div>
-    )
+        <div>
+            <h2>Seja Bem-vindo(a)!</h2>
+        </div>
+    );
 }
 
 export default HomePage;
