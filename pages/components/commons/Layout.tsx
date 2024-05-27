@@ -1,5 +1,6 @@
 import React from "react";
 import { ReactNode } from "react";
+import { Button } from "react-aria-components";
 
 interface LayoutProps {
     children: ReactNode;
@@ -14,6 +15,20 @@ export const Layout = ({ children }: LayoutProps) => {
                 <h1>Fauna do Ribeira</h1>
             </header>
             {children}
+            <footer>
+                <h5>Fauna do Ribeira</h5>
+                <p>
+                    Se interessou pelo projeto e gostaria de ser um(a)
+                    colaborador(a)?
+                </p>
+                <Button aria-describedby="descricaoContato">
+                    Clique aqui para entrar em contato
+                </Button>
+                <p id="descricaoContato">
+                    Abre a janela do aplicativo de e-mail com o destinatário
+                    (e-mail do projeto) já preenchido.
+                </p>
+            </footer>
         </>
     );
 };

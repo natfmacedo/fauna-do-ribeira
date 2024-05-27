@@ -25,6 +25,12 @@
       ],
       "@components/*": [
         "pages/components/commons/*"
+      ],
+      "@db-crud-animais": [
+        "core/crud.ts"
+      ],
+      "@server/*": [
+        "src/server/*"
       ]
     }
   },

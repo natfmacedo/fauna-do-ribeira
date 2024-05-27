@@ -13,6 +13,7 @@ interface Animal {
     eating: string;
     location: string;
     iucnState: string;
+    link: string;
 }
 
 function create(
@@ -22,7 +23,8 @@ function create(
     characteristics: string,
     eating: string,
     location: string,
-    iucnState: string
+    iucnState: string,
+    link: string
 ) {
     const animal: Animal = {
         id: uuid(),
@@ -34,6 +36,7 @@ function create(
         eating: eating,
         location: location,
         iucnState: iucnState,
+        link: link,
     };
 
     // Array da lista de animais
@@ -55,7 +58,7 @@ function create(
     return name;
 }
 
-function read(): Array<Animal> {
+export function read(): Array<Animal> {
     const dbString = fs.readFileSync(DB_FILE_PATH, "utf-8");
     const db = JSON.parse(dbString || "{}");
     // Fail Fast Validations
@@ -71,7 +74,25 @@ function CLEAR_DB() {
 
 // [SIMULAÇÃO]
 CLEAR_DB();
-create("Maria-leque-do-sudeste", "", "", "", "", "", "");
-create("Tucano-de-bico-preto", "", "", "", "", "", "");
-// eslint-disable-next-line no-console
+create(
+    "Maria-leque-do-sudeste",
+    "",
+    "Onychorhynchus swainsoni",
+    "Pertencente ao Reino Animalia e à Ordem dos Passeiformes, a Maria-leque-do-sudeste tem entre 16 e 17,5 centímetros de comprimento e pesa entre 13 e 21 gramas. O nome vem da presença de uma plumagem na cabeça em formato de leque nas cores escarlate, preto e azul no macho e laranja, preto e azul na fêmea.",
+    "Borboletas, libélulas, vespas e mamangavas.",
+    "Apiaí, Barra do Turvo e Eldorado.",
+    "Vulnerável (VU)",
+    ""
+);
+create(
+    "Tucano-de-bico-preto",
+    "",
+    "Ramphastos vitellinus",
+    "Pertencente ao Reino Animalia e à Ordem dos Paciformes, possui aproximadamente 46 centímetros de comprimento.",
+    "Frutos, artrópodes em geral, aranhas, ovos, filhotes de outras aves, anfíbios, morcegos e gambás.",
+    "Apiaí, Cananéia e Eldorado.",
+    "Pouco preocupante (LC)",
+    ""
+);
+//eslint-disable-next-line no-console
 console.log(read());
