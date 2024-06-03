@@ -13,6 +13,7 @@ interface HomeAnimal {
     id: string;
     name: string;
     image: string;
+    imageDescription: string;
     scientificName: string;
     characteristics: string;
     eating: string;
@@ -22,14 +23,30 @@ interface HomeAnimal {
 }
 
 function HomePage() {
+    // const [initialLoadComplete, setInitialLoadComplete] = React.useState(false);
+    const initialLoadComplete = React.useRef(false);
+    const [totalPages, setTotalPages] = React.useState(0);
     const [page, setPage] = React.useState(1);
+    const [search, setSearch] = React.useState("");
     const [animals, setAnimals] = React.useState<HomeAnimal[]>([]);
+    const homeAnimals = animals.filter((animal) => {
+        const searchNormalized = search.toLowerCase();
+        const nameNormalized = animal.name.toLowerCase();
+        return nameNormalized.includes(searchNormalized);
+    });
+    const hasNoAnimals = homeAnimals.length === 0;
+    const hasMorePages = totalPages > page;
 
     //Carrega as informações
     React.useEffect(() => {
-        animalController.get({ page }).then(({ animals }) => {
-            setAnimals(animals);
-        });
+        // setInitialLoadComplete(true);
+
+        if (!initialLoadComplete.current) {
+            animalController.get({ page }).then(({ animals, pages }) => {
+                setAnimals(animals);
+                setTotalPages(pages);
+            });
+        }
     }, []);
 
     return (
@@ -53,19 +70,26 @@ function HomePage() {
             <section className="cards">
                 <h3 className="cards__titulo">Catálogo de animais</h3>
                 <div className="cards__busca">
-                    {/* <label htmlFor="animal" className="cards__busca__texto">
-                        Buscar animal:
-                    </label> */}
                     <SearchField id="animal" type="search" inputMode="text">
                         <Label htmlFor="animal">Buscar animal:</Label>
-                        <Input />
+                        <Input
+                            aria-placeholder="Digite um nome, exemplo: Onça-parda."
+                            onChange={function handleSearch(event) {
+                                setSearch(event.target.value);
+                            }}
+                        />
                         <Button>✕</Button>
-                        <Text slot="description">
-                            Digite um nome, ex: Onça-parda.
+                        <Text aria-hidden="true" slot="description">
+                            Digite um nome, exemplo: Onça-parda.
                         </Text>
+                        {hasNoAnimals && (
+                            <p className="cards__busca--nao-encontrada">
+                                Nenhum animal encontrado.
+                            </p>
+                        )}
                     </SearchField>
                 </div>
-                {animals.map((animal) => {
+                {homeAnimals.map((animal) => {
                     return (
                         <div className="card" key={animal.id}>
                             <img src="" alt="" />
@@ -120,10 +144,35 @@ function HomePage() {
                         </div>
                     );
                 })}
-                <Button onPress={() => setPage(page + 1)}>
-                    Página {page}, carregar mais animais...
-                </Button>
+                {hasMorePages && (
+                    <Button
+                        onPress={() => {
+                            const nextPage = page + 1;
+                            setPage(nextPage);
+
+                            animalController
+                                .get({ page: nextPage })
+                                .then(({ animals, pages }) => {
+                                    setAnimals((oldAnimals) => {
+                                        return [...oldAnimals, ...animals];
+                                    });
+                                    setTotalPages(pages);
+                                });
+                        }}
+                    >
+                        Página {page}, carregar mais animais...
+                    </Button>
+                )}
             </section>
+            {/* <section className="botao">
+                <Button
+                    onPress={() => {
+                        window.scrollTo(0, 0);
+                    }}
+                >
+                    Voltar para o topo
+                </Button>
+            </section> */}
         </>
     );
 }

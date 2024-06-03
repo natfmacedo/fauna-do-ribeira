@@ -1,10 +1,11 @@
 {
   "animals": [
     {
-      "id": "db737949-1f8a-43a6-80ec-b4a4eccc8d17",
-      "date": "2024-05-27T19:27:26.883Z",
+      "id": "927c3973-6ffb-4e0d-8cff-f59d506d85ba",
+      "date": "2024-06-03T17:55:08.735Z",
       "name": "Maria-leque-do-sudeste",
       "image": "",
+      "imageDescription": "",
       "scientificName": "Onychorhynchus swainsoni",
       "characteristics": "Pertencente ao Reino Animalia e à Ordem dos Passeiformes, a Maria-leque-do-sudeste tem entre 16 e 17,5 centímetros de comprimento e pesa entre 13 e 21 gramas. O nome vem da presença de uma plumagem na cabeça em formato de leque nas cores escarlate, preto e azul no macho e laranja, preto e azul na fêmea.",
       "eating": "Borboletas, libélulas, vespas e mamangavas.",
@@ -13,15 +14,68 @@
       "link": ""
     },
     {
-      "id": "edda89f6-40ac-49a8-a430-f2ffc9c7748c",
-      "date": "2024-05-27T19:27:26.885Z",
+      "id": "8b423e06-f66e-4ce3-acb1-e205df237113",
+      "date": "2024-06-03T17:55:08.771Z",
       "name": "Tucano-de-bico-preto",
       "image": "",
+      "imageDescription": "",
       "scientificName": "Ramphastos vitellinus",
       "characteristics": "Pertencente ao Reino Animalia e à Ordem dos Paciformes, possui aproximadamente 46 centímetros de comprimento.",
       "eating": "Frutos, artrópodes em geral, aranhas, ovos, filhotes de outras aves, anfíbios, morcegos e gambás.",
       "location": "Apiaí, Cananéia e Eldorado.",
       "iucnState": "Pouco preocupante (LC)",
+      "link": ""
+    },
+    {
+      "id": "63299f6b-fbfa-4b36-9a86-b15bc698989d",
+      "date": "2024-06-03T17:55:08.789Z",
+      "name": "Papagaio-de-cara-roxa",
+      "image": "",
+      "imageDescription": "",
+      "scientificName": "Amazona brasiliensis",
+      "characteristics": "Pertencente ao Reino Animalia e à Ordem dos Psittaciformes, trata-se de uma espécie caiçara na cor verde com vértice e garganta arroxeados.",
+      "eating": "Frutos, insetos e larvas.",
+      "location": "Cananéia, Iguape, Ilha Comprida, Itariri, Jacupiranga e Pariquera-Açu.",
+      "iucnState": "Quase ameaçada (NT)",
+      "link": ""
+    },
+    {
+      "id": "1f2eb8c0-7de6-4090-8dc6-f4dcac0d092e",
+      "date": "2024-06-03T17:55:08.792Z",
+      "name": "Jacutinga",
+      "image": "",
+      "imageDescription": "",
+      "scientificName": "Aburria jacutinga",
+      "characteristics": "Pertencente ao Reino Animalia e à Ordem dos Galliformes, possui entre 64 e 74 centímetros de comprimento e pesa cerca de 1,1 a 1,4 quilogramas.",
+      "eating": "Polpa de frutos carnosos e palmito-juçara.",
+      "location": "Apiaí, Cananéia, Iporanga e Pedro de Toledo.",
+      "iucnState": "Em perigo (EN)",
+      "link": ""
+    },
+    {
+      "id": "1183df91-f381-46d8-8c50-c94d48dfc80f",
+      "date": "2024-06-03T17:55:08.795Z",
+      "name": "Queixada",
+      "image": "",
+      "imageDescription": "",
+      "scientificName": "Tayassu pecari",
+      "characteristics": "Pertencente ao Reino Animalia e à Ordem Artiodactyla, o Queixada é o maior animal da família de porcos selvagens da América do Sul. Possui cerca de 1,1 metro de comprimento e pesa entre 20 e 40 quilos.",
+      "eating": "Frutos, raízes, sementes, larvas de insetos e minhocas.",
+      "location": "Cananéia, Juquiá, Miracatu e Tapiraí.",
+      "iucnState": "Vulnerável (VU)",
+      "link": ""
+    },
+    {
+      "id": "faa24230-60f7-4254-91c1-019c58cd3243",
+      "date": "2024-06-03T17:55:08.797Z",
+      "name": "Anta",
+      "image": "",
+      "imageDescription": "",
+      "scientificName": "Tapirus terrestris",
+      "characteristics": "Pertencente ao Reino Animalia e à Ordem Perissodactyla, trata-se do mamífero terrestre mais pesado da América do Sul com 180 a 300 quilogramas e 1 a 2 metros de comprimento.",
+      "eating": "Frutas, plantas, flores, folhas e cascas.",
+      "location": "Juquiá, Miracatu e Tapiraí.",
+      "iucnState": "Vulnerável (VU)",
       "link": ""
     }
   ]
