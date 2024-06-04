@@ -25,8 +25,10 @@ interface HomeAnimal {
 function HomePage() {
     // const [initialLoadComplete, setInitialLoadComplete] = React.useState(false);
     const initialLoadComplete = React.useRef(false);
-    const [totalPages, setTotalPages] = React.useState(0);
-    const [page, setPage] = React.useState(1);
+    // const [totalPages, setTotalPages] = React.useState(0);
+    const page = 1;
+    const limit = 6;
+    const [isLoading, setIsLoading] = React.useState(true);
     const [search, setSearch] = React.useState("");
     const [animals, setAnimals] = React.useState<HomeAnimal[]>([]);
     const homeAnimals = animals.filter((animal) => {
@@ -34,18 +36,24 @@ function HomePage() {
         const nameNormalized = animal.name.toLowerCase();
         return nameNormalized.includes(searchNormalized);
     });
-    const hasNoAnimals = homeAnimals.length === 0;
-    const hasMorePages = totalPages > page;
+    // const hasMorePages = totalPages > page;
+    const hasNoAnimals = homeAnimals.length === 0 && !isLoading;
 
     //Carrega as informações
     React.useEffect(() => {
         // setInitialLoadComplete(true);
 
         if (!initialLoadComplete.current) {
-            animalController.get({ page }).then(({ animals, pages }) => {
-                setAnimals(animals);
-                setTotalPages(pages);
-            });
+            animalController
+                .get({ page, limit })
+                .then(({ animals }) => {
+                    setAnimals(animals);
+                    // setTotalPages(pages);
+                })
+                .finally(() => {
+                    setIsLoading(false);
+                    initialLoadComplete.current = true;
+                });
         }
     }, []);
 
@@ -82,6 +90,11 @@ function HomePage() {
                         <Text aria-hidden="true" slot="description">
                             Digite um nome, exemplo: Onça-parda.
                         </Text>
+                        {isLoading && (
+                            <p className="cards__busca--carregando">
+                                Carregando...
+                            </p>
+                        )}
                         {hasNoAnimals && (
                             <p className="cards__busca--nao-encontrada">
                                 Nenhum animal encontrado.
@@ -144,7 +157,7 @@ function HomePage() {
                         </div>
                     );
                 })}
-                {hasMorePages && (
+                {/* {hasMorePages && (
                     <Button
                         onPress={() => {
                             const nextPage = page + 1;
@@ -157,12 +170,15 @@ function HomePage() {
                                         return [...oldAnimals, ...animals];
                                     });
                                     setTotalPages(pages);
+                                })
+                                .finally(() => {
+                                    setIsLoading(false);
                                 });
                         }}
                     >
-                        Página {page}, carregar mais animais...
+                        Ver mais animais ↓
                     </Button>
-                )}
+                )} */}
             </section>
             {/* <section className="botao">
                 <Button

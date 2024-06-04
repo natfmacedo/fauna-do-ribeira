@@ -93,7 +93,7 @@ create(
     "",
     "",
     "Ramphastos vitellinus",
-    "Pertencente ao Reino Animalia e à Ordem dos Paciformes, possui aproximadamente 46 centímetros de comprimento.",
+    "Pertencente ao Reino Animalia e à Ordem dos Piciformes, possui aproximadamente 46 centímetros de comprimento.",
     "Frutos, artrópodes em geral, aranhas, ovos, filhotes de outras aves, anfíbios, morcegos e gambás.",
     "Apiaí, Cananéia e Eldorado.",
     "Pouco preocupante (LC)",
