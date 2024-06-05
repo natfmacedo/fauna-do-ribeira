@@ -19,6 +19,7 @@ import {
     Dialog,
     Heading,
 } from "react-aria-components";
+import axios from "axios";
 
 interface AdminAnimal {
     id: string;
@@ -41,6 +42,60 @@ function AdminPage() {
     const [animals, setAnimals] = React.useState<AdminAnimal[]>([]);
     const hasNoAnimals = animals.length === 0 && !isLoading;
     const hasMorePages = totalPages > page;
+
+    // upload de imagens
+    const [uploading, setUploading] = React.useState(false);
+    const [selectedImage, setSelectedImage] = React.useState("");
+    const [selectedFile, setSelectedFile] = React.useState<File>();
+
+    const handleUpload = async () => {
+        setUploading(true);
+        try {
+            if (!selectedFile) return;
+            const formData = new FormData();
+            formData.append("myImage", selectedFile);
+            const { data } = await axios.post("/api/upload", formData);
+        } catch (error: any) {
+            console.error(error.response?.data);
+        }
+        setUploading(false);
+    };
+
+    // const [selectedFile, setSelectedFile] = React.useState("");
+    // const [imageUrl, setImageUrl] = React.useState("");
+    // const [errorMessage, setErrorMessage] = React.useState("");
+
+    // const handleFileChange = (event: any) => {
+    //     const file = event.currentTarget.files[0];
+    //     setSelectedFile(file);
+    //     if (file) {
+    //         const url = URL.createObjectURL(file);
+    //         setImageUrl(url);
+    //     }
+    // };
+
+    // const handleSubmit = async (event: { preventDefault: () => void }) => {
+    //     event.preventDefault();
+    //     const formData = new FormData();
+    //     formData.append("file", selectedFile);
+
+    //     const response = await fetch("/api/upload", {
+    //         method: "POST",
+    //         body: formData,
+    //     });
+    //     try {
+    //         const result = await response.json();
+    //         if (result) {
+    //             setImageUrl(result.imageUrl);
+    //         } else {
+    //             setErrorMessage(result.message);
+    //             console.error("Failed to upload file");
+    //         }
+    //     } catch (error) {
+    //         setErrorMessage("Error to uploading file");
+    //         console.error("Error to uploading file:", error);
+    //     }
+    // };
 
     React.useEffect(() => {
         if (!initialLoadComplete.current) {
@@ -296,12 +351,45 @@ function AdminPage() {
                             <Input />
                             <FieldError />
                         </TextField>
-                        <FileTrigger
-                            acceptedFileTypes={["image/png", "image/jpeg"]}
-                        >
+                        <label htmlFor="imagem">Imagem:</label>
+                        <input
+                            id="imagem"
+                            type="file"
+                            onChange={({ target }) => {
+                                if (target.files) {
+                                    const file = target.files[0];
+                                    setSelectedImage(URL.createObjectURL(file));
+                                    setSelectedFile(file);
+                                }
+                            }}
+                        />
+                        {selectedImage && <img src={selectedImage} alt="" />}
+                        {/* <FileTrigger type="file" onSelect={handleFileChange}>
                             <Label>Imagem:</Label>
-                            <Button name="imagem">Selecionar imagem...</Button>
-                        </FileTrigger>
+                            <Button>Select a file</Button>
+                        </FileTrigger> */}
+                        {/* <label>
+                            <input
+                                type="file"
+                                onChange={({ target }) => {
+                                    if (target.files) {
+                                        const file = target.files[0];
+                                        setSelectedImage(
+                                            URL.createObjectURL(file)
+                                        );
+                                        setSelectedFile(file);
+                                    }
+                                }}
+                            />
+                            {selectedImage ? (
+                                <img src={selectedImage} alt="" />
+                            ) : (
+                                <span>Selecionar imagem...</span>
+                            )}
+                        </label> */}
+                        {/* <Button isDisabled={uploading}>
+                            {uploading ? "Uploading..." : "Upload"}
+                        </Button> */}
                         <TextField
                             name="descricaoImagem"
                             type="text"
@@ -376,6 +464,9 @@ function AdminPage() {
                             <Button name="cadastrarAnimal" type="submit">
                                 Cadastrar
                             </Button>
+                            <button onClick={handleUpload} type="submit">
+                                Upload
+                            </button>
                         </div>
                     </Form>
                 </div>
