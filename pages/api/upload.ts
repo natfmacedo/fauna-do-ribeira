@@ -40,38 +40,3 @@ const handler: NextApiHandler = async (req, res) => {
     res.json({ done: "ok" });
 };
 export default handler;
-
-// export default async function handler(
-//     req: NextApiRequest,
-//     res: NextApiResponse
-// ) {
-//     if (req.method !== "POST") {
-//         return res.status(405).json({
-//             message: "Method npt allowed",
-//         });
-//     }
-
-//     const form = formidable({ multiples: false });
-//     let fields;
-//     let files;
-
-//     try {
-//         [fields, files] = await form.parse(req);
-//         const imageFile = files.file[0];
-//         if (!imageFile || !imageFile.filepath) {
-//             return res.status(400).json({
-//                 message: "No image file uploaded",
-//             });
-//         }
-//         const uploadDir = path.join(process.cwd(), "public", "images");
-//         await fs.mkdir(uploadDir, { recursive: true });
-
-//         res.status(200).json({
-//             message: "Image uploaded succesfully",
-//             imageUrl: `/images/${imageFile}`,
-//         });
-//     } catch (error) {
-//         console.error("Upload error:", error);
-//         res.status(500).json({ message: "Failed to upload image" });
-//     }
-// }

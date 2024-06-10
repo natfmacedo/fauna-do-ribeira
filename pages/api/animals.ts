@@ -9,6 +9,11 @@ export default function handler(
         return;
     }
 
+    if (request.method === "POST") {
+        animalController.create(request, response);
+        return;
+    }
+
     response.status(405).json({
         message: "Method not allowed",
     });

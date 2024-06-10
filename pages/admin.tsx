@@ -36,6 +36,20 @@ interface AdminAnimal {
 
 function AdminPage() {
     const initialLoadComplete = React.useRef(false);
+
+    const [newAnimalName, setNewAnimalName] = React.useState("");
+    const [newAnimalScientificName, setNewAnimalScientificName] =
+        React.useState("");
+    const [newAnimalImage, setNewAnimalImage] = React.useState("");
+    const [newAnimalImageDescription, setNewAnimalImageDescription] =
+        React.useState("");
+    const [newAnimalCharacteristics, setNewAnimalCharacteristics] =
+        React.useState("");
+    const [newAnimalEating, setNewAnimalEating] = React.useState("");
+    const [newAnimalLocation, setNewAnimalLocation] = React.useState("");
+    const [newAnimalIUCNState, setNewAnimalIUCNState] = React.useState("");
+    const [newAnimalLink, setNewAnimalLink] = React.useState("");
+
     const [totalPages, setTotalPages] = React.useState(0);
     const [page, setPage] = React.useState(1);
     const [isLoading, setIsLoading] = React.useState(true);
@@ -61,41 +75,9 @@ function AdminPage() {
         setUploading(false);
     };
 
-    // const [selectedFile, setSelectedFile] = React.useState("");
-    // const [imageUrl, setImageUrl] = React.useState("");
-    // const [errorMessage, setErrorMessage] = React.useState("");
-
-    // const handleFileChange = (event: any) => {
-    //     const file = event.currentTarget.files[0];
-    //     setSelectedFile(file);
-    //     if (file) {
-    //         const url = URL.createObjectURL(file);
-    //         setImageUrl(url);
-    //     }
-    // };
-
-    // const handleSubmit = async (event: { preventDefault: () => void }) => {
-    //     event.preventDefault();
-    //     const formData = new FormData();
-    //     formData.append("file", selectedFile);
-
-    //     const response = await fetch("/api/upload", {
-    //         method: "POST",
-    //         body: formData,
-    //     });
-    //     try {
-    //         const result = await response.json();
-    //         if (result) {
-    //             setImageUrl(result.imageUrl);
-    //         } else {
-    //             setErrorMessage(result.message);
-    //             console.error("Failed to upload file");
-    //         }
-    //     } catch (error) {
-    //         setErrorMessage("Error to uploading file");
-    //         console.error("Error to uploading file:", error);
-    //     }
-    // };
+    const newAnimalHandler = () => {
+        setNewAnimalName(newAnimalName);
+    };
 
     React.useEffect(() => {
         if (!initialLoadComplete.current) {
@@ -237,7 +219,7 @@ function AdminPage() {
                                         {animal.iucnState}
                                     </td>
                                     <td className="tabela__corpo__conteudo">
-                                        {animal.link}
+                                        {animal.link.substring(0, 15)}...
                                     </td>
                                     <td className="tabela__corpo__conteudo">
                                         <Button>Editar</Button>
@@ -340,15 +322,63 @@ function AdminPage() {
             <section className="cadastro">
                 <h2 className="cadastro__titulo">Cadastro de animais</h2>
                 <div className="cadastro__formulario">
-                    <Form>
+                    <Form
+                        onSubmit={(event) => {
+                            handleUpload();
+                            event.preventDefault();
+                            animalController.create({
+                                name: newAnimalName,
+                                scientificName: newAnimalScientificName,
+                                image: newAnimalImage,
+                                imageDescription: newAnimalImageDescription,
+                                characteristics: newAnimalCharacteristics,
+                                eating: newAnimalEating,
+                                location: newAnimalLocation,
+                                iucnState: newAnimalIUCNState,
+                                link: newAnimalLink,
+                                onSuccess(animal: AdminAnimal) {
+                                    alert("Animal cadastrado com sucesso!");
+                                    setAnimals((oldAnimals) => {
+                                        return [animal, ...oldAnimals];
+                                    });
+                                    setNewAnimalName("");
+                                    setNewAnimalScientificName("");
+                                    setNewAnimalImage("");
+                                    setNewAnimalImageDescription("");
+                                    setNewAnimalCharacteristics("");
+                                    setNewAnimalEating("");
+                                    setNewAnimalLocation("");
+                                    setNewAnimalIUCNState("");
+                                    setNewAnimalLink("");
+                                },
+                                onError() {
+                                    alert(
+                                        "Você precisa preencher todos os campos para cadastrar um novo animal."
+                                    );
+                                },
+                            });
+                        }}
+                    >
                         <TextField name="nome" type="text" isRequired>
                             <Label>Nome:</Label>
-                            <Input />
+                            <Input
+                                value={newAnimalName}
+                                onChange={function newAnimalHandler(event) {
+                                    setNewAnimalName(event.target.value);
+                                }}
+                            />
                             <FieldError />
                         </TextField>
                         <TextField name="nomeCientifico" type="text" isRequired>
                             <Label>Nome científico:</Label>
-                            <Input />
+                            <Input
+                                value={newAnimalScientificName}
+                                onChange={function newAnimalHandler(event) {
+                                    setNewAnimalScientificName(
+                                        event.target.value
+                                    );
+                                }}
+                            />
                             <FieldError />
                         </TextField>
                         <label htmlFor="imagem">Imagem:</label>
@@ -360,10 +390,15 @@ function AdminPage() {
                                     const file = target.files[0];
                                     setSelectedImage(URL.createObjectURL(file));
                                     setSelectedFile(file);
+                                    setNewAnimalImage(file.name);
                                 }
                             }}
                         />
-                        {selectedImage && <img src={selectedImage} alt="" />}
+                        {selectedImage ? (
+                            <img src={selectedImage} alt="" />
+                        ) : (
+                            <img src="" alt="" />
+                        )}
                         {/* <FileTrigger type="file" onSelect={handleFileChange}>
                             <Label>Imagem:</Label>
                             <Button>Select a file</Button>
@@ -396,7 +431,14 @@ function AdminPage() {
                             isRequired
                         >
                             <Label>Descrição da imagem:</Label>
-                            <TextArea />
+                            <TextArea
+                                value={newAnimalImageDescription}
+                                onChange={function newAnimalHandler(event) {
+                                    setNewAnimalImageDescription(
+                                        event.target.value
+                                    );
+                                }}
+                            />
                             <FieldError />
                         </TextField>
                         <TextField
@@ -405,12 +447,24 @@ function AdminPage() {
                             isRequired
                         >
                             <Label>Características:</Label>
-                            <TextArea />
+                            <TextArea
+                                value={newAnimalCharacteristics}
+                                onChange={function newAnimalHandler(event) {
+                                    setNewAnimalCharacteristics(
+                                        event.target.value
+                                    );
+                                }}
+                            />
                             <FieldError />
                         </TextField>
                         <TextField name="alimentacao" type="text" isRequired>
                             <Label>Alimentação:</Label>
-                            <Input />
+                            <Input
+                                value={newAnimalEating}
+                                onChange={function newAnimalHandler(event) {
+                                    setNewAnimalEating(event.target.value);
+                                }}
+                            />
                             <FieldError />
                         </TextField>
                         <TextField
@@ -419,15 +473,76 @@ function AdminPage() {
                             isRequired
                         >
                             <Label>Possíveis locais de avistamento</Label>
-                            <Input />
+                            <Input
+                                value={newAnimalLocation}
+                                onChange={function newAnimalHandler(event) {
+                                    setNewAnimalLocation(event.target.value);
+                                }}
+                            />
                             <FieldError />
                         </TextField>
-                        <Select name="estadoIUCN" isRequired>
+                        <label htmlFor="estadoIUCN">
+                            Estado de Conservação IUCN
+                        </label>
+                        <select
+                            name="estadoIUCN"
+                            id="estadoIUCN"
+                            value={newAnimalIUCNState}
+                            defaultValue="Selecione uma opção"
+                            onChange={function newAnimalHandler(event) {
+                                setNewAnimalIUCNState(event.target.value);
+                            }}
+                            required
+                        >
+                            <option
+                                value=""
+                                disabled
+                                aria-disabled="true"
+                                defaultValue="true"
+                            >
+                                Selecione uma opção
+                            </option>
+                            <option value="Extinta (EX)">Extinta (EX)</option>
+                            <option value="Extinta na natureza (EW)">
+                                Extinta na natureza (EW)
+                            </option>
+                            <option value="Criticamente em perigo (CR)">
+                                Criticamente em perigo (CR)
+                            </option>
+                            <option value="Em perigo (EN)">
+                                Em perigo (EN)
+                            </option>
+                            <option value="Vulnerável (VU)">
+                                Vulnerável (VU)
+                            </option>
+                            <option value="Quase ameaçada (NT)">
+                                Quase ameaçada (NT)
+                            </option>
+                            <option value="Pouco preocupante (LC)">
+                                Pouco preocupante (LC)
+                            </option>
+                            <option value="Deficiente de dados (DD)">
+                                Deficiente de dados (DD)
+                            </option>
+                            <option value="Não avaliada (NE)">
+                                Não avaliada (NE)
+                            </option>
+                        </select>
+                        {/* <Select name="estadoIUCN" isRequired>
                             <Label>Estado de Conservação IUCN</Label>
                             <Button>
-                                <SelectValue />
+                                <SelectValue
+                                    onChange={function newAnimalHandler(
+                                        event: HTMLSelectElement
+                                    ) {
+                                        setNewAnimalIUCNState(
+                                            event.target.value
+                                        );
+                                    }}
+                                />
                                 <span aria-hidden="true">▼</span>
                             </Button>
+                            <FieldError />
                             <Popover>
                                 <ListBox>
                                     <ListBoxItem>Extinta (EX)</ListBoxItem>
@@ -451,22 +566,35 @@ function AdminPage() {
                                     <ListBoxItem>Não avaliada (NE)</ListBoxItem>
                                 </ListBox>
                             </Popover>
-                        </Select>
+                        </Select> */}
                         <TextField name="link" type="url" isRequired>
                             <Label>Link para mais informações:</Label>
-                            <Input />
+                            <Input
+                                value={newAnimalLink}
+                                onChange={function newAnimalHandler(event) {
+                                    setNewAnimalLink(event.target.value);
+                                }}
+                            />
                             <FieldError />
                         </TextField>
                         <div className="cadastro__formulario__botoes">
-                            <Button name="cancelarCadastro" type="reset">
+                            <Button
+                                name="cancelarCadastro"
+                                type="reset"
+                                // onPress={setSelectedFile("")}
+                            >
                                 Cancelar
                             </Button>
-                            <Button name="cadastrarAnimal" type="submit">
+                            <Button
+                                name="cadastrarAnimal"
+                                type="submit"
+                                // onPress={handleUpload}
+                            >
                                 Cadastrar
                             </Button>
-                            <button onClick={handleUpload} type="submit">
+                            {/* <button onClick={handleUpload} type="submit">
                                 Upload
-                            </button>
+                            </button> */}
                         </div>
                     </Form>
                 </div>

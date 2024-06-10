@@ -1,3 +1,6 @@
+import { z as schema } from "zod";
+import { Animal, AnimalSchema } from "@ui/schema/animal";
+
 interface AnimalRepositoryGetParams {
     page: number;
     limit: number;
@@ -28,24 +31,57 @@ function get({
     );
 }
 
+export async function createAnimal(
+    name: string,
+    scientificName: string,
+    image: string,
+    imageDescription: string,
+    characteristics: string,
+    eating: string,
+    location: string,
+    iucnState: string,
+    link: string
+): Promise<Animal> {
+    const response = await fetch("/api/animals", {
+        method: "POST",
+        headers: {
+            // MIME Type
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            name,
+            scientificName,
+            image,
+            imageDescription,
+            characteristics,
+            eating,
+            location,
+            iucnState,
+            link,
+        }),
+    });
+
+    if (response.ok) {
+        const serverResponse = await response.json();
+        const ServerResponseSchema = schema.object({
+            animal: AnimalSchema,
+        });
+        const serverResponseParsed =
+            ServerResponseSchema.safeParse(serverResponse);
+        if (!serverResponseParsed.success) {
+            throw new Error("Failed to create an animal");
+        }
+
+        const animal = serverResponseParsed.data.animal;
+        return animal;
+    }
+    throw new Error("Failed to create an animal");
+}
+
 export const animalRepository = {
     get,
+    createAnimal,
 };
-
-// Model/Schema
-interface Animal {
-    id: string;
-    date: Date;
-    name: string;
-    image: string;
-    imageDescription: string;
-    scientificName: string;
-    characteristics: string;
-    eating: string;
-    location: string;
-    iucnState: string;
-    link: string;
-}
 
 function parseServerAnimals(responseBody: unknown): {
     total: number;
@@ -96,7 +132,7 @@ function parseServerAnimals(responseBody: unknown): {
 
                 return {
                     id,
-                    date: new Date(date),
+                    date: date,
                     image,
                     imageDescription,
                     name,
