@@ -1,4 +1,9 @@
-import { read, create } from "@db-crud-animais";
+import {
+    read,
+    create,
+    update,
+    getAnimalById as dbGetAnimalById,
+} from "@db-crud-animals";
 
 interface AnimalRepositoryGetParams {
     page?: number;
@@ -33,6 +38,14 @@ function get({
     };
 }
 
+async function getAnimalById(id: string): Promise<Animal> {
+    const ALL_ANIMALS = read();
+    const animalId = ALL_ANIMALS.find((animal) => animal.id === id);
+    if (!animalId) throw new Error(`Animal with id "${id}" not found`);
+    dbGetAnimalById(JSON.stringify(animalId));
+    return animalId;
+}
+
 async function createAnimal(
     name: string,
     scientificName: string,
@@ -58,9 +71,44 @@ async function createAnimal(
     return newAnimal;
 }
 
+async function animalUpdate(
+    id: string,
+    name: string,
+    scientificName: string,
+    image: string,
+    imageDescription: string,
+    characteristics: string,
+    eating: string,
+    location: string,
+    iucnState: string,
+    link: string
+): Promise<Animal> {
+    const ALL_ANIMALS = read();
+
+    const animal = ALL_ANIMALS.find((currentAnimal) => currentAnimal.id === id);
+
+    if (!animal) throw new Error(`Animal with id "${id}" not found`);
+
+    const updatedAnimal = update(animal.id, {
+        name,
+        scientificName,
+        image,
+        imageDescription,
+        characteristics,
+        eating,
+        location,
+        iucnState,
+        link,
+    });
+
+    return updatedAnimal;
+}
+
 export const animalRepository = {
     get,
+    getAnimalById,
     createAnimal,
+    animalUpdate,
 };
 
 // Model/Schema

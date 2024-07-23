@@ -20,6 +20,7 @@ import {
     Heading,
 } from "react-aria-components";
 import axios from "axios";
+import Link from "next/link";
 
 interface AdminAnimal {
     id: string;
@@ -37,7 +38,9 @@ interface AdminAnimal {
 function AdminPage() {
     const initialLoadComplete = React.useRef(false);
 
+    // const [animalId, setAnimalId] = React.useState("");
     const [newAnimalName, setNewAnimalName] = React.useState("");
+    // const [animalName, setAnimalName] = React.useState("");
     const [newAnimalScientificName, setNewAnimalScientificName] =
         React.useState("");
     const [newAnimalImage, setNewAnimalImage] = React.useState("");
@@ -73,10 +76,6 @@ function AdminPage() {
             console.error(error.response?.data);
         }
         setUploading(false);
-    };
-
-    const newAnimalHandler = () => {
-        setNewAnimalName(newAnimalName);
     };
 
     React.useEffect(() => {
@@ -222,53 +221,53 @@ function AdminPage() {
                                         {animal.link.substring(0, 15)}...
                                     </td>
                                     <td className="tabela__corpo__conteudo">
-                                        <Button>Editar</Button>
+                                        <Link
+                                            // as={`/admin-animal-update/${animal.name}`}
+                                            href={{
+                                                pathname:
+                                                    "/admin-animal-update",
+                                                query: {
+                                                    id: animal.id,
+                                                },
+                                            }}
+                                            role="button"
+                                        >
+                                            Editar
+                                        </Link>
                                     </td>
                                     <td className="tabela__corpo__conteudo">
                                         <DialogTrigger>
                                             <Button>Excluir</Button>
                                             <Modal>
                                                 <Dialog>
-                                                    <Dialog>
-                                                        {({ close }) => (
-                                                            <form>
-                                                                <Heading slot="title">
-                                                                    Excluir
-                                                                    animal
-                                                                </Heading>
-                                                                <p>
-                                                                    Tem certeza
-                                                                    que deseja
-                                                                    excluir “
-                                                                    {
-                                                                        animal.name
-                                                                    }
-                                                                    ”? As
-                                                                    informações
-                                                                    a respeito
-                                                                    dessa
-                                                                    espécie
-                                                                    serão
-                                                                    permanentemente
-                                                                    excluídas.
-                                                                </p>
-                                                                <Button
-                                                                    onPress={
-                                                                        close
-                                                                    }
-                                                                >
-                                                                    Cancelar
-                                                                </Button>
-                                                                <Button
-                                                                    onPress={
-                                                                        close
-                                                                    }
-                                                                >
-                                                                    Excluir
-                                                                </Button>
-                                                            </form>
-                                                        )}
-                                                    </Dialog>
+                                                    {({ close }) => (
+                                                        <Form>
+                                                            <Heading slot="title">
+                                                                Excluir animal
+                                                            </Heading>
+                                                            <p>
+                                                                Tem certeza que
+                                                                deseja excluir “
+                                                                {animal.name}
+                                                                ”? As
+                                                                informações a
+                                                                respeito dessa
+                                                                espécie serão
+                                                                permanentemente
+                                                                excluídas.
+                                                            </p>
+                                                            <Button
+                                                                onPress={close}
+                                                            >
+                                                                Cancelar
+                                                            </Button>
+                                                            <Button
+                                                                onPress={close}
+                                                            >
+                                                                Excluir
+                                                            </Button>
+                                                        </Form>
+                                                    )}
                                                 </Dialog>
                                             </Modal>
                                         </DialogTrigger>
@@ -324,7 +323,6 @@ function AdminPage() {
                 <div className="cadastro__formulario">
                     <Form
                         onSubmit={(event) => {
-                            handleUpload();
                             event.preventDefault();
                             animalController.create({
                                 name: newAnimalName,
@@ -337,6 +335,7 @@ function AdminPage() {
                                 iucnState: newAnimalIUCNState,
                                 link: newAnimalLink,
                                 onSuccess(animal: AdminAnimal) {
+                                    handleUpload();
                                     alert("Animal cadastrado com sucesso!");
                                     setAnimals((oldAnimals) => {
                                         return [animal, ...oldAnimals];
@@ -344,6 +343,7 @@ function AdminPage() {
                                     setNewAnimalName("");
                                     setNewAnimalScientificName("");
                                     setNewAnimalImage("");
+                                    // setSelectedFile(null);
                                     setNewAnimalImageDescription("");
                                     setNewAnimalCharacteristics("");
                                     setNewAnimalEating("");
@@ -388,17 +388,21 @@ function AdminPage() {
                             onChange={({ target }) => {
                                 if (target.files) {
                                     const file = target.files[0];
-                                    setSelectedImage(URL.createObjectURL(file));
-                                    setSelectedFile(file);
-                                    setNewAnimalImage(file.name);
+                                    try {
+                                        setSelectedImage(
+                                            URL.createObjectURL(file)
+                                        );
+                                        setSelectedFile(file);
+                                        setNewAnimalImage(file.name);
+                                    } catch {
+                                        alert(
+                                            "Selecione uma imagem para continuar"
+                                        );
+                                    }
                                 }
                             }}
                         />
-                        {selectedImage ? (
-                            <img src={selectedImage} alt="" />
-                        ) : (
-                            <img src="" alt="" />
-                        )}
+                        {selectedImage && <img src={selectedImage} alt="" />}
                         {/* <FileTrigger type="file" onSelect={handleFileChange}>
                             <Label>Imagem:</Label>
                             <Button>Select a file</Button>
@@ -472,7 +476,7 @@ function AdminPage() {
                             type="text"
                             isRequired
                         >
-                            <Label>Possíveis locais de avistamento</Label>
+                            <Label>Locais de avistamento:</Label>
                             <Input
                                 value={newAnimalLocation}
                                 onChange={function newAnimalHandler(event) {
@@ -482,23 +486,22 @@ function AdminPage() {
                             <FieldError />
                         </TextField>
                         <label htmlFor="estadoIUCN">
-                            Estado de Conservação IUCN
+                            Estado de Conservação IUCN:
                         </label>
                         <select
                             name="estadoIUCN"
                             id="estadoIUCN"
-                            value={newAnimalIUCNState}
-                            defaultValue="Selecione uma opção"
+                            // value={newAnimalIUCNState}
                             onChange={function newAnimalHandler(event) {
                                 setNewAnimalIUCNState(event.target.value);
                             }}
+                            defaultValue="defaultOption"
                             required
                         >
                             <option
-                                value=""
+                                value="defaultOption"
                                 disabled
                                 aria-disabled="true"
-                                defaultValue="true"
                             >
                                 Selecione uma opção
                             </option>
@@ -581,7 +584,7 @@ function AdminPage() {
                             <Button
                                 name="cancelarCadastro"
                                 type="reset"
-                                // onPress={setSelectedFile("")}
+                                // onPress={setSelectedFile(null)}
                             >
                                 Cancelar
                             </Button>

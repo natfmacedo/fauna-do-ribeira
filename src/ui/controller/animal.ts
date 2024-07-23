@@ -13,7 +13,17 @@ async function get(params: AnimalControllerGetParams) {
     });
 }
 
+interface AnimalControllerGetByIdParams {
+    id: string;
+}
+
+async function getAnimalById(params: AnimalControllerGetByIdParams) {
+    return animalRepository.getAnimalById({
+        id: params.id,
+    });
+}
 interface AnimalControllerCreateParams {
+    id?: string;
     name?: string;
     scientificName?: string;
     image?: string;
@@ -23,6 +33,20 @@ interface AnimalControllerCreateParams {
     location?: string;
     iucnState?: string;
     link?: string;
+    onError: () => void;
+    onSuccess: (animal: Animal) => void;
+}
+interface AnimalControllerUpdateParams {
+    id: string;
+    name: string;
+    scientificName: string;
+    image: string;
+    imageDescription: string;
+    characteristics: string;
+    eating: string;
+    location: string;
+    iucnState: string;
+    link: string;
     onError: () => void;
     onSuccess: (animal: Animal) => void;
 }
@@ -76,7 +100,60 @@ function create({
         });
 }
 
+function animalUpdate({
+    id,
+    name,
+    scientificName,
+    image,
+    imageDescription,
+    characteristics,
+    eating,
+    location,
+    iucnState,
+    link,
+    onSuccess,
+    onError,
+}: AnimalControllerUpdateParams) {
+    // Fail Fast Validations
+    if (
+        !id ||
+        !name ||
+        !scientificName ||
+        !image ||
+        !imageDescription ||
+        !characteristics ||
+        !eating ||
+        !location ||
+        !iucnState ||
+        !link
+    ) {
+        onError();
+        return;
+    }
+    animalRepository
+        .animalUpdate(
+            id,
+            name,
+            scientificName,
+            image,
+            imageDescription,
+            characteristics,
+            eating,
+            location,
+            iucnState,
+            link
+        )
+        .then((updatedAnimal) => {
+            onSuccess(updatedAnimal);
+        })
+        .catch(() => {
+            onError();
+        });
+}
+
 export const animalController = {
     get,
+    getAnimalById,
     create,
+    animalUpdate,
 };

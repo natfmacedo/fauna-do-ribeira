@@ -1,4 +1,4 @@
-import { z as schema } from "zod";
+import { z as schema, string } from "zod";
 import { Animal, AnimalSchema } from "@ui/schema/animal";
 
 interface AnimalRepositoryGetParams {
@@ -9,6 +9,12 @@ interface AnimalRepositoryGetOutput {
     animals: Animal[];
     total: number;
     pages: number;
+}
+interface AnimalControllerGetByIdParams {
+    id: string;
+}
+interface AnimalControlerGetByIdOutput {
+    animal: Animal[];
 }
 
 function get({
@@ -29,6 +35,19 @@ function get({
             };
         }
     );
+}
+
+function getAnimalById({
+    id,
+}: AnimalControllerGetByIdParams): Promise<AnimalControlerGetByIdOutput> {
+    return fetch(`/api/animals?id=${id}`).then(async (serverAnswer) => {
+        const animalsString = await serverAnswer.text();
+        const responseParsed = parseServerAnimals(JSON.parse(animalsString));
+
+        return {
+            animal: responseParsed.animals,
+        };
+    });
 }
 
 export async function createAnimal(
@@ -78,9 +97,58 @@ export async function createAnimal(
     throw new Error("Failed to create an animal");
 }
 
+async function animalUpdate(
+    animalId: string,
+    name: string,
+    scientificName: string,
+    image: string,
+    imageDescription: string,
+    characteristics: string,
+    eating: string,
+    location: string,
+    iucnState: string,
+    link: string
+): Promise<Animal> {
+    const response = await fetch(`/api/animals/${animalId}/animal-update`, {
+        method: "PUT",
+        headers: {
+            // MIME Type
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            name,
+            scientificName,
+            image,
+            imageDescription,
+            characteristics,
+            eating,
+            location,
+            iucnState,
+            link,
+        }),
+    });
+    if (response.ok) {
+        const serverResponse = await response.json();
+        const ServerResponseSchema = schema.object({
+            animal: AnimalSchema,
+        });
+        const serverResponseParsed =
+            ServerResponseSchema.safeParse(serverResponse);
+        if (!serverResponseParsed.success) {
+            throw new Error(`Failed to update animal with id "${animalId}"`);
+        }
+        const updatedAnimal = serverResponseParsed.data.animal;
+        return updatedAnimal;
+    }
+
+    throw new Error("Sever Error");
+}
+
 export const animalRepository = {
     get,
+    getAnimalById,
     createAnimal,
+    animalUpdate,
 };
 
 function parseServerAnimals(responseBody: unknown): {

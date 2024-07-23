@@ -26,7 +26,7 @@
       "@components/*": [
         "pages/components/commons/*"
       ],
-      "@db-crud-animais": [
+      "@db-crud-animals": [
         "core/crud.ts"
       ],
       "@server/*": [
