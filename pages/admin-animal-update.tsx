@@ -82,6 +82,9 @@ function UpdateAnimalPage() {
     return (
         <>
             <section className="update">
+                <Link className="update__buttom" href="/admin" role="button">
+                    Voltar para a tabela
+                </Link>
                 <h2 className="update__title">Editar animal</h2>
                 <div className="update__form">
                     <Form

@@ -5,36 +5,39 @@ import {
     getAnimalById as dbGetAnimalById,
 } from "@db-crud-animals";
 
-interface AnimalRepositoryGetParams {
-    page?: number;
-    limit?: number;
-}
+// interface AnimalRepositoryGetParams {
+//     page?: number;
+//     limit?: number;
+// }
 
 interface AnimalRepositoryGetOutput {
     animals: Animal[];
-    total: number;
-    pages: number;
+    // total: number;
+    // pages: number;
 }
 
-function get({
-    page,
-    limit,
-}: AnimalRepositoryGetParams = {}): AnimalRepositoryGetOutput {
-    const currentPage = page || 1;
-    const currentLimit = limit || 4;
+// function get(): AnimalRepositoryGetOutput {
+//     // const currentPage = page || 1;
+//     // const currentLimit = limit || 4;
 
-    const ALL_ANIMALS = read().reverse();
+//     const ALL_ANIMALS = read().reverse();
 
-    // Paginação
-    const startIndex = (currentPage - 1) * currentLimit;
-    const endIndex = currentPage * currentLimit;
-    const paginatedAnimals = ALL_ANIMALS.slice(startIndex, endIndex);
-    const totalPages = Math.ceil(ALL_ANIMALS.length / currentLimit);
+//     // Paginação
+//     // const startIndex = (currentPage - 1) * currentLimit;
+//     // const endIndex = currentPage * currentLimit;
+//     // const paginatedAnimals = ALL_ANIMALS.slice(startIndex, endIndex);
+//     // const totalPages = Math.ceil(ALL_ANIMALS.length / currentLimit);
+//     return {
+//         animals: ALL_ANIMALS,
+//         // total: ALL_ANIMALS.length,
+//         // pages: totalPages,
+//     };
+// }
 
+function get(): AnimalRepositoryGetOutput {
+    const ALL_ANIMALS = read();
     return {
-        animals: paginatedAnimals,
-        total: ALL_ANIMALS.length,
-        pages: totalPages,
+        animals: ALL_ANIMALS,
     };
 }
 

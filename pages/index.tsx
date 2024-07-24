@@ -46,10 +46,10 @@ function HomePage() {
 
         if (!initialLoadComplete.current) {
             animalController
-                .get({ page, limit })
+                .get()
                 .then(({ animals }) => {
                     setAnimals(animals);
-                    // setTotalPages(pages);
+                    // setTotalPages(total);
                 })
                 .finally(() => {
                     setIsLoading(false);

@@ -8,6 +8,8 @@ import {
     FieldError,
     Button,
     TextArea,
+    SearchField,
+    Text,
     FileTrigger,
     Select,
     SelectValue,
@@ -38,9 +40,7 @@ interface AdminAnimal {
 function AdminPage() {
     const initialLoadComplete = React.useRef(false);
 
-    // const [animalId, setAnimalId] = React.useState("");
     const [newAnimalName, setNewAnimalName] = React.useState("");
-    // const [animalName, setAnimalName] = React.useState("");
     const [newAnimalScientificName, setNewAnimalScientificName] =
         React.useState("");
     const [newAnimalImage, setNewAnimalImage] = React.useState("");
@@ -56,9 +56,17 @@ function AdminPage() {
     const [totalPages, setTotalPages] = React.useState(0);
     const [page, setPage] = React.useState(1);
     const [isLoading, setIsLoading] = React.useState(true);
+    const [search, setSearch] = React.useState("");
     const [animals, setAnimals] = React.useState<AdminAnimal[]>([]);
-    const hasNoAnimals = animals.length === 0 && !isLoading;
-    const hasMorePages = totalPages > page;
+    // const hasMorePages = totalPages > page;
+
+    // search
+    const tableAnimals = animals.filter((animal) => {
+        const searchNormalized = search.toLowerCase();
+        const nameNormalized = animal.name.toLowerCase();
+        return nameNormalized.includes(searchNormalized);
+    });
+    const hasNoAnimals = tableAnimals.length === 0 && !isLoading;
 
     // upload de imagens
     const [uploading, setUploading] = React.useState(false);
@@ -81,24 +89,50 @@ function AdminPage() {
     React.useEffect(() => {
         if (!initialLoadComplete.current) {
             animalController
-                .get({ page })
-                .then(({ animals, pages }) => {
+                .get()
+                .then(({ animals }) => {
                     setAnimals(animals);
-                    setTotalPages(pages);
                 })
                 .finally(() => {
                     setIsLoading(false);
                     initialLoadComplete.current = true;
                 });
         }
+        // if (!initialLoadComplete.current) {
+        //     animalController
+        //         .get()
+        //         .then(({ animals }) => {
+        //             setAnimals(animals);
+        //             // setTotalPages(pages);
+        //         })
+        //         .finally(() => {
+        //             setIsLoading(false);
+        //             initialLoadComplete.current = true;
+        //         });
+        // }
     }, []);
 
     return (
         <>
             <section className="apresentacao">
                 <h2>Olá, administrador(a)!</h2>
-                <div className="tabela__botaoCadastrar">
+                <div className="apresentacao__botaoCadastrar">
                     <Button>Cadastrar</Button>
+                </div>
+                <div className="apresentacao__busca">
+                    <SearchField id="animal" type="search" inputMode="text">
+                        <Label htmlFor="animal">Buscar animal:</Label>
+                        <Input
+                            aria-placeholder="Digite um nome, exemplo: Onça-parda."
+                            onChange={function handleSearch(event) {
+                                setSearch(event.target.value);
+                            }}
+                        />
+                        <Button>✕</Button>
+                        <Text aria-hidden="true" slot="description">
+                            Digite um nome, exemplo: Onça-parda.
+                        </Text>
+                    </SearchField>
                 </div>
             </section>
             <section className="tabela">
@@ -183,7 +217,7 @@ function AdminPage() {
                         </tr>
                     </thead>
                     <tbody className="tabela__corpo">
-                        {animals.map((animal) => {
+                        {tableAnimals.map((animal) => {
                             return (
                                 <tr key={animal.id}>
                                     <td className="tabela__corpo__conteudo">
@@ -193,7 +227,13 @@ function AdminPage() {
                                         {animal.image}
                                     </td>
                                     <td className="tabela__corpo__conteudo">
-                                        {animal.imageDescription}
+                                        {animal.imageDescription.substring(
+                                            0,
+                                            48
+                                        ) +
+                                            (animal.imageDescription.length > 15
+                                                ? "..."
+                                                : "")}
                                     </td>
                                     <td className="tabela__corpo__conteudo">
                                         {animal.name}
@@ -205,20 +245,31 @@ function AdminPage() {
                                         {animal.characteristics.substring(
                                             0,
                                             48
-                                        )}
-                                        ...
+                                        ) +
+                                            (animal.characteristics.length > 48
+                                                ? "..."
+                                                : "")}
                                     </td>
                                     <td className="tabela__corpo__conteudo">
-                                        {animal.eating}
+                                        {animal.eating.substring(0, 15) +
+                                            (animal.eating.length > 15
+                                                ? "..."
+                                                : "")}
                                     </td>
                                     <td className="tabela__corpo__conteudo">
-                                        {animal.location}
+                                        {animal.location.substring(0, 15) +
+                                            (animal.location.length > 15
+                                                ? "..."
+                                                : "")}
                                     </td>
                                     <td className="tabela__corpo__conteudo">
                                         {animal.iucnState}
                                     </td>
                                     <td className="tabela__corpo__conteudo">
-                                        {animal.link.substring(0, 15)}...
+                                        {animal.link.substring(0, 15) +
+                                            (animal.link.length > 15
+                                                ? "..."
+                                                : "")}
                                     </td>
                                     <td className="tabela__corpo__conteudo">
                                         <Link
@@ -285,7 +336,7 @@ function AdminPage() {
                                 <td>Nenhum animal encontrado.</td>
                             </tr>
                         )}
-                        {hasMorePages && (
+                        {/* {hasMorePages && (
                             <tr>
                                 <td>
                                     <Button
@@ -314,7 +365,7 @@ function AdminPage() {
                                     </Button>
                                 </td>
                             </tr>
-                        )}
+                        )} */}
                     </tbody>
                 </table>
             </section>

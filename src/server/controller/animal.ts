@@ -1,37 +1,63 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { z as schema } from "zod";
 import { animalRepository } from "@server/repository/animal";
+import { read } from "@db-crud-animals";
 
-async function get(req: NextApiRequest, res: NextApiResponse) {
-    const query = req.query;
-    const page = Number(query.page);
-    const limit = Number(query.limit);
+// async function get(req: NextApiRequest, res: NextApiResponse) {
+//     // const query = req.query;
+//     // const page = Number(query.page);
+//     // const limit = Number(query.limit);
+//     // if (query.page && isNaN(page)) {
+//     //     res.status(400).json({
+//     //         error: {
+//     //             message: "`page` must be a number",
+//     //         },
+//     //     });
+//     //     return;
+//     // }
+//     // if (query.limit && isNaN(limit)) {
+//     //     res.status(400).json({
+//     //         error: {
+//     //             message: "`limit` must be a number",
+//     //         },
+//     //     });
+//     //     return;
+//     // }
 
-    if (query.page && isNaN(page)) {
-        res.status(400).json({
-            error: {
-                message: "`page` must be a number",
-            },
-        });
-        return;
-    }
-    if (query.limit && isNaN(limit)) {
-        res.status(400).json({
-            error: {
-                message: "`limit` must be a number",
-            },
-        });
-        return;
-    }
+//     const query = req.query;
 
-    const output = animalRepository.get({
-        page,
-        limit,
-    });
+//     if (!query.success) {
+//         res.status(404).json({
+//             error: {
+//                 message: "No animals were found",
+//             },
+//         });
+//         return;
+//     }
+
+//     const output = animalRepository.get();
+//     res.status(200).json({
+//         animals: output.animals,
+//     });
+//     // try {
+//     //     res.status(200).json({
+//     //         // total: output.total,
+//     //         // pages: output.pages,
+//     //         animals: output.animals,
+//     //     });
+//     // } catch (err) {
+//     //     return res.status(404).json({
+//     //         error: {
+//     //             message: `Id not found`,
+//     //         },
+//     //     });
+//     // }
+// }
+
+function get(_: NextApiRequest, res: NextApiResponse) {
+    const output = animalRepository.get();
 
     res.status(200).json({
-        total: output.total,
-        pages: output.pages,
         animals: output.animals,
     });
 }
@@ -115,10 +141,6 @@ async function create(req: NextApiRequest, res: NextApiResponse) {
         animal: createdAnimal,
     });
 }
-
-// async function getAnimalById(req: NextApiRequest, res: NextApiResponse) {
-//     const query =
-// }
 
 async function animalUpdate(req: NextApiRequest, res: NextApiResponse) {
     // Fail Fast Validations

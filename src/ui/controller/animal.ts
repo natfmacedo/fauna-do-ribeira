@@ -6,15 +6,15 @@ interface AnimalControllerGetParams {
     limit?: number;
 }
 
-async function get(params: AnimalControllerGetParams) {
-    return animalRepository.get({
-        page: params.page,
-        limit: params.limit || 4,
-    });
-}
-
 interface AnimalControllerGetByIdParams {
     id: string;
+}
+// async function get() {
+//     return animalRepository.get({ animals });
+// }
+
+async function get() {
+    return animalRepository.get();
 }
 
 async function getAnimalById(params: AnimalControllerGetByIdParams) {
