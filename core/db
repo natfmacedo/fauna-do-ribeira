@@ -24,7 +24,7 @@
       "eating": "Frutos, artrópodes em geral, aranhas, ovos, filhotes de outras aves, anfíbios, morcegos e gambás.",
       "location": "Apiaí, Cananéia e Eldorado.",
       "iucnState": "Pouco preocupante (LC)",
-      "link": "a"
+      "link": "https://www.npmjs.com/package/formidable"
     },
     {
       "id": "4f79edc4-2f05-49bc-bb20-01430881f9c0",
@@ -53,19 +53,6 @@
       "link": "https://www.npmjs.com/package/formidable"
     },
     {
-      "id": "4449d1df-6308-46ba-8822-945d7c25460a",
-      "date": "2024-07-17T21:49:23.078Z",
-      "name": "Queixada",
-      "scientificName": "Tayassu pecari",
-      "image": "a",
-      "imageDescription": "a",
-      "characteristics": "Pertencente ao Reino Animalia e à Ordem Artiodactyla, o Queixada é o maior animal da família de porcos selvagens da América do Sul. Possui cerca de 1,1 metro de comprimento e pesa entre 20 e 40 quilos.",
-      "eating": "Frutos, raízes, sementes, larvas de insetos e minhocas.",
-      "location": "Cananéia, Juquiá, Miracatu e Tapiraí.",
-      "iucnState": "Vulnerável (VU)",
-      "link": "a"
-    },
-    {
       "id": "d5c68fd2-6f14-401f-87e3-09ccd2699be0",
       "date": "2024-07-17T21:49:23.080Z",
       "name": "Anta",
@@ -76,32 +63,6 @@
       "eating": "Frutas, plantas, flores, folhas e cascas.",
       "location": "Juquiá, Miracatu e Tapiraí.",
       "iucnState": "Vulnerável (VU)",
-      "link": "https://www.npmjs.com/package/formidable"
-    },
-    {
-      "id": "03ab24da-966f-435f-b299-43c95762b707",
-      "date": "2024-07-22T20:47:00.975Z",
-      "name": "Onça-parda",
-      "scientificName": "a",
-      "image": "daltonismo01.PNG",
-      "imageDescription": "a",
-      "characteristics": "a",
-      "eating": "a",
-      "location": "a",
-      "iucnState": "Pouco preocupante (LC)",
-      "link": "https://www.npmjs.com/package/formidable"
-    },
-    {
-      "id": "681d8832-9f96-4c84-a01b-cb05efbe1a90",
-      "date": "2024-07-22T21:05:47.901Z",
-      "name": "Boto",
-      "scientificName": "a",
-      "image": "paleta01.PNG",
-      "imageDescription": "a",
-      "characteristics": "a",
-      "eating": "a",
-      "location": "a",
-      "iucnState": "Criticamente em perigo (CR)",
       "link": "https://www.npmjs.com/package/formidable"
     }
   ]

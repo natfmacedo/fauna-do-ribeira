@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { z as schema } from "zod";
 import { animalRepository } from "@server/repository/animal";
 import { read } from "@db-crud-animals";
+import { HttpNotFoundError } from "@server/infra/errors";
 
 // async function get(req: NextApiRequest, res: NextApiResponse) {
 //     // const query = req.query;
@@ -101,11 +102,13 @@ async function getAnimalById(req: NextApiRequest, res: NextApiResponse) {
             animal: animalById,
         });
     } catch (err) {
-        return res.status(404).json({
-            error: {
-                message: `Id not found`,
-            },
-        });
+        if (err instanceof HttpNotFoundError) {
+            return res.status(err.status).json({
+                error: {
+                    message: err.message,
+                },
+            });
+        }
     }
 }
 
@@ -184,22 +187,51 @@ async function animalUpdate(req: NextApiRequest, res: NextApiResponse) {
             animal: updatedAnimal,
         });
     } catch (err) {
-        if (err instanceof Error) {
-            res.status(404).json({
+        if (err instanceof HttpNotFoundError) {
+            res.status(err.status).json({
                 error: {
                     message: err.message,
                 },
             });
         }
     }
-    // if (!animalId || typeof animalId !== "string") {
-    //     res.status(400).json({
-    //         error: {
-    //             message: "You must to provide a string ID.",
-    //         },
-    //     });
-    //     return;
-    // }
+}
+
+async function deleteById(req: NextApiRequest, res: NextApiResponse) {
+    const QuerySchema = schema.object({
+        id: schema.string().uuid().nonempty(),
+    });
+
+    // Fail Fast Validations
+    const parsedQuery = QuerySchema.safeParse(req.query);
+    if (!parsedQuery.success) {
+        res.status(400).json({
+            error: {
+                message: "You must to provide a valid id",
+            },
+        });
+        return;
+    }
+
+    try {
+        const animalId = parsedQuery.data.id;
+        await animalRepository.deleteById(animalId);
+        res.status(204).end();
+    } catch (err) {
+        if (err instanceof HttpNotFoundError) {
+            return res.status(err.status).json({
+                error: {
+                    message: err.message,
+                },
+            });
+        }
+
+        res.status(500).json({
+            error: {
+                message: "Internal server error",
+            },
+        });
+    }
 }
 
 export const animalController = {
@@ -207,4 +239,5 @@ export const animalController = {
     create,
     getAnimalById,
     animalUpdate,
+    deleteById,
 };

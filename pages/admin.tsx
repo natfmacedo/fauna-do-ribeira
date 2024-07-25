@@ -40,6 +40,7 @@ interface AdminAnimal {
 function AdminPage() {
     const initialLoadComplete = React.useRef(false);
 
+    // animal infos
     const [newAnimalName, setNewAnimalName] = React.useState("");
     const [newAnimalScientificName, setNewAnimalScientificName] =
         React.useState("");
@@ -53,6 +54,7 @@ function AdminPage() {
     const [newAnimalIUCNState, setNewAnimalIUCNState] = React.useState("");
     const [newAnimalLink, setNewAnimalLink] = React.useState("");
 
+    // AdminPage infos
     const [totalPages, setTotalPages] = React.useState(0);
     const [page, setPage] = React.useState(1);
     const [isLoading, setIsLoading] = React.useState(true);
@@ -98,18 +100,6 @@ function AdminPage() {
                     initialLoadComplete.current = true;
                 });
         }
-        // if (!initialLoadComplete.current) {
-        //     animalController
-        //         .get()
-        //         .then(({ animals }) => {
-        //             setAnimals(animals);
-        //             // setTotalPages(pages);
-        //         })
-        //         .finally(() => {
-        //             setIsLoading(false);
-        //             initialLoadComplete.current = true;
-        //         });
-        // }
     }, []);
 
     return (
@@ -313,7 +303,42 @@ function AdminPage() {
                                                                 Cancelar
                                                             </Button>
                                                             <Button
-                                                                onPress={close}
+                                                                onPress={function handleClick() {
+                                                                    animalController
+                                                                        .deleteById(
+                                                                            animal.id
+                                                                        )
+                                                                        .then(
+                                                                            () => {
+                                                                                setAnimals(
+                                                                                    (
+                                                                                        currentAnimals
+                                                                                    ) => {
+                                                                                        return currentAnimals.filter(
+                                                                                            (
+                                                                                                currentAnimal
+                                                                                            ) => {
+                                                                                                if (
+                                                                                                    currentAnimal.id ===
+                                                                                                    animal.id
+                                                                                                )
+                                                                                                    return false;
+
+                                                                                                return true;
+                                                                                            }
+                                                                                        );
+                                                                                    }
+                                                                                );
+                                                                            }
+                                                                        )
+                                                                        .catch(
+                                                                            () => {
+                                                                                console.error(
+                                                                                    "Failed to delete"
+                                                                                );
+                                                                            }
+                                                                        );
+                                                                }}
                                                             >
                                                                 Excluir
                                                             </Button>

@@ -151,7 +151,17 @@ async function animalUpdate(
         return updatedAnimal;
     }
 
-    throw new Error("Sever Error");
+    throw new Error("Server Error");
+}
+
+async function deleteById(id: string) {
+    const response = await fetch(`/api/animals/${id}`, {
+        method: "DELETE",
+    });
+
+    if (!response.ok) {
+        throw new Error("Failed to delete");
+    }
 }
 
 export const animalRepository = {
@@ -159,6 +169,7 @@ export const animalRepository = {
     getAnimalById,
     createAnimal,
     animalUpdate,
+    deleteById,
 };
 
 function parseServerAnimals(responseBody: unknown): {

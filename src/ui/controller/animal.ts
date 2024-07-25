@@ -9,9 +9,6 @@ interface AnimalControllerGetParams {
 interface AnimalControllerGetByIdParams {
     id: string;
 }
-// async function get() {
-//     return animalRepository.get({ animals });
-// }
 
 async function get() {
     return animalRepository.get();
@@ -151,9 +148,15 @@ function animalUpdate({
         });
 }
 
+async function deleteById(id: string): Promise<void> {
+    const animalId = id;
+    await animalRepository.deleteById(animalId);
+}
+
 export const animalController = {
     get,
     getAnimalById,
     create,
     animalUpdate,
+    deleteById,
 };

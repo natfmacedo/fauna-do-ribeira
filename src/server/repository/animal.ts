@@ -3,7 +3,9 @@ import {
     create,
     update,
     getAnimalById as dbGetAnimalById,
+    deleteById as dbDeleteById,
 } from "@db-crud-animals";
+import { HttpNotFoundError } from "@server/infra/errors";
 
 // interface AnimalRepositoryGetParams {
 //     page?: number;
@@ -44,7 +46,8 @@ function get(): AnimalRepositoryGetOutput {
 async function getAnimalById(id: string): Promise<Animal> {
     const ALL_ANIMALS = read();
     const animalId = ALL_ANIMALS.find((animal) => animal.id === id);
-    if (!animalId) throw new Error(`Animal with id "${id}" not found`);
+    if (!animalId)
+        throw new HttpNotFoundError(`Animal with id "${id}" not found`);
     dbGetAnimalById(JSON.stringify(animalId));
     return animalId;
 }
@@ -90,7 +93,8 @@ async function animalUpdate(
 
     const animal = ALL_ANIMALS.find((currentAnimal) => currentAnimal.id === id);
 
-    if (!animal) throw new Error(`Animal with id "${id}" not found`);
+    if (!animal)
+        throw new HttpNotFoundError(`Animal with id "${id}" not found`);
 
     const updatedAnimal = update(animal.id, {
         name,
@@ -107,11 +111,21 @@ async function animalUpdate(
     return updatedAnimal;
 }
 
+async function deleteById(id: string) {
+    const ALL_ANIMALS = read();
+    const animal = ALL_ANIMALS.find((animal) => animal.id === id);
+
+    if (!animal)
+        throw new HttpNotFoundError(`Animal with id "${id}" not found`);
+    dbDeleteById(id);
+}
+
 export const animalRepository = {
     get,
     getAnimalById,
     createAnimal,
     animalUpdate,
+    deleteById,
 };
 
 // Model/Schema
