@@ -1,5 +1,6 @@
 import React from "react";
 import { animalController } from "@ui/controller/animal";
+import { NextSeo } from "next-seo";
 import {
     Form,
     TextField,
@@ -39,20 +40,6 @@ interface AdminAnimal {
 
 function AdminPage() {
     const initialLoadComplete = React.useRef(false);
-
-    // animal infos
-    const [newAnimalName, setNewAnimalName] = React.useState("");
-    const [newAnimalScientificName, setNewAnimalScientificName] =
-        React.useState("");
-    const [newAnimalImage, setNewAnimalImage] = React.useState("");
-    const [newAnimalImageDescription, setNewAnimalImageDescription] =
-        React.useState("");
-    const [newAnimalCharacteristics, setNewAnimalCharacteristics] =
-        React.useState("");
-    const [newAnimalEating, setNewAnimalEating] = React.useState("");
-    const [newAnimalLocation, setNewAnimalLocation] = React.useState("");
-    const [newAnimalIUCNState, setNewAnimalIUCNState] = React.useState("");
-    const [newAnimalLink, setNewAnimalLink] = React.useState("");
 
     // AdminPage infos
     const [totalPages, setTotalPages] = React.useState(0);
@@ -104,11 +91,12 @@ function AdminPage() {
 
     return (
         <>
+            <NextSeo
+                title="Gerenciamento | Fauna do Ribeira"
+                description="Página de gerenciamentos dos animais cadastrados no site Fauna do Ribeira"
+            />
             <section className="apresentacao">
                 <h2>Olá, administrador(a)!</h2>
-                <div className="apresentacao__botaoCadastrar">
-                    <Button>Cadastrar</Button>
-                </div>
                 <div className="apresentacao__busca">
                     <SearchField id="animal" type="search" inputMode="text">
                         <Label htmlFor="animal">Buscar animal:</Label>
@@ -126,6 +114,11 @@ function AdminPage() {
                 </div>
             </section>
             <section className="tabela">
+                <div className="table__createButton">
+                    <Link href="/admin-animal-create" role="button">
+                        + Cadastrar animal
+                    </Link>
+                </div>
                 <table>
                     <caption className="tabela__legenda">
                         Animais cadastrados no site Fauna do Ribeira
@@ -196,6 +189,12 @@ function AdminPage() {
                                 scope="col"
                                 className="tabela__cabecalho__titulo"
                             >
+                                Exibir detalhes
+                            </th>
+                            <th
+                                scope="col"
+                                className="tabela__cabecalho__titulo"
+                            >
                                 Editar
                             </th>
                             <th
@@ -260,6 +259,106 @@ function AdminPage() {
                                             (animal.link.length > 15
                                                 ? "..."
                                                 : "")}
+                                    </td>
+                                    <td className="tabela__corpo__conteudo">
+                                        <DialogTrigger>
+                                            <Button>Exibir</Button>
+                                            <Modal>
+                                                <Dialog>
+                                                    {({ close }) => (
+                                                        <div className="tabela__corpo__conteudo__card">
+                                                            <Heading slot="title">
+                                                                Detalhes do card
+                                                            </Heading>
+                                                            <img
+                                                                src=""
+                                                                alt=""
+                                                            />
+                                                            <div className="tabela__corpo__conteudo__card__conteudo">
+                                                                <h4
+                                                                    className="card__conteudo__titulo"
+                                                                    id="nomeAnimal"
+                                                                >
+                                                                    {
+                                                                        animal.name
+                                                                    }
+                                                                </h4>
+                                                                <dl className="card__conteudo__lista">
+                                                                    <dt className="card__conteudo__lista__topico">
+                                                                        Nome
+                                                                        científico
+                                                                    </dt>
+                                                                    <dd className="card__conteudo__lista__texto">
+                                                                        {
+                                                                            animal.scientificName
+                                                                        }
+                                                                    </dd>
+                                                                    <dt className="card__conteudo__lista__topico">
+                                                                        Características
+                                                                    </dt>
+                                                                    <dd className="card__conteudo__lista__texto">
+                                                                        {
+                                                                            animal.characteristics
+                                                                        }
+                                                                    </dd>
+                                                                    <dt className="card__conteudo__lista__topico">
+                                                                        Alimentação
+                                                                    </dt>
+                                                                    <dd className="card__conteudo__lista__texto">
+                                                                        {
+                                                                            animal.eating
+                                                                        }
+                                                                    </dd>
+                                                                    <dt className="card__conteudo__lista__topico">
+                                                                        Possíveis
+                                                                        locais
+                                                                        de
+                                                                        avistamento
+                                                                    </dt>
+                                                                    <dd className="card__conteudo__lista__texto">
+                                                                        {
+                                                                            animal.location
+                                                                        }
+                                                                    </dd>
+                                                                    <dt className="card__conteudo__lista__topico">
+                                                                        Estado
+                                                                        de
+                                                                        Conservação
+                                                                        IUCN
+                                                                    </dt>
+                                                                    <dd className="card__conteudo__lista__texto">
+                                                                        {
+                                                                            animal.iucnState
+                                                                        }
+                                                                    </dd>
+                                                                </dl>
+                                                                <Link
+                                                                    className="react-aria-Button"
+                                                                    href={
+                                                                        animal.link
+                                                                    }
+                                                                    target="_blank"
+                                                                >
+                                                                    Saiba mais{" "}
+                                                                    <span>
+                                                                        sobre
+                                                                        o(a){" "}
+                                                                        {
+                                                                            animal.name
+                                                                        }
+                                                                    </span>
+                                                                </Link>
+                                                            </div>
+                                                            <Button
+                                                                onPress={close}
+                                                            >
+                                                                Fechar
+                                                            </Button>
+                                                        </div>
+                                                    )}
+                                                </Dialog>
+                                            </Modal>
+                                        </DialogTrigger>
                                     </td>
                                     <td className="tabela__corpo__conteudo">
                                         <Link
@@ -394,7 +493,7 @@ function AdminPage() {
                     </tbody>
                 </table>
             </section>
-            <section className="cadastro">
+            {/* <section className="cadastro">
                 <h2 className="cadastro__titulo">Cadastro de animais</h2>
                 <div className="cadastro__formulario">
                     <Form
@@ -479,32 +578,6 @@ function AdminPage() {
                             }}
                         />
                         {selectedImage && <img src={selectedImage} alt="" />}
-                        {/* <FileTrigger type="file" onSelect={handleFileChange}>
-                            <Label>Imagem:</Label>
-                            <Button>Select a file</Button>
-                        </FileTrigger> */}
-                        {/* <label>
-                            <input
-                                type="file"
-                                onChange={({ target }) => {
-                                    if (target.files) {
-                                        const file = target.files[0];
-                                        setSelectedImage(
-                                            URL.createObjectURL(file)
-                                        );
-                                        setSelectedFile(file);
-                                    }
-                                }}
-                            />
-                            {selectedImage ? (
-                                <img src={selectedImage} alt="" />
-                            ) : (
-                                <span>Selecionar imagem...</span>
-                            )}
-                        </label> */}
-                        {/* <Button isDisabled={uploading}>
-                            {uploading ? "Uploading..." : "Upload"}
-                        </Button> */}
                         <TextField
                             name="descricaoImagem"
                             type="text"
@@ -607,45 +680,6 @@ function AdminPage() {
                                 Não avaliada (NE)
                             </option>
                         </select>
-                        {/* <Select name="estadoIUCN" isRequired>
-                            <Label>Estado de Conservação IUCN</Label>
-                            <Button>
-                                <SelectValue
-                                    onChange={function newAnimalHandler(
-                                        event: HTMLSelectElement
-                                    ) {
-                                        setNewAnimalIUCNState(
-                                            event.target.value
-                                        );
-                                    }}
-                                />
-                                <span aria-hidden="true">▼</span>
-                            </Button>
-                            <FieldError />
-                            <Popover>
-                                <ListBox>
-                                    <ListBoxItem>Extinta (EX)</ListBoxItem>
-                                    <ListBoxItem>
-                                        Extinta na natureza (EW)
-                                    </ListBoxItem>
-                                    <ListBoxItem>
-                                        Criticamente em perigo (CR)
-                                    </ListBoxItem>
-                                    <ListBoxItem>Em perigo (EN)</ListBoxItem>
-                                    <ListBoxItem>Vulnerável (VU)</ListBoxItem>
-                                    <ListBoxItem>
-                                        Quase ameaçada (NT)
-                                    </ListBoxItem>
-                                    <ListBoxItem>
-                                        Pouco preocupante (LC)
-                                    </ListBoxItem>
-                                    <ListBoxItem>
-                                        Deficiente de dados (DD)
-                                    </ListBoxItem>
-                                    <ListBoxItem>Não avaliada (NE)</ListBoxItem>
-                                </ListBox>
-                            </Popover>
-                        </Select> */}
                         <TextField name="link" type="url" isRequired>
                             <Label>Link para mais informações:</Label>
                             <Input
@@ -671,13 +705,10 @@ function AdminPage() {
                             >
                                 Cadastrar
                             </Button>
-                            {/* <button onClick={handleUpload} type="submit">
-                                Upload
-                            </button> */}
                         </div>
                     </Form>
                 </div>
-            </section>
+            </section> */}
         </>
     );
 }

@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 import { animalController } from "@ui/controller/animal";
 import axios from "axios";
+import { NextSeo } from "next-seo";
 
 interface UpdateAnimalPage {
     id: string;
@@ -81,8 +82,12 @@ function UpdateAnimalPage() {
 
     return (
         <>
+            <NextSeo
+                title="Edição | Fauna do Ribeira"
+                description="Página de edição dos dados dos animais cadastrados no site Fauna do Ribeira"
+            />
             <section className="update">
-                <Link className="update__buttom" href="/admin" role="button">
+                <Link className="update__buttom" href="/admin">
                     Voltar para a tabela
                 </Link>
                 <h2 className="update__title">Editar animal</h2>
