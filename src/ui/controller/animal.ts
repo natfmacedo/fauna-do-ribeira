@@ -1,24 +1,10 @@
 import { animalRepository } from "@ui/repository/animal";
 import { Animal } from "@ui/schema/animal";
 
-interface AnimalControllerGetParams {
-    page: number;
-    limit?: number;
-}
-
 interface AnimalControllerGetByIdParams {
     id: string;
 }
 
-async function get() {
-    return animalRepository.get();
-}
-
-async function getAnimalById(params: AnimalControllerGetByIdParams) {
-    return animalRepository.getAnimalById({
-        id: params.id,
-    });
-}
 interface AnimalControllerCreateParams {
     id?: string;
     name?: string;
@@ -46,6 +32,10 @@ interface AnimalControllerUpdateParams {
     link: string;
     onError: () => void;
     onSuccess: (animal: Animal) => void;
+}
+
+async function get() {
+    return animalRepository.get();
 }
 
 function create({
@@ -95,6 +85,12 @@ function create({
         .catch(() => {
             onError();
         });
+}
+
+async function getAnimalById(params: AnimalControllerGetByIdParams) {
+    return animalRepository.getAnimalById({
+        id: params.id,
+    });
 }
 
 function animalUpdate({

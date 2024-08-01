@@ -7,49 +7,15 @@ import {
 } from "@db-crud-animals";
 import { HttpNotFoundError } from "@server/infra/errors";
 
-// interface AnimalRepositoryGetParams {
-//     page?: number;
-//     limit?: number;
-// }
-
 interface AnimalRepositoryGetOutput {
     animals: Animal[];
-    // total: number;
-    // pages: number;
 }
 
-// function get(): AnimalRepositoryGetOutput {
-//     // const currentPage = page || 1;
-//     // const currentLimit = limit || 4;
-
-//     const ALL_ANIMALS = read().reverse();
-
-//     // Paginação
-//     // const startIndex = (currentPage - 1) * currentLimit;
-//     // const endIndex = currentPage * currentLimit;
-//     // const paginatedAnimals = ALL_ANIMALS.slice(startIndex, endIndex);
-//     // const totalPages = Math.ceil(ALL_ANIMALS.length / currentLimit);
-//     return {
-//         animals: ALL_ANIMALS,
-//         // total: ALL_ANIMALS.length,
-//         // pages: totalPages,
-//     };
-// }
-
 function get(): AnimalRepositoryGetOutput {
-    const ALL_ANIMALS = read();
+    const ALL_ANIMALS = read().reverse();
     return {
         animals: ALL_ANIMALS,
     };
-}
-
-async function getAnimalById(id: string): Promise<Animal> {
-    const ALL_ANIMALS = read();
-    const animalId = ALL_ANIMALS.find((animal) => animal.id === id);
-    if (!animalId)
-        throw new HttpNotFoundError(`Animal with id "${id}" not found`);
-    dbGetAnimalById(JSON.stringify(animalId));
-    return animalId;
 }
 
 async function createAnimal(
@@ -75,6 +41,15 @@ async function createAnimal(
         link
     );
     return newAnimal;
+}
+
+async function getAnimalById(id: string): Promise<Animal> {
+    const ALL_ANIMALS = read();
+    const animalId = ALL_ANIMALS.find((animal) => animal.id === id);
+    if (!animalId)
+        throw new HttpNotFoundError(`Animal with id "${id}" not found`);
+    dbGetAnimalById(JSON.stringify(animalId));
+    return animalId;
 }
 
 async function animalUpdate(

@@ -8,8 +8,6 @@ export default function handler(
     if (request.method === "GET") {
         animalController.get(request, response);
         return;
-        // animalController.get(request, response);
-        // return;
     }
 
     if (request.method === "POST") {

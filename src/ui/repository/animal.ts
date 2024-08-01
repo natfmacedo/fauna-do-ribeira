@@ -1,15 +1,8 @@
-import { z as schema, string } from "zod";
+import { z as schema } from "zod";
 import { Animal, AnimalSchema } from "@ui/schema/animal";
 
-interface AnimalRepositoryGetParams {
-    animals: Animal[];
-    // page: number;
-    // limit: number;
-}
 interface AnimalRepositoryGetOutput {
     animals: Animal[];
-    // total: number;
-    // pages: number;
 }
 interface AnimalControllerGetByIdParams {
     id: string;
@@ -17,21 +10,6 @@ interface AnimalControllerGetByIdParams {
 interface AnimalControlerGetByIdOutput {
     animal: Animal[];
 }
-
-// function get({
-//     animals,
-// }: AnimalRepositoryGetParams): Promise<AnimalRepositoryGetOutput> {
-//     return fetch(`/api/animals`).then(async (serverAnswer) => {
-//         const animalsString = await serverAnswer.text();
-//         const responseParsed = parseServerAnimals(JSON.parse(animalsString));
-
-//         return {
-//             animals: responseParsed.animals,
-//             // total: responseParsed.total,
-//             // pages: responseParsed.pages,
-//         };
-//     });
-// }
 
 function get(): Promise<AnimalRepositoryGetOutput> {
     return fetch("/api/animals").then(async (serverAnswer) => {
@@ -47,20 +25,7 @@ function get(): Promise<AnimalRepositoryGetOutput> {
     });
 }
 
-function getAnimalById({
-    id,
-}: AnimalControllerGetByIdParams): Promise<AnimalControlerGetByIdOutput> {
-    return fetch(`/api/animals?id=${id}`).then(async (serverAnswer) => {
-        const animalsString = await serverAnswer.text();
-        const responseParsed = parseServerAnimals(JSON.parse(animalsString));
-
-        return {
-            animal: responseParsed.animals,
-        };
-    });
-}
-
-export async function createAnimal(
+async function createAnimal(
     name: string,
     scientificName: string,
     image: string,
@@ -105,6 +70,19 @@ export async function createAnimal(
         return animal;
     }
     throw new Error("Failed to create an animal");
+}
+
+function getAnimalById({
+    id,
+}: AnimalControllerGetByIdParams): Promise<AnimalControlerGetByIdOutput> {
+    return fetch(`/api/animals?id=${id}`).then(async (serverAnswer) => {
+        const animalsString = await serverAnswer.text();
+        const responseParsed = parseServerAnimals(JSON.parse(animalsString));
+
+        return {
+            animal: responseParsed.animals,
+        };
+    });
 }
 
 async function animalUpdate(
@@ -173,21 +151,15 @@ export const animalRepository = {
 };
 
 function parseServerAnimals(responseBody: unknown): {
-    // total: number;
-    // pages: number;
     animals: Array<Animal>;
 } {
     if (
         responseBody !== null &&
         typeof responseBody === "object" &&
         "animals" in responseBody &&
-        // "total" in responseBody &&
-        // "pages" in responseBody &&
         Array.isArray(responseBody.animals)
     ) {
         return {
-            // total: Number(responseBody.total),
-            // pages: Number(responseBody.pages),
             animals: responseBody.animals.map((animal: unknown) => {
                 if (animal === null && typeof animal !== "object") {
                     throw new Error("Invalid animal from API");
@@ -236,8 +208,6 @@ function parseServerAnimals(responseBody: unknown): {
         };
     }
     return {
-        // pages: 1,
-        // total: 0,
         animals: [],
     };
 }

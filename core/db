@@ -5,12 +5,12 @@
       "date": "2024-07-17T21:49:23.061Z",
       "name": "Maria-leque-do-sudeste",
       "scientificName": "Onychorhynchus swainsoni",
-      "image": "a",
+      "image": "paleta01.PNG",
       "imageDescription": "Pertencente ao Reino Animalia e à Ordem dos Passeiformes, a Maria-leque-do-sudeste tem entre 16 e 17,5 centímetros de comprimento e pesa entre 13 e 21 gramas. O nome vem da presença de uma plumagem na cabeça em formato de leque nas cores escarlate, preto e azul no macho e laranja, preto e azul na fêmea.",
       "characteristics": "Pertencente ao Reino Animalia e à Ordem dos Passeiformes, a Maria-leque-do-sudeste tem entre 16 e 17,5 centímetros de comprimento e pesa entre 13 e 21 gramas. O nome vem da presença de uma plumagem na cabeça em formato de leque nas cores escarlate, preto e azul no macho e laranja, preto e azul na fêmea.",
       "eating": "Borboletas, libélulas, vespas e mamangavas.",
       "location": "Apiaí, Barra do Turvo e Eldorado.",
-      "iucnState": "Vulnerável (VU)",
+      "iucnState": "Em perigo (EN)",
       "link": "https://www.npmjs.com/package/formidable"
     },
     {
@@ -18,7 +18,7 @@
       "date": "2024-07-17T21:49:23.071Z",
       "name": "Tucano-de-bico-preto",
       "scientificName": "Ramphastos vitellinus",
-      "image": "a",
+      "image": "teste.PNG",
       "imageDescription": "a",
       "characteristics": "Pertencente ao Reino Animalia e à Ordem dos Piciformes, possui aproximadamente 46 centímetros de comprimento.",
       "eating": "Frutos, artrópodes em geral, aranhas, ovos, filhotes de outras aves, anfíbios, morcegos e gambás.",
@@ -31,13 +31,13 @@
       "date": "2024-07-17T21:49:23.072Z",
       "name": "Papagaio-de-cara-roxa",
       "scientificName": "Amazona brasiliensis",
-      "image": "a",
+      "image": "teste.PNG",
       "imageDescription": "a",
       "characteristics": "Pertencente ao Reino Animalia e à Ordem dos Psittaciformes, trata-se de uma espécie caiçara na cor verde com vértice e garganta arroxeados.",
       "eating": "Frutos, insetos e larvas.",
       "location": "Cananéia, Iguape, Ilha Comprida, Itariri, Jacupiranga e Pariquera-Açu.",
       "iucnState": "Quase ameaçada (NT)",
-      "link": "a"
+      "link": "https://www.npmjs.com/package/formidable"
     },
     {
       "id": "6858615f-b085-42af-b5cc-cbb2e9aa727b",
@@ -66,19 +66,6 @@
       "link": "https://www.npmjs.com/package/formidable"
     },
     {
-      "id": "2b1a7bad-f4eb-4a9e-9d80-6fe720dbfc7e",
-      "date": "2024-07-25T18:17:31.947Z",
-      "name": "Boto",
-      "scientificName": "a",
-      "image": "teste.PNG",
-      "imageDescription": "a",
-      "characteristics": "a",
-      "eating": "a",
-      "location": "a",
-      "iucnState": "Quase ameaçada (NT)",
-      "link": "https://www.npmjs.com/package/formidable"
-    },
-    {
       "id": "9b8bed99-43e9-409a-8d63-f51d93dbf400",
       "date": "2024-07-25T18:22:27.204Z",
       "name": "Queixada",
@@ -92,16 +79,42 @@
       "link": "https://www.npmjs.com/package/formidable"
     },
     {
-      "id": "b533c56e-d8e9-413a-81a4-b2cf4e00bb20",
-      "date": "2024-07-29T15:16:18.507Z",
-      "name": "Queixada",
+      "id": "37d44606-dad0-4056-beae-ea5ae8bd9d26",
+      "date": "2024-07-29T17:54:38.742Z",
+      "name": "Onça-parda",
       "scientificName": "a",
       "image": "teste.PNG",
       "imageDescription": "a",
       "characteristics": "a",
       "eating": "a",
       "location": "a",
+      "iucnState": "Pouco preocupante (LC)",
+      "link": "https://www.npmjs.com/package/formidable"
+    },
+    {
+      "id": "f4a780f1-eb0d-49a6-980a-9ff4d4ca1c45",
+      "date": "2024-07-29T18:12:00.877Z",
+      "name": "Cachorro-vinagre",
+      "scientificName": "a",
+      "image": "paleta01.PNG",
+      "imageDescription": "a",
+      "characteristics": "a",
+      "eating": "a",
+      "location": "a",
       "iucnState": "Vulnerável (VU)",
+      "link": "https://www.npmjs.com/package/formidable"
+    },
+    {
+      "id": "37c98323-a6a2-495a-af90-0f94d97ac649",
+      "date": "2024-07-29T19:17:59.260Z",
+      "name": "Boto",
+      "scientificName": "a",
+      "image": "teste.PNG",
+      "imageDescription": "a",
+      "characteristics": "a",
+      "eating": "a",
+      "location": "a",
+      "iucnState": "Em perigo (EN)",
       "link": "https://www.npmjs.com/package/formidable"
     }
   ]

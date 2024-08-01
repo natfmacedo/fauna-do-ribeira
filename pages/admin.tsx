@@ -1,22 +1,13 @@
-import React from "react";
-import { animalController } from "@ui/controller/animal";
+import React, { useEffect, useRef, useState } from "react";
 import { NextSeo } from "next-seo";
+import { animalController } from "@ui/controller/animal";
 import {
     Form,
-    TextField,
     Label,
     Input,
-    FieldError,
     Button,
-    TextArea,
     SearchField,
     Text,
-    FileTrigger,
-    Select,
-    SelectValue,
-    Popover,
-    ListBox,
-    ListBoxItem,
     DialogTrigger,
     Modal,
     Dialog,
@@ -39,15 +30,12 @@ interface AdminAnimal {
 }
 
 function AdminPage() {
-    const initialLoadComplete = React.useRef(false);
+    const initialLoadComplete = useRef(false);
 
     // AdminPage infos
-    const [totalPages, setTotalPages] = React.useState(0);
-    const [page, setPage] = React.useState(1);
-    const [isLoading, setIsLoading] = React.useState(true);
-    const [search, setSearch] = React.useState("");
-    const [animals, setAnimals] = React.useState<AdminAnimal[]>([]);
-    // const hasMorePages = totalPages > page;
+    const [isLoading, setIsLoading] = useState(true);
+    const [search, setSearch] = useState("");
+    const [animals, setAnimals] = useState<AdminAnimal[]>([]);
 
     // search
     const tableAnimals = animals.filter((animal) => {
@@ -57,25 +45,7 @@ function AdminPage() {
     });
     const hasNoAnimals = tableAnimals.length === 0 && !isLoading;
 
-    // upload de imagens
-    const [uploading, setUploading] = React.useState(false);
-    const [selectedImage, setSelectedImage] = React.useState("");
-    const [selectedFile, setSelectedFile] = React.useState<File>();
-
-    const handleUpload = async () => {
-        setUploading(true);
-        try {
-            if (!selectedFile) return;
-            const formData = new FormData();
-            formData.append("myImage", selectedFile);
-            const { data } = await axios.post("/api/upload", formData);
-        } catch (error: any) {
-            console.error(error.response?.data);
-        }
-        setUploading(false);
-    };
-
-    React.useEffect(() => {
+    useEffect(() => {
         if (!initialLoadComplete.current) {
             animalController
                 .get()
@@ -95,11 +65,11 @@ function AdminPage() {
                 title="Gerenciamento | Fauna do Ribeira"
                 description="Página de gerenciamentos dos animais cadastrados no site Fauna do Ribeira"
             />
-            <section className="apresentacao">
-                <h2>Olá, administrador(a)!</h2>
-                <div className="apresentacao__busca">
+            <section className="intro">
+                <h2 className="intro__title">Olá, administrador(a)!</h2>
+                <div className="intro__search">
                     <SearchField id="animal" type="search" inputMode="text">
-                        <Label htmlFor="animal">Buscar animal:</Label>
+                        <Label>Buscar animal:</Label>
                         <Input
                             aria-placeholder="Digite um nome, exemplo: Onça-parda."
                             onChange={function handleSearch(event) {
@@ -113,109 +83,70 @@ function AdminPage() {
                     </SearchField>
                 </div>
             </section>
-            <section className="tabela">
+            <section className="table">
                 <div className="table__createButton">
                     <Link href="/admin-animal-create" role="button">
                         + Cadastrar animal
                     </Link>
                 </div>
                 <table>
-                    <caption className="tabela__legenda">
+                    <caption className="table__subtitle">
                         Animais cadastrados no site Fauna do Ribeira
                     </caption>
-                    <thead className="tabela__cabecalho">
+                    <thead className="table__head">
                         <tr>
-                            <th
-                                scope="col"
-                                className="tabela__cabecalho__titulo"
-                            >
+                            <th scope="col" className="table__head__title">
                                 ID
                             </th>
-                            <th
-                                scope="col"
-                                className="tabela__cabecalho__titulo"
-                            >
+                            <th scope="col" className="table__head__title">
                                 Imagem
                             </th>
-                            <th
-                                scope="col"
-                                className="tabela__cabecalho__titulo"
-                            >
+                            <th scope="col" className="table__head__title">
                                 Descrição da imagem
                             </th>
-                            <th
-                                scope="col"
-                                className="tabela__cabecalho__titulo"
-                            >
+                            <th scope="col" className="table__head__title">
                                 Nome
                             </th>
-                            <th
-                                scope="col"
-                                className="tabela__cabecalho__titulo"
-                            >
+                            <th scope="col" className="table__head__title">
                                 Nome científico
                             </th>
-                            <th
-                                scope="col"
-                                className="tabela__cabecalho__titulo"
-                            >
+                            <th scope="col" className="table__head__title">
                                 Características
                             </th>
-                            <th
-                                scope="col"
-                                className="tabela__cabecalho__titulo"
-                            >
+                            <th scope="col" className="table__head__title">
                                 Alimentação
                             </th>
-                            <th
-                                scope="col"
-                                className="tabela__cabecalho__titulo"
-                            >
+                            <th scope="col" className="table__head__title">
                                 Localização
                             </th>
-                            <th
-                                scope="col"
-                                className="tabela__cabecalho__titulo"
-                            >
+                            <th scope="col" className="table__head__title">
                                 Estado IUCN
                             </th>
-                            <th
-                                scope="col"
-                                className="tabela__cabecalho__titulo"
-                            >
+                            <th scope="col" className="table__head__title">
                                 Link
                             </th>
-                            <th
-                                scope="col"
-                                className="tabela__cabecalho__titulo"
-                            >
+                            <th scope="col" className="table__head__title">
                                 Exibir detalhes
                             </th>
-                            <th
-                                scope="col"
-                                className="tabela__cabecalho__titulo"
-                            >
+                            <th scope="col" className="table__head__title">
                                 Editar
                             </th>
-                            <th
-                                scope="col"
-                                className="tabela__cabecalho__titulo"
-                            >
+                            <th scope="col" className="table__head__title">
                                 Excluir
                             </th>
                         </tr>
                     </thead>
-                    <tbody className="tabela__corpo">
+                    <tbody className="table__body">
                         {tableAnimals.map((animal) => {
                             return (
                                 <tr key={animal.id}>
-                                    <td className="tabela__corpo__conteudo">
+                                    <td className="table__body__content">
                                         {animal.id.substring(0, 4)}
                                     </td>
-                                    <td className="tabela__corpo__conteudo">
+                                    <td className="tabela__body__content">
                                         {animal.image}
                                     </td>
-                                    <td className="tabela__corpo__conteudo">
+                                    <td className="tabela__body__content">
                                         {animal.imageDescription.substring(
                                             0,
                                             48
@@ -224,13 +155,13 @@ function AdminPage() {
                                                 ? "..."
                                                 : "")}
                                     </td>
-                                    <td className="tabela__corpo__conteudo">
+                                    <td className="tabela__body__content">
                                         {animal.name}
                                     </td>
-                                    <td className="tabela__corpo__conteudo">
+                                    <td className="tabela__body__content">
                                         {animal.scientificName}
                                     </td>
-                                    <td className="tabela__corpo__conteudo">
+                                    <td className="tabela__body__content">
                                         {animal.characteristics.substring(
                                             0,
                                             48
@@ -239,34 +170,34 @@ function AdminPage() {
                                                 ? "..."
                                                 : "")}
                                     </td>
-                                    <td className="tabela__corpo__conteudo">
+                                    <td className="tabela__body__content">
                                         {animal.eating.substring(0, 15) +
                                             (animal.eating.length > 15
                                                 ? "..."
                                                 : "")}
                                     </td>
-                                    <td className="tabela__corpo__conteudo">
+                                    <td className="tabela__body__content">
                                         {animal.location.substring(0, 15) +
                                             (animal.location.length > 15
                                                 ? "..."
                                                 : "")}
                                     </td>
-                                    <td className="tabela__corpo__conteudo">
+                                    <td className="tabela__body__content">
                                         {animal.iucnState}
                                     </td>
-                                    <td className="tabela__corpo__conteudo">
+                                    <td className="tabela__body__content">
                                         {animal.link.substring(0, 15) +
                                             (animal.link.length > 15
                                                 ? "..."
                                                 : "")}
                                     </td>
-                                    <td className="tabela__corpo__conteudo">
+                                    <td className="tabela__body__content">
                                         <DialogTrigger>
                                             <Button>Exibir</Button>
                                             <Modal>
                                                 <Dialog>
                                                     {({ close }) => (
-                                                        <div className="tabela__corpo__conteudo__card">
+                                                        <div className="tabela__body__content__card">
                                                             <Heading slot="title">
                                                                 Detalhes do card
                                                             </Heading>
@@ -493,222 +424,6 @@ function AdminPage() {
                     </tbody>
                 </table>
             </section>
-            {/* <section className="cadastro">
-                <h2 className="cadastro__titulo">Cadastro de animais</h2>
-                <div className="cadastro__formulario">
-                    <Form
-                        onSubmit={(event) => {
-                            event.preventDefault();
-                            animalController.create({
-                                name: newAnimalName,
-                                scientificName: newAnimalScientificName,
-                                image: newAnimalImage,
-                                imageDescription: newAnimalImageDescription,
-                                characteristics: newAnimalCharacteristics,
-                                eating: newAnimalEating,
-                                location: newAnimalLocation,
-                                iucnState: newAnimalIUCNState,
-                                link: newAnimalLink,
-                                onSuccess(animal: AdminAnimal) {
-                                    handleUpload();
-                                    alert("Animal cadastrado com sucesso!");
-                                    setAnimals((oldAnimals) => {
-                                        return [animal, ...oldAnimals];
-                                    });
-                                    setNewAnimalName("");
-                                    setNewAnimalScientificName("");
-                                    setNewAnimalImage("");
-                                    // setSelectedFile(null);
-                                    setNewAnimalImageDescription("");
-                                    setNewAnimalCharacteristics("");
-                                    setNewAnimalEating("");
-                                    setNewAnimalLocation("");
-                                    setNewAnimalIUCNState("");
-                                    setNewAnimalLink("");
-                                },
-                                onError() {
-                                    alert(
-                                        "Você precisa preencher todos os campos para cadastrar um novo animal."
-                                    );
-                                },
-                            });
-                        }}
-                    >
-                        <TextField name="nome" type="text" isRequired>
-                            <Label>Nome:</Label>
-                            <Input
-                                value={newAnimalName}
-                                onChange={function newAnimalHandler(event) {
-                                    setNewAnimalName(event.target.value);
-                                }}
-                            />
-                            <FieldError />
-                        </TextField>
-                        <TextField name="nomeCientifico" type="text" isRequired>
-                            <Label>Nome científico:</Label>
-                            <Input
-                                value={newAnimalScientificName}
-                                onChange={function newAnimalHandler(event) {
-                                    setNewAnimalScientificName(
-                                        event.target.value
-                                    );
-                                }}
-                            />
-                            <FieldError />
-                        </TextField>
-                        <label htmlFor="imagem">Imagem:</label>
-                        <input
-                            id="imagem"
-                            type="file"
-                            onChange={({ target }) => {
-                                if (target.files) {
-                                    const file = target.files[0];
-                                    try {
-                                        setSelectedImage(
-                                            URL.createObjectURL(file)
-                                        );
-                                        setSelectedFile(file);
-                                        setNewAnimalImage(file.name);
-                                    } catch {
-                                        alert(
-                                            "Selecione uma imagem para continuar"
-                                        );
-                                    }
-                                }
-                            }}
-                        />
-                        {selectedImage && <img src={selectedImage} alt="" />}
-                        <TextField
-                            name="descricaoImagem"
-                            type="text"
-                            isRequired
-                        >
-                            <Label>Descrição da imagem:</Label>
-                            <TextArea
-                                value={newAnimalImageDescription}
-                                onChange={function newAnimalHandler(event) {
-                                    setNewAnimalImageDescription(
-                                        event.target.value
-                                    );
-                                }}
-                            />
-                            <FieldError />
-                        </TextField>
-                        <TextField
-                            name="caracteristicas"
-                            type="text"
-                            isRequired
-                        >
-                            <Label>Características:</Label>
-                            <TextArea
-                                value={newAnimalCharacteristics}
-                                onChange={function newAnimalHandler(event) {
-                                    setNewAnimalCharacteristics(
-                                        event.target.value
-                                    );
-                                }}
-                            />
-                            <FieldError />
-                        </TextField>
-                        <TextField name="alimentacao" type="text" isRequired>
-                            <Label>Alimentação:</Label>
-                            <Input
-                                value={newAnimalEating}
-                                onChange={function newAnimalHandler(event) {
-                                    setNewAnimalEating(event.target.value);
-                                }}
-                            />
-                            <FieldError />
-                        </TextField>
-                        <TextField
-                            name="locaisAvistamento"
-                            type="text"
-                            isRequired
-                        >
-                            <Label>Locais de avistamento:</Label>
-                            <Input
-                                value={newAnimalLocation}
-                                onChange={function newAnimalHandler(event) {
-                                    setNewAnimalLocation(event.target.value);
-                                }}
-                            />
-                            <FieldError />
-                        </TextField>
-                        <label htmlFor="estadoIUCN">
-                            Estado de Conservação IUCN:
-                        </label>
-                        <select
-                            name="estadoIUCN"
-                            id="estadoIUCN"
-                            // value={newAnimalIUCNState}
-                            onChange={function newAnimalHandler(event) {
-                                setNewAnimalIUCNState(event.target.value);
-                            }}
-                            defaultValue="defaultOption"
-                            required
-                        >
-                            <option
-                                value="defaultOption"
-                                disabled
-                                aria-disabled="true"
-                            >
-                                Selecione uma opção
-                            </option>
-                            <option value="Extinta (EX)">Extinta (EX)</option>
-                            <option value="Extinta na natureza (EW)">
-                                Extinta na natureza (EW)
-                            </option>
-                            <option value="Criticamente em perigo (CR)">
-                                Criticamente em perigo (CR)
-                            </option>
-                            <option value="Em perigo (EN)">
-                                Em perigo (EN)
-                            </option>
-                            <option value="Vulnerável (VU)">
-                                Vulnerável (VU)
-                            </option>
-                            <option value="Quase ameaçada (NT)">
-                                Quase ameaçada (NT)
-                            </option>
-                            <option value="Pouco preocupante (LC)">
-                                Pouco preocupante (LC)
-                            </option>
-                            <option value="Deficiente de dados (DD)">
-                                Deficiente de dados (DD)
-                            </option>
-                            <option value="Não avaliada (NE)">
-                                Não avaliada (NE)
-                            </option>
-                        </select>
-                        <TextField name="link" type="url" isRequired>
-                            <Label>Link para mais informações:</Label>
-                            <Input
-                                value={newAnimalLink}
-                                onChange={function newAnimalHandler(event) {
-                                    setNewAnimalLink(event.target.value);
-                                }}
-                            />
-                            <FieldError />
-                        </TextField>
-                        <div className="cadastro__formulario__botoes">
-                            <Button
-                                name="cancelarCadastro"
-                                type="reset"
-                                // onPress={setSelectedFile(null)}
-                            >
-                                Cancelar
-                            </Button>
-                            <Button
-                                name="cadastrarAnimal"
-                                type="submit"
-                                // onPress={handleUpload}
-                            >
-                                Cadastrar
-                            </Button>
-                        </div>
-                    </Form>
-                </div>
-            </section> */}
         </>
     );
 }

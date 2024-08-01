@@ -14,7 +14,4 @@ export default function handler(
             message: "Method now allowed",
         },
     });
-    // eslint-disable-next-line no-console
-    // console.log(request.headers);
-    // response.status(200).json({ message: "Animal atualizado!" });
 }

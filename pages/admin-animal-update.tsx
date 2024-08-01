@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { NextSeo } from "next-seo";
 import { useSearchParams } from "next/navigation";
-import { redirect } from "next/navigation";
+import { animalController } from "@ui/controller/animal";
+import axios from "axios";
 import {
+    Breadcrumbs,
+    Breadcrumb,
     FieldError,
     Form,
     Input,
@@ -11,9 +15,6 @@ import {
     Button,
 } from "react-aria-components";
 import Link from "next/link";
-import { animalController } from "@ui/controller/animal";
-import axios from "axios";
-import { NextSeo } from "next-seo";
 
 interface UpdateAnimalPage {
     id: string;
@@ -29,8 +30,11 @@ interface UpdateAnimalPage {
 }
 
 function UpdateAnimalPage() {
+    // parâmetros vindos de admin.tsx
     const searchParams = useSearchParams();
     const id = searchParams.get("id") || "";
+
+    // animal infos
     const [animal, setAnimal] = React.useState<UpdateAnimalPage[]>([]);
     const [animalName, setAnimalName] = useState("");
     const [animalScientificName, setAnimalScientificName] = useState("");
@@ -46,7 +50,6 @@ function UpdateAnimalPage() {
     const [uploading, setUploading] = useState(false);
     const [selectedImage, setSelectedImage] = useState("");
     const [selectedFile, setSelectedFile] = useState<File>();
-    // const [updatedAnimalImage, setUpdatedAnimalImage] = useState("");
 
     const handleUpload = async () => {
         setUploading(true);
@@ -54,9 +57,11 @@ function UpdateAnimalPage() {
             if (!selectedFile) return;
             const formData = new FormData();
             formData.append("myImage", selectedFile);
-            const { data } = await axios.post("/api/upload", formData);
-        } catch (error: any) {
-            console.error(error.response?.data);
+            await axios.post("/api/upload", formData);
+        } catch (err) {
+            if (err instanceof Error) {
+                console.error(err);
+            }
         }
         setUploading(false);
     };
@@ -87,9 +92,21 @@ function UpdateAnimalPage() {
                 description="Página de edição dos dados dos animais cadastrados no site Fauna do Ribeira"
             />
             <section className="update">
-                <Link className="update__buttom" href="/admin">
-                    Voltar para a tabela
-                </Link>
+                <div className="update__menu">
+                    <Breadcrumbs>
+                        <Breadcrumb>
+                            <Link
+                                className="update__menu__linkToPreviousPage"
+                                href="/admin"
+                            >
+                                Tabela
+                            </Link>
+                        </Breadcrumb>
+                        <Breadcrumb>
+                            <Link href="">Edição</Link>
+                        </Breadcrumb>
+                    </Breadcrumbs>
+                </div>
                 <h2 className="update__title">Editar animal</h2>
                 <div className="update__form">
                     <Form
@@ -112,7 +129,6 @@ function UpdateAnimalPage() {
                                     setAnimal((oldAnimals) => {
                                         return [animal, ...oldAnimals];
                                     });
-                                    // redirect("/admin");
                                 },
                                 onError() {
                                     alert(
@@ -122,7 +138,11 @@ function UpdateAnimalPage() {
                             });
                         }}
                     >
-                        <TextField name="animalName" isRequired>
+                        <TextField
+                            name="animalName"
+                            className="update__form__field"
+                            isRequired
+                        >
                             <Label>Nome:</Label>
                             <Input
                                 type="text"
@@ -133,7 +153,11 @@ function UpdateAnimalPage() {
                             />
                             <FieldError />
                         </TextField>
-                        <TextField name="animalScientificName" isRequired>
+                        <TextField
+                            name="animalScientificName"
+                            className="update__form__field"
+                            isRequired
+                        >
                             <Label>Nome científico:</Label>
                             <Input
                                 type="text"
@@ -144,7 +168,7 @@ function UpdateAnimalPage() {
                             />
                             <FieldError />
                         </TextField>
-                        <div>
+                        <div className="update__form__field">
                             <label htmlFor="animalImage">
                                 Escolher nova imagem:
                             </label>
@@ -152,6 +176,7 @@ function UpdateAnimalPage() {
                                 name="animalImage"
                                 id="animalImage"
                                 type="file"
+                                accept="image/png, image/jpeg"
                                 onChange={({ target }) => {
                                     if (target.files) {
                                         const file = target.files[0];
@@ -172,22 +197,11 @@ function UpdateAnimalPage() {
                             {selectedImage && (
                                 <img src={selectedImage} alt="" />
                             )}
-                            {/* {!selectedImage && (
-                                <div>
-                                    <label htmlFor="oldAnimalImage">
-                                        Imagem atual:
-                                    </label>
-                                    <img
-                                        // id="animalImage"
-                                        src={`../images/fauna-do-ribeira-${animalImage}`}
-                                        alt=""
-                                    />
-                                </div>
-                            )} */}
                         </div>
                         <TextField
                             name="animalImageDescription"
                             type="text"
+                            className="update__form__field"
                             isRequired
                         >
                             <Label>Descrição da imagem:</Label>
@@ -204,6 +218,7 @@ function UpdateAnimalPage() {
                         <TextField
                             name="animalCharacteristics"
                             type="text"
+                            className="update__form__field"
                             isRequired
                         >
                             <Label>Características:</Label>
@@ -217,7 +232,11 @@ function UpdateAnimalPage() {
                             />
                             <FieldError />
                         </TextField>
-                        <TextField name="animalEating" isRequired>
+                        <TextField
+                            name="animalEating"
+                            className="update__form__field"
+                            isRequired
+                        >
                             <Label>Alimentação:</Label>
                             <Input
                                 type="text"
@@ -228,7 +247,11 @@ function UpdateAnimalPage() {
                             />
                             <FieldError />
                         </TextField>
-                        <TextField name="animalLocation" isRequired>
+                        <TextField
+                            name="animalLocation"
+                            className="update__form__field"
+                            isRequired
+                        >
                             <Label>Locais de avistamento:</Label>
                             <Input
                                 type="text"
@@ -239,53 +262,61 @@ function UpdateAnimalPage() {
                             />
                             <FieldError />
                         </TextField>
-                        <label htmlFor="animalIucnState">
-                            Estado de Conservação IUCN:
-                        </label>
-                        <select
-                            name="animalIucnState"
-                            id="animalIucnState"
-                            // value={newAnimalIUCNState}
-                            onChange={function updatedAnimalHandler(event) {
-                                setAnimalIucnState(event.target.value);
-                            }}
-                            value={animalIucnState}
-                            required
-                        >
-                            <option
-                                value="Selecione uma opção"
-                                disabled
-                                aria-disabled="true"
+                        <div className="update__form__field">
+                            <label htmlFor="animalIucnState">
+                                Estado de Conservação IUCN:
+                            </label>
+                            <select
+                                name="animalIucnState"
+                                id="animalIucnState"
+                                // value={newAnimalIUCNState}
+                                onChange={function updatedAnimalHandler(event) {
+                                    setAnimalIucnState(event.target.value);
+                                }}
+                                value={animalIucnState}
+                                required
                             >
-                                Selecione uma opção
-                            </option>
-                            <option value="Extinta (EX)">Extinta (EX)</option>
-                            <option value="Extinta na natureza (EW)">
-                                Extinta na natureza (EW)
-                            </option>
-                            <option value="Criticamente em perigo (CR)">
-                                Criticamente em perigo (CR)
-                            </option>
-                            <option value="Em perigo (EN)">
-                                Em perigo (EN)
-                            </option>
-                            <option value="Vulnerável (VU)">
-                                Vulnerável (VU)
-                            </option>
-                            <option value="Quase ameaçada (NT)">
-                                Quase ameaçada (NT)
-                            </option>
-                            <option value="Pouco preocupante (LC)">
-                                Pouco preocupante (LC)
-                            </option>
-                            <option value="Deficiente de dados (DD)">
-                                Deficiente de dados (DD)
-                            </option>
-                            <option value="Não avaliada (NE)">
-                                Não avaliada (NE)
-                            </option>
-                        </select>
-                        <TextField name="animalLink" isRequired>
+                                <option
+                                    value="Selecione uma opção"
+                                    disabled
+                                    aria-disabled="true"
+                                >
+                                    Selecione uma opção
+                                </option>
+                                <option value="Extinta (EX)">
+                                    Extinta (EX)
+                                </option>
+                                <option value="Extinta na natureza (EW)">
+                                    Extinta na natureza (EW)
+                                </option>
+                                <option value="Criticamente em perigo (CR)">
+                                    Criticamente em perigo (CR)
+                                </option>
+                                <option value="Em perigo (EN)">
+                                    Em perigo (EN)
+                                </option>
+                                <option value="Vulnerável (VU)">
+                                    Vulnerável (VU)
+                                </option>
+                                <option value="Quase ameaçada (NT)">
+                                    Quase ameaçada (NT)
+                                </option>
+                                <option value="Pouco preocupante (LC)">
+                                    Pouco preocupante (LC)
+                                </option>
+                                <option value="Deficiente de dados (DD)">
+                                    Deficiente de dados (DD)
+                                </option>
+                                <option value="Não avaliada (NE)">
+                                    Não avaliada (NE)
+                                </option>
+                            </select>
+                        </div>
+                        <TextField
+                            name="animalLink"
+                            className="update__form__field"
+                            isRequired
+                        >
                             <Label>Link para mais informações:</Label>
                             <Input
                                 type="url"
@@ -300,16 +331,9 @@ function UpdateAnimalPage() {
                             <Link href="/admin" role="button">
                                 Cancelar
                             </Link>
-                            <Button
-                                name="cadastrarAnimal"
-                                type="submit"
-                                // onPress={handleUpload}
-                            >
+                            <Button name="updateAnimal" type="submit">
                                 Atualizar
                             </Button>
-                            {/* <button onClick={handleUpload} type="submit">
-                                Upload
-                            </button> */}
                         </div>
                     </Form>
                 </div>

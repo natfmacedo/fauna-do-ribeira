@@ -1,5 +1,5 @@
-import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
-import formidable, { errors as formidableErrors } from "formidable";
+import { NextApiHandler, NextApiRequest } from "next";
+import formidable from "formidable";
 import { promises as fs } from "fs";
 import path from "path";
 
