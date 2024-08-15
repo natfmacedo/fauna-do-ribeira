@@ -13,6 +13,9 @@ import {
     TextField,
     TextArea,
     Button,
+    DialogTrigger,
+    Modal,
+    Dialog,
 } from "react-aria-components";
 import Link from "next/link";
 
@@ -194,9 +197,11 @@ function UpdateAnimalPage() {
                                     }
                                 }}
                             />
-                            {selectedImage && (
-                                <img src={selectedImage} alt="" />
-                            )}
+                            <div className="animalImage">
+                                {selectedImage && (
+                                    <img src={selectedImage} alt="" />
+                                )}
+                            </div>
                         </div>
                         <TextField
                             name="animalImageDescription"
@@ -328,9 +333,31 @@ function UpdateAnimalPage() {
                             <FieldError />
                         </TextField>
                         <div className="update__form__buttons">
-                            <Link href="/admin" role="button">
-                                Cancelar
-                            </Link>
+                            <DialogTrigger>
+                                <Button name="cancelCreateAnimal">
+                                    Cancelar
+                                </Button>
+                                <Modal>
+                                    <Dialog>
+                                        {({ close }) => (
+                                            <Form>
+                                                <h4 slot="title">
+                                                    Descartar informações
+                                                </h4>
+                                                <p>
+                                                    Deseja descartar as novas
+                                                    informações inseridas em{" "}
+                                                    {`"${animalName}"`}?
+                                                </p>
+                                                <Button onPress={close}>
+                                                    Não
+                                                </Button>
+                                                <Link href="/admin">Sim</Link>
+                                            </Form>
+                                        )}
+                                    </Dialog>
+                                </Modal>
+                            </DialogTrigger>
                             <Button name="updateAnimal" type="submit">
                                 Atualizar
                             </Button>

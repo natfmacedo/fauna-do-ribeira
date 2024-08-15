@@ -197,88 +197,105 @@ function AdminPage() {
                                             <Modal>
                                                 <Dialog>
                                                     {({ close }) => (
-                                                        <div className="tabela__body__content__card">
-                                                            <Heading slot="title">
-                                                                Detalhes do card
-                                                            </Heading>
+                                                        <div className="table__body__content__card">
+                                                            <h4
+                                                                slot="title"
+                                                                className="table__body__content__title"
+                                                            >
+                                                                {animal.name}
+                                                            </h4>
                                                             <img
-                                                                src=""
-                                                                alt=""
+                                                                src={`/images/fauna-do-ribeira-${animal.image}`}
+                                                                alt={
+                                                                    animal.imageDescription
+                                                                }
+                                                                className="table__body__content__image"
                                                             />
-                                                            <div className="tabela__corpo__conteudo__card__conteudo">
-                                                                <h4
-                                                                    className="card__conteudo__titulo"
-                                                                    id="nomeAnimal"
-                                                                >
-                                                                    {
-                                                                        animal.name
-                                                                    }
-                                                                </h4>
-                                                                <dl className="card__conteudo__lista">
-                                                                    <dt className="card__conteudo__lista__topico">
+                                                            <div className="table__body__content__card__content">
+                                                                <dl className="card__content__list">
+                                                                    <dt className="card__content__list__topic">
+                                                                        Id
+                                                                    </dt>
+                                                                    <dd className="card__content__list__text">
+                                                                        {
+                                                                            animal.id
+                                                                        }
+                                                                    </dd>
+                                                                    <dt className="card__content__list__topic">
                                                                         Nome
                                                                         científico
                                                                     </dt>
-                                                                    <dd className="card__conteudo__lista__texto">
+                                                                    <dd className="card__content__list__text">
                                                                         {
                                                                             animal.scientificName
                                                                         }
                                                                     </dd>
-                                                                    <dt className="card__conteudo__lista__topico">
+                                                                    <dt className="card__content__list__topic">
+                                                                        Descrição
+                                                                        da
+                                                                        imagem
+                                                                    </dt>
+                                                                    <dd className="card__content__list__text">
+                                                                        {
+                                                                            animal.imageDescription
+                                                                        }
+                                                                    </dd>
+                                                                    <dt className="card__content__list__topic">
                                                                         Características
                                                                     </dt>
-                                                                    <dd className="card__conteudo__lista__texto">
+                                                                    <dd className="card__content__list__text">
                                                                         {
                                                                             animal.characteristics
                                                                         }
                                                                     </dd>
-                                                                    <dt className="card__conteudo__lista__topico">
+                                                                    <dt className="card__content__list__topic">
                                                                         Alimentação
                                                                     </dt>
-                                                                    <dd className="card__conteudo__lista__texto">
+                                                                    <dd className="card__content__list__text">
                                                                         {
                                                                             animal.eating
                                                                         }
                                                                     </dd>
-                                                                    <dt className="card__conteudo__lista__topico">
-                                                                        Possíveis
-                                                                        locais
+                                                                    <dt className="card__content__list__topic">
+                                                                        Locais
                                                                         de
                                                                         avistamento
                                                                     </dt>
-                                                                    <dd className="card__conteudo__lista__texto">
+                                                                    <dd className="card__ccontent__list__text">
                                                                         {
                                                                             animal.location
                                                                         }
                                                                     </dd>
-                                                                    <dt className="card__conteudo__lista__topico">
+                                                                    <dt className="card__content__list__topic">
                                                                         Estado
                                                                         de
                                                                         Conservação
                                                                         IUCN
                                                                     </dt>
-                                                                    <dd className="card__conteudo__lista__texto">
+                                                                    <dd className="card__content__list__text">
                                                                         {
                                                                             animal.iucnState
                                                                         }
                                                                     </dd>
+                                                                    <dt className="card__content__list__topic">
+                                                                        Link
+                                                                        para
+                                                                        mais
+                                                                        informações
+                                                                    </dt>
+                                                                    <dd className="card__content__list__text">
+                                                                        <Link
+                                                                            href={
+                                                                                animal.link
+                                                                            }
+                                                                            target="_blank"
+                                                                        >
+                                                                            {
+                                                                                animal.link
+                                                                            }
+                                                                        </Link>
+                                                                    </dd>
                                                                 </dl>
-                                                                <Link
-                                                                    className="react-aria-Button"
-                                                                    href={
-                                                                        animal.link
-                                                                    }
-                                                                    target="_blank"
-                                                                >
-                                                                    Saiba mais{" "}
-                                                                    <span>
-                                                                        sobre
-                                                                        o(a){" "}
-                                                                        {
-                                                                            animal.name
-                                                                        }
-                                                                    </span>
-                                                                </Link>
                                                             </div>
                                                             <Button
                                                                 onPress={close}
@@ -391,36 +408,6 @@ function AdminPage() {
                                 <td>Nenhum animal encontrado.</td>
                             </tr>
                         )}
-                        {/* {hasMorePages && (
-                            <tr>
-                                <td>
-                                    <Button
-                                        onPress={() => {
-                                            setIsLoading(true);
-                                            const nextPage = page + 1;
-                                            setPage(nextPage);
-
-                                            animalController
-                                                .get({ page: nextPage })
-                                                .then(({ animals, pages }) => {
-                                                    setAnimals((oldAnimals) => {
-                                                        return [
-                                                            ...oldAnimals,
-                                                            ...animals,
-                                                        ];
-                                                    });
-                                                    setTotalPages(pages);
-                                                })
-                                                .finally(() => {
-                                                    setIsLoading(false);
-                                                });
-                                        }}
-                                    >
-                                        Página {page}, carregar mais animais...
-                                    </Button>
-                                </td>
-                            </tr>
-                        )} */}
                     </tbody>
                 </table>
             </section>

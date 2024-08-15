@@ -11,6 +11,10 @@ import {
     FieldError,
     Button,
     TextArea,
+    DialogTrigger,
+    Dialog,
+    Modal,
+    Heading,
 } from "react-aria-components";
 import axios from "axios";
 import Link from "next/link";
@@ -112,6 +116,7 @@ function CreateAnimalPage() {
                                     setNewAnimalScientificName("");
                                     setNewAnimalImage("");
                                     setSelectedImage("");
+                                    setNewAnimalImage("");
                                     setNewAnimalImageDescription("");
                                     setNewAnimalCharacteristics("");
                                     setNewAnimalEating("");
@@ -184,9 +189,11 @@ function CreateAnimalPage() {
                                     }
                                 }}
                             />
-                            {selectedImage && (
-                                <img src={selectedImage} alt="" />
-                            )}
+                            <div className="animalImage">
+                                {selectedImage && (
+                                    <img src={selectedImage} alt="" />
+                                )}
+                            </div>
                         </div>
                         <TextField
                             name="animalImageDescription"
@@ -318,15 +325,58 @@ function CreateAnimalPage() {
                             <FieldError />
                         </TextField>
                         <div className="create__form__buttons">
-                            <Button
-                                name="cancelCreateAnimal"
-                                type="reset"
-                                onPress={function resetAnimalImage() {
-                                    setSelectedImage("");
-                                }}
-                            >
-                                Cancelar
-                            </Button>
+                            <DialogTrigger>
+                                <Button name="cancelCreateAnimal">
+                                    Cancelar
+                                </Button>
+                                <Modal>
+                                    <Dialog>
+                                        {({ close }) => (
+                                            <Form>
+                                                <h4 slot="title">
+                                                    Descartar informações
+                                                </h4>
+                                                <p>
+                                                    Deseja descartar as
+                                                    informações preenchidas
+                                                    nesse cadastro?
+                                                </p>
+                                                <Button onPress={close}>
+                                                    Não
+                                                </Button>
+                                                <Button
+                                                    type="reset"
+                                                    onPress={function resetAnimalImage() {
+                                                        setNewAnimalName("");
+                                                        setNewAnimalScientificName(
+                                                            ""
+                                                        );
+                                                        setNewAnimalImage("");
+                                                        setSelectedImage("");
+                                                        setNewAnimalImageDescription(
+                                                            ""
+                                                        );
+                                                        setNewAnimalCharacteristics(
+                                                            ""
+                                                        );
+                                                        setNewAnimalEating("");
+                                                        setNewAnimalLocation(
+                                                            ""
+                                                        );
+                                                        setNewAnimalIUCNState(
+                                                            ""
+                                                        );
+                                                        setNewAnimalLink("");
+                                                        close();
+                                                    }}
+                                                >
+                                                    Sim
+                                                </Button>
+                                            </Form>
+                                        )}
+                                    </Dialog>
+                                </Modal>
+                            </DialogTrigger>
                             <Button name="createAnimal" type="submit">
                                 Cadastrar
                             </Button>

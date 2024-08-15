@@ -105,9 +105,8 @@ function HomePage() {
                     return (
                         <div className="card" key={animal.id}>
                             <img
-                                src=""
-                                // src={`/images/fauna-do-ribeira-${animal.image}`}
-                                alt=""
+                                src={`/images/fauna-do-ribeira-${animal.image}`}
+                                alt={animal.imageDescription}
                                 className="card__image"
                             />
                             <div className="card__content">
@@ -241,6 +240,19 @@ function HomePage() {
                     </ul>
                 </div>
             </section>
+            <footer>
+                <p>
+                    Se interessou pelo projeto e gostaria de ser um(a)
+                    colaborador(a)?
+                </p>
+                <Button aria-describedby="contactDescription">
+                    Clique aqui para entrar em contato
+                </Button>
+                <p id="contactDescription">
+                    Abre a janela do aplicativo de e-mail com o destinatário
+                    (e-mail do projeto) já preenchido.
+                </p>
+            </footer>
         </>
     );
 }
