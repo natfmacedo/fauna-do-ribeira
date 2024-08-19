@@ -8,7 +8,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     return (
         <>
             <DefaultSeo
-                title="Catálogo | Fauna do Ribeira"
+                title="Animais | Fauna do Ribeira"
                 description="Catálogo de animais pertencentes à fauna nativa da região do Vale do Ribeira no Estado de São Paulo."
             />
             <Layout>

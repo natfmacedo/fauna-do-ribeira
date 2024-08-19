@@ -125,9 +125,9 @@ function AdminPage() {
                             <th scope="col" className="table__head__title">
                                 Link
                             </th>
-                            <th scope="col" className="table__head__title">
+                            {/* <th scope="col" className="table__head__title">
                                 Exibir detalhes
-                            </th>
+                            </th> */}
                             <th scope="col" className="table__head__title">
                                 Editar
                             </th>
@@ -147,13 +147,7 @@ function AdminPage() {
                                         {animal.image}
                                     </td>
                                     <td className="tabela__body__content">
-                                        {animal.imageDescription.substring(
-                                            0,
-                                            48
-                                        ) +
-                                            (animal.imageDescription.length > 15
-                                                ? "..."
-                                                : "")}
+                                        {animal.imageDescription}
                                     </td>
                                     <td className="tabela__body__content">
                                         {animal.name}
@@ -162,38 +156,29 @@ function AdminPage() {
                                         {animal.scientificName}
                                     </td>
                                     <td className="tabela__body__content">
-                                        {animal.characteristics.substring(
-                                            0,
-                                            48
-                                        ) +
-                                            (animal.characteristics.length > 48
-                                                ? "..."
-                                                : "")}
+                                        {animal.characteristics}
                                     </td>
                                     <td className="tabela__body__content">
-                                        {animal.eating.substring(0, 15) +
-                                            (animal.eating.length > 15
-                                                ? "..."
-                                                : "")}
+                                        {animal.eating}
                                     </td>
                                     <td className="tabela__body__content">
-                                        {animal.location.substring(0, 15) +
-                                            (animal.location.length > 15
-                                                ? "..."
-                                                : "")}
+                                        {animal.location}
                                     </td>
                                     <td className="tabela__body__content">
                                         {animal.iucnState}
                                     </td>
                                     <td className="tabela__body__content">
-                                        {animal.link.substring(0, 15) +
+                                        {animal.link}
+                                        {/* {animal.link.substring(0, 15) +
                                             (animal.link.length > 15
                                                 ? "..."
-                                                : "")}
+                                                : "")} */}
                                     </td>
-                                    <td className="tabela__body__content">
+                                    {/* <td className="tabela__body__content">
                                         <DialogTrigger>
-                                            <Button>Exibir</Button>
+                                            <Button aria-label={animal.name}>
+                                                Exibir
+                                            </Button>
                                             <Modal>
                                                 <Dialog>
                                                     {({ close }) => (
@@ -307,10 +292,9 @@ function AdminPage() {
                                                 </Dialog>
                                             </Modal>
                                         </DialogTrigger>
-                                    </td>
-                                    <td className="tabela__corpo__conteudo">
+                                    </td> */}
+                                    <td className="tabela__body__content">
                                         <Link
-                                            // as={`/admin-animal-update/${animal.name}`}
                                             href={{
                                                 pathname:
                                                     "/admin-animal-update",
@@ -319,13 +303,16 @@ function AdminPage() {
                                                 },
                                             }}
                                             role="button"
+                                            aria-label={animal.name}
                                         >
                                             Editar
                                         </Link>
                                     </td>
-                                    <td className="tabela__corpo__conteudo">
+                                    <td className="tabela__body__content">
                                         <DialogTrigger>
-                                            <Button>Excluir</Button>
+                                            <Button aria-label={animal.name}>
+                                                Excluir
+                                            </Button>
                                             <Modal>
                                                 <Dialog>
                                                     {({ close }) => (

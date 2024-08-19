@@ -59,23 +59,27 @@ function HomePage() {
     return (
         <>
             <section className="banner">
-                <div className="banner__content">
-                    <h2 className="banner__content__title">
-                        Seja Bem-vindo(a)!
-                    </h2>
-                    <p className="banner__content__text">
+                <article>
+                    <h2 className="banner__title">Seja Bem-vindo(a)!</h2>
+                    <p className="banner__text">
                         Conheça a{" "}
-                        <strong className="banner__content__text--emphasis">
+                        <strong className="banner__text--emphasis">
                             fauna nativa da região do Vale do Ribeira{" "}
                         </strong>
                         e o Estado de Conservação de cada espécie segundo a
                         União Internacional para a Conservação da Natureza e dos
                         Recursos Naturais (IUCN).
                     </p>
+                    <Link className="banner__link" href="#animals">
+                        Conhecer animais
+                    </Link>
+                </article>
+                <div className="banner__image">
+                    <img src="" alt="" />
                 </div>
             </section>
-            <section className="cards">
-                <h3 className="cards__title">Catálogo de animais</h3>
+            <section className="search">
+                <h3 className="cards__title">Catálogo</h3>
                 <div className="cards__search">
                     <SearchField id="animal" type="search" inputMode="text">
                         <Label>Buscar animal:</Label>
@@ -101,27 +105,26 @@ function HomePage() {
                         )}
                     </SearchField>
                 </div>
+            </section>
+            <section className="cards" id="animals">
                 {homeAnimals.map((animal) => {
                     return (
                         <div className="card" key={animal.id}>
+                            <h4 className="card__title" id="nomeAnimal">
+                                {animal.name}
+                            </h4>
                             <img
                                 src={`/images/fauna-do-ribeira-${animal.image}`}
                                 alt={animal.imageDescription}
                                 className="card__image"
                             />
                             <div className="card__content">
-                                <h4
-                                    className="card__content__title"
-                                    id="nomeAnimal"
-                                >
-                                    {animal.name}
-                                </h4>
                                 <dl className="card__content__list">
                                     <dt className="card__content__list__topic">
                                         Nome científico
                                     </dt>
                                     <dd className="card__content__list__text">
-                                        {animal.scientificName}
+                                        <i>{animal.scientificName}</i>
                                     </dd>
                                     <dt className="card__content__list__topic">
                                         Características
@@ -136,28 +139,56 @@ function HomePage() {
                                         {animal.eating}
                                     </dd>
                                     <dt className="card__content__list__topic">
-                                        Possíveis locais de avistamento
+                                        Locais de avistamento
                                     </dt>
                                     <dd className="card__content__list__text">
                                         {animal.location}
                                     </dd>
                                     <dt className="card__content__list__topic">
                                         Estado de Conservação IUCN
+                                        <div className="card__content__list__topic--tooltip">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                height="18px"
+                                                viewBox="0 -960 960 960"
+                                                width="24px"
+                                                fill="#1a1a1a"
+                                                className="tooltip-trigger"
+                                                aria-describedby="tooltip-description"
+                                            >
+                                                <path d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm-36-154h74q0-33 7.5-52t42.5-52q26-26 41-49.5t15-56.5q0-56-41-86t-97-30q-57 0-92.5 30T342-618l66 26q5-18 22.5-39t53.5-21q32 0 48 17.5t16 38.5q0 20-12 37.5T506-526q-44 39-54 59t-10 73Zm38 314q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
+                                            </svg>
+                                            <span
+                                                id="tooltip-description"
+                                                role="tooltip"
+                                            >
+                                                A União Internacional para a
+                                                Conservação da Natureza e dos
+                                                Recursos Naturais é responsável
+                                                por catalogar o estado de
+                                                conservação de diversas espécies
+                                                de plantas, animais, fungos e
+                                                protozoários na Lista Vermelha
+                                                de Espécies Ameaçadas.
+                                            </span>
+                                        </div>
                                     </dt>
                                     <dd className="card__content__list__text">
                                         {animal.iucnState}
                                     </dd>
                                 </dl>
-                                <Link
-                                    className="card__content__link"
-                                    href={animal.link}
-                                    target="_blank"
-                                >
-                                    Saiba mais{" "}
-                                    <span className="card__content__link--emphasis">
+                                <div className="card__content__link">
+                                    <Link
+                                        href={animal.link}
+                                        target="_blank"
+                                        aria-label={`Saiba mais sobre o(a) ${animal.name}`}
+                                    >
+                                        Saiba mais
+                                        {/* <span className="card__content__link--emphasis">
                                         sobre o(a) {animal.name}
-                                    </span>
-                                </Link>
+                                    </span> */}
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     );
@@ -240,18 +271,23 @@ function HomePage() {
                     </ul>
                 </div>
             </section>
-            <footer>
-                <p>
-                    Se interessou pelo projeto e gostaria de ser um(a)
-                    colaborador(a)?
-                </p>
-                <Button aria-describedby="contactDescription">
-                    Clique aqui para entrar em contato
-                </Button>
-                <p id="contactDescription">
+            <footer className="footer">
+                <div className="footer__content">
+                    <p className="footer__text">
+                        Se interessou pelo projeto e gostaria de ser um(a)
+                        colaborador(a)?
+                    </p>
+                    <Button
+                        aria-describedby="contactDescription"
+                        className="footer__button"
+                    >
+                        Clique aqui para entrar em contato
+                    </Button>
+                </div>
+                {/* <p id="contactDescription">
                     Abre a janela do aplicativo de e-mail com o destinatário
                     (e-mail do projeto) já preenchido.
-                </p>
+                </p> */}
             </footer>
         </>
     );

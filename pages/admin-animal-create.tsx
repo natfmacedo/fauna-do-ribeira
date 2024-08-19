@@ -76,7 +76,7 @@ function CreateAnimalPage() {
                 description="Página de cadastro de novos animais no site Fauna do Ribeira"
             />
             <section className="create">
-                <div className="create__menu">
+                <div className="create__menu" role="menu">
                     <Breadcrumbs>
                         <Breadcrumb>
                             <Link
@@ -141,6 +141,7 @@ function CreateAnimalPage() {
                             <Label>Nome:</Label>
                             <Input
                                 value={newAnimalName}
+                                placeholder="Ex.: Onça-parda"
                                 onChange={function newAnimalHandler(event) {
                                     setNewAnimalName(event.target.value);
                                 }}
@@ -156,6 +157,7 @@ function CreateAnimalPage() {
                             <Label>Nome científico:</Label>
                             <Input
                                 value={newAnimalScientificName}
+                                placeholder="Ex.: Puma concolor"
                                 onChange={function newAnimalHandler(event) {
                                     setNewAnimalScientificName(
                                         event.target.value
@@ -204,6 +206,7 @@ function CreateAnimalPage() {
                             <Label>Descrição da imagem:</Label>
                             <TextArea
                                 value={newAnimalImageDescription}
+                                placeholder="Ex.: Mamífero semelhante a uma onça-pintada, pesa cerca de cinquenta e três a setenta e dois quilos, mede até cento e cinquenta centímetros e possui entre sessenta e noventa e sete centímetros de cauda (que é cilíndrica e no formato da letra j). Apresenta pelagem curta, olhos arredondados e coloração que varia entre cinza e marrom-avermelhado (com exceção do rosto que costuma ser mais claro em tons de bege). Foto via Pixabay."
                                 onChange={function newAnimalHandler(event) {
                                     setNewAnimalImageDescription(
                                         event.target.value
@@ -221,6 +224,7 @@ function CreateAnimalPage() {
                             <Label>Características:</Label>
                             <TextArea
                                 value={newAnimalCharacteristics}
+                                placeholder="Ex.: Pertencente ao Reino Animalia e à Ordem Carnivora, trata-se do segundo maior felino das Américas, perdendo apenas para a onça-pintada. Possui de 53 a 72 centímetros de comprimento (sem a cauda) e pesa cerca de 50 quilogramas."
                                 onChange={function newAnimalHandler(event) {
                                     setNewAnimalCharacteristics(
                                         event.target.value
@@ -238,6 +242,7 @@ function CreateAnimalPage() {
                             <Label>Alimentação:</Label>
                             <Input
                                 value={newAnimalEating}
+                                placeholder="Ex.: Capivaras, catetos, queixadas, veados, tatus, lagartos, aves e insetos."
                                 onChange={function newAnimalHandler(event) {
                                     setNewAnimalEating(event.target.value);
                                 }}
@@ -253,6 +258,7 @@ function CreateAnimalPage() {
                             <Label>Locais de avistamento:</Label>
                             <Input
                                 value={newAnimalLocation}
+                                placeholder="Ex.: Apiaí, Iporanga, Juquiá, Miracatu e Tapiraí."
                                 onChange={function newAnimalHandler(event) {
                                     setNewAnimalLocation(event.target.value);
                                 }}
@@ -318,6 +324,7 @@ function CreateAnimalPage() {
                             <Label>Link para mais informações:</Label>
                             <Input
                                 value={newAnimalLink}
+                                placeholder="Ex.: https://oncafari.org/especie_fauna/onca-parda/"
                                 onChange={function newAnimalHandler(event) {
                                     setNewAnimalLink(event.target.value);
                                 }}

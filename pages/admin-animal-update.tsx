@@ -95,7 +95,7 @@ function UpdateAnimalPage() {
                 description="Página de edição dos dados dos animais cadastrados no site Fauna do Ribeira"
             />
             <section className="update">
-                <div className="update__menu">
+                <div className="update__menu" role="menu">
                     <Breadcrumbs>
                         <Breadcrumb>
                             <Link
@@ -352,7 +352,12 @@ function UpdateAnimalPage() {
                                                 <Button onPress={close}>
                                                     Não
                                                 </Button>
-                                                <Link href="/admin">Sim</Link>
+                                                <Link
+                                                    href="/admin"
+                                                    role="button"
+                                                >
+                                                    Sim
+                                                </Link>
                                             </Form>
                                         )}
                                     </Dialog>

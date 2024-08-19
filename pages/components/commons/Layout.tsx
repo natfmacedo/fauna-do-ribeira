@@ -9,14 +9,20 @@ interface LayoutProps {
 export const Layout = ({ children }: LayoutProps) => {
     return (
         <>
-            <header>
-                <a href=""></a>
-                <img />
-                <h1>Fauna do Ribeira</h1>
+            <header className="header">
+                {/* <a href=""></a>
+                <img /> */}
+                <h1 className="header__title">
+                    Fauna do <br />
+                    <span className="header__title--emphasis">Ribeira</span>
+                </h1>
             </header>
             {children}
-            <footer>
-                <h5>Fauna do Ribeira</h5>
+            <footer className="footer">
+                <h5 className="footer__logo">
+                    Fauna do <br />
+                    <span className="footer__logo--emphasis">Ribeira</span>
+                </h5>
             </footer>
         </>
     );
