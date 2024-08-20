@@ -13,7 +13,7 @@ export const Layout = ({ children }: LayoutProps) => {
                 {/* <a href=""></a>
                 <img /> */}
                 <h1 className="header__title">
-                    Fauna do <br />
+                    Fauna do <br aria-hidden="true" />
                     <span className="header__title--emphasis">Ribeira</span>
                 </h1>
             </header>

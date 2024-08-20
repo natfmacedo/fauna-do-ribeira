@@ -78,12 +78,18 @@ function HomePage() {
                     <img src="" alt="" />
                 </div>
             </section>
-            <section className="search">
-                <h3 className="cards__title">Catálogo</h3>
-                <div className="cards__search">
-                    <SearchField id="animal" type="search" inputMode="text">
+            <section className="intro">
+                <h3 className="intro__title">Catálogo de espécies</h3>
+                {/* <div className="intro__search">
+                    <SearchField
+                        className="intro__search__field"
+                        id="animal"
+                        type="search"
+                        inputMode="text"
+                    >
                         <Label>Buscar animal:</Label>
                         <Input
+                            className="intro__search__field__input"
                             aria-placeholder="Digite um nome, exemplo: Onça-parda."
                             onChange={function handleSearch(event) {
                                 setSearch(event.target.value);
@@ -104,7 +110,7 @@ function HomePage() {
                             </p>
                         )}
                     </SearchField>
-                </div>
+                </div> */}
             </section>
             <section className="cards" id="animals">
                 {homeAnimals.map((animal) => {
@@ -146,35 +152,49 @@ function HomePage() {
                                     </dd>
                                     <dt className="card__content__list__topic">
                                         Estado de Conservação IUCN
-                                        <div className="card__content__list__topic--tooltip">
+                                        <span
+                                            aria-hidden="false"
+                                            className="tooltip-trigger"
+                                            aria-describedby="tooltip-description"
+                                            tabIndex={0}
+                                        >
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 height="18px"
                                                 viewBox="0 -960 960 960"
                                                 width="24px"
                                                 fill="#1a1a1a"
-                                                className="tooltip-trigger"
-                                                aria-describedby="tooltip-description"
                                             >
                                                 <path d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm-36-154h74q0-33 7.5-52t42.5-52q26-26 41-49.5t15-56.5q0-56-41-86t-97-30q-57 0-92.5 30T342-618l66 26q5-18 22.5-39t53.5-21q32 0 48 17.5t16 38.5q0 20-12 37.5T506-526q-44 39-54 59t-10 73Zm38 314q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
                                             </svg>
-                                            <span
-                                                id="tooltip-description"
-                                                role="tooltip"
-                                            >
-                                                A União Internacional para a
-                                                Conservação da Natureza e dos
-                                                Recursos Naturais é responsável
-                                                por catalogar o estado de
-                                                conservação de diversas espécies
-                                                de plantas, animais, fungos e
-                                                protozoários na Lista Vermelha
-                                                de Espécies Ameaçadas.
-                                            </span>
-                                        </div>
+                                        </span>
+                                        <span
+                                            id="tooltip-description"
+                                            role="tooltip"
+                                            aria-hidden="false"
+                                        >
+                                            A União Internacional para a
+                                            Conservação da Natureza e dos
+                                            Recursos Naturais é responsável por
+                                            catalogar o estado de conservação de
+                                            diversas espécies de plantas,
+                                            animais, fungos e protozoários na
+                                            Lista Vermelha de Espécies
+                                            Ameaçadas.
+                                        </span>
                                     </dt>
                                     <dd className="card__content__list__text">
                                         {animal.iucnState}
+                                        <span className="tooltip-screenReader">
+                                            A União Internacional para a
+                                            Conservação da Natureza e dos
+                                            Recursos Naturais (IUCN) é
+                                            responsável por catalogar o estado
+                                            de conservação de diversas espécies
+                                            de plantas, animais, fungos e
+                                            protozoários na Lista Vermelha de
+                                            Espécies Ameaçadas.
+                                        </span>
                                     </dd>
                                 </dl>
                                 <div className="card__content__link">
@@ -206,55 +226,55 @@ function HomePage() {
                         </Button>
                     </h2>
                 </div>
-                <div>
+                <div className="accordion__content">
                     <ul
                         id="accordionContent"
                         className="accordion__content"
                         hidden={!isOpen}
                     >
-                        <li className="accordion__content">
+                        <li className="accordion__content__list">
                             AZEVEDO, Ana Lúcia. Veja curiosidades sobre o
                             boto-cinza. O Globo, 2022. Disponível em:
                             https://oglobo.globo.com/um-so-planeta/noticia/2022/05/veja-curiosidades-sobre-o-boto-cinza.ghtml.
                             Acesso em: 15 maio 2024.
                         </li>
-                        <li className="accordion__content">
+                        <li className="accordion__content__list">
                             Bugio-ruivo. In: Wikipedia, 2021. Disponível em:
                             https://pt.wikipedia.org/wiki/Bugio-ruivo. Acesso
                             em: 15 maio 2024.
                         </li>
-                        <li className="accordion__content">
+                        <li className="accordion__content__list">
                             GOMES, Leticia. Jiboia mais rara do mundo é achada
                             ‘sem querer’ no interior de São Paulo. G1, 2020.
                             Disponível em:
                             https://g1.globo.com/sp/santos-regiao/noticia/2020/11/25/jiboia-mais-rara-do-mundo-e-achada-sem-querer-no-interior-de-sao-paulo.ghtml.
                             Acesso em: 16 maio 2024.
                         </li>
-                        <li className="accordion__content">
+                        <li className="accordion__content__list">
                             IPEC PESQUISAS. IPeC Pesquisas, [s.d]. Projeto
                             Boto-Cinza. Disponível em:
                             https://ipecpesquisas.org.br/projetobotocinza/.
                             Acesso em: 15 maio 2024.
                         </li>
-                        <li className="accordion__content">
+                        <li className="accordion__content__list">
                             IUCN RED LIST. IUCN Red List, 2024. The IUCN Red
                             List of Threatened Species. Disponível em:
                             https://www.iucnredlist.org/. Acesso em: 15 maio
                             2024.
                         </li>
-                        <li className="accordion__content">
+                        <li className="accordion__content__list">
                             Jiboia rara é vista pela terceira vez em quase 70
                             anos no interior paulista. UOL Notícias, 2020.
                             Disponível em:
                             https://noticias.uol.com.br/cotidiano/ultimas-noticias/2020/11/25/jiboia-rara-e-vista-pela-3-vez-em-quase-70-anos-no-interior-paulista.htm.
                             Acesso em: 16 maio 2024.
                         </li>
-                        <li className="accordion__content">
+                        <li className="accordion__content__list">
                             ONÇAFARI. Onçafari, [s.d]. Conheça a nossa fauna.
                             Disponível em: https://oncafari.org/fauna/. Acesso
                             em: 15 maio 2024.
                         </li>
-                        <li className="accordion__content">
+                        <li className="accordion__content__list">
                             PARQUE ECOLÓGICO IMIGRANTES. Parque Ecológico
                             Imigrantes, c2019. Quase sempre ao pôr do sol
                             começam as vocalizações dos bugios no parque
@@ -262,7 +282,7 @@ function HomePage() {
                             https://parqueecologicoimigrantes.org.br/atracoes/bugio/.
                             Acesso em: 15 maio 2024.
                         </li>
-                        <li className="accordion__content">
+                        <li className="accordion__content__list">
                             WIKIAVES. WikiAves, c2024. Observação de aves e
                             ciência cidadã para todos. Disponível em:
                             https://www.wikiaves.com.br/. Acesso em: 15 maio
@@ -277,17 +297,21 @@ function HomePage() {
                         Se interessou pelo projeto e gostaria de ser um(a)
                         colaborador(a)?
                     </p>
-                    <Button
+                    <Link
+                        href="mailto:nfelixmacedo@gmail.com"
                         aria-describedby="contactDescription"
                         className="footer__button"
                     >
                         Clique aqui para entrar em contato
-                    </Button>
+                    </Link>
+                    <p
+                        id="contactDescription"
+                        className="footer__text--screenReader"
+                    >
+                        Abre a janela do aplicativo de e-mail com o destinatário
+                        (e-mail do responsável pelo projeto) já preenchido.
+                    </p>
                 </div>
-                {/* <p id="contactDescription">
-                    Abre a janela do aplicativo de e-mail com o destinatário
-                    (e-mail do projeto) já preenchido.
-                </p> */}
             </footer>
         </>
     );
