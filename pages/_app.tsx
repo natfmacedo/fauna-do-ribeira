@@ -3,6 +3,7 @@ import { DefaultSeo } from "next-seo";
 import type { AppProps } from "next/app";
 import { Layout } from "@components/Layout";
 import "@ui/theme/styles.css";
+import "@ui/theme/styles-admin.css";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
     return (

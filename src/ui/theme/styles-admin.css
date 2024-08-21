@@ -1,0 +1,200 @@
+@import url("styles.css");
+
+.intro__admin {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem .125rem;
+    align-items: flex-start;
+}
+
+.intro__admin__title {
+    color: var(--primary-color);
+}
+
+.intro__admin__search__field {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    width: 100%;
+}
+
+.intro__admin__search__label {
+    font-weight: 600;
+}
+
+.intro__admin__search__text {
+    color: var(--primary-color);
+    font-size: .75rem;
+    font-weight: 600;
+}
+
+.table {
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    padding: 1rem;
+}
+
+.table__createButton {
+    align-self: flex-start;
+    background-color: var(--primary-color);
+    border-radius: .25rem;
+    padding: .5rem 1rem;
+}
+
+.table__createButton a {
+    color: var(--tertiary-text-color);
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    transition: all .3s;
+}
+
+.table__createButton a:hover {
+    text-decoration: underline;
+}
+
+table {
+    font-size: .75rem;
+    font-weight: 500;
+    border-collapse: collapse;
+    border-radius: .5rem;
+}
+
+table, th, td {
+    border: .063rem solid var(--primary-color);
+}
+
+.table__subtitle {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.table__head {
+    background-color: var(--primary-color);
+    color: var(--tertiary-text-color);
+}
+
+.table__head__title {
+    font-weight: 300;
+    text-align: center;
+}
+
+.table__body__content {
+    padding: .125rem;
+}
+
+tr:nth-child(even) {
+    background-color: #F2F2F2;
+}
+
+.table__body__content--image img{
+    width: 5rem;
+}
+
+.table__body__content--update, .table__body__content--delete {
+    padding: .125rem;
+}
+
+.table__body__content--loading, .table__body__content--notFound {
+    font-weight: 600;
+    text-align: center;
+}
+
+.table__body__content--update a {
+    background-color: var(--primary-color);
+    border-radius: .25rem;
+    color: var(--tertiary-text-color);
+    padding: .5rem;
+    text-decoration: none;
+    transition: all .3s;
+}
+
+.table__body__content--update a:hover {
+    text-decoration: underline;
+}
+
+.table__body__content--delete Button {
+    background-color: var(--secundary-color);
+    border: none;
+    border-radius: .25rem;
+    color: var(--tertiary-text-color);
+    cursor: pointer;
+    font-family: var(--text-font);
+    font-size: .75rem;
+    font-weight: 500;
+    padding: .5rem;
+    transition: all .3s;
+}
+
+.table__body__content--delete Button:hover {
+    text-decoration: underline;
+}
+
+/* .table__body__content--delete Button:enabled {
+    backdrop-filter: 
+} */
+
+.react-aria-Dialog {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    position: relative;
+    align-content: center;
+    background-color: var(--tertiary-text-color);
+    border: 1rem solid var(--primary-color);
+    border-radius: .25rem;
+    outline: none;
+    padding: 2rem;
+    max-height: inherit;
+    box-sizing: border-box;
+    overflow: auto;
+    width: 50%;
+    margin-top: -60rem;    
+
+}
+
+.react-aria-DialogModal {
+    position: relative;
+}
+
+.react-aria-Heading[slot=title] {
+    line-height: 1em;
+    margin-top: 0;
+}
+
+.react-aria-Dialog p {
+    font-weight: 600;
+}
+
+.react-aria-Dialog Button {
+    display: inline-flex; 
+    padding: .5rem .875rem; 
+    justify-content: center; 
+    align-items: center; 
+    border-radius: .25rem; 
+    border: none;
+    cursor: pointer;        
+    line-height: 1.5rem; 
+    font-family: var(--text-font);
+    font-size: .75rem;
+    font-weight: 600; 
+}
+
+.react-aria-Dialog Button:hover {
+    text-decoration: underline;
+}
+
+.react-aria-Dialog .cancelButton {
+    background-color: #D9D9D9;
+    color: var(--primary-text-color);
+    margin-right: 1rem;
+}
+
+.react-aria-Dialog .deleteButton {
+    background-color: var(--secundary-color);
+    color: var(--tertiary-text-color);
+}
+

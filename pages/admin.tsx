@@ -65,21 +65,31 @@ function AdminPage() {
                 title="Gerenciamento | Fauna do Ribeira"
                 description="Página de gerenciamentos dos animais cadastrados no site Fauna do Ribeira"
             />
-            <section className="intro">
-                <h2 className="intro__title">Olá, administrador(a)!</h2>
-                <div className="intro__search">
-                    <SearchField id="animal" type="search" inputMode="text">
-                        <Label>Buscar animal:</Label>
+            <section className="intro__admin">
+                <h2 className="intro__admin__title">Olá, administrador(a)!</h2>
+                <div className="intro__admin__search">
+                    <SearchField
+                        id="animal"
+                        type="search"
+                        inputMode="text"
+                        className="intro__admin__search__field"
+                    >
+                        <Label className="intro__admin__search__label">
+                            Buscar animal:
+                        </Label>
                         <Input
+                            className="intro__admin__search__input"
                             aria-placeholder="Digite um nome, exemplo: Onça-parda."
                             onChange={function handleSearch(event) {
                                 setSearch(event.target.value);
                             }}
                         />
-                        <Button>✕</Button>
-                        <Text aria-hidden="true" slot="description">
-                            Digite um nome, exemplo: Onça-parda.
-                        </Text>
+                        {/* <Button>✕</Button> */}
+                        <div className="intro__admin__search__text">
+                            <Text aria-hidden="true" slot="description">
+                                Digite um nome, exemplo: Onça-parda.
+                            </Text>
+                        </div>
                     </SearchField>
                 </div>
             </section>
@@ -143,38 +153,41 @@ function AdminPage() {
                                     <td className="table__body__content">
                                         {animal.id.substring(0, 4)}
                                     </td>
-                                    <td className="tabela__body__content">
-                                        {animal.image}
+                                    <td className="table__body__content--image">
+                                        <img
+                                            src={`images/fauna-do-ribeira-${animal.image}`}
+                                            alt=""
+                                        />
                                     </td>
-                                    <td className="tabela__body__content">
+                                    <td className="table__body__content">
                                         {animal.imageDescription}
                                     </td>
-                                    <td className="tabela__body__content">
+                                    <td className="table__body__content">
                                         {animal.name}
                                     </td>
-                                    <td className="tabela__body__content">
+                                    <td className="table__body__content">
                                         {animal.scientificName}
                                     </td>
-                                    <td className="tabela__body__content">
+                                    <td className="table__body__content">
                                         {animal.characteristics}
                                     </td>
-                                    <td className="tabela__body__content">
+                                    <td className="table__body__content">
                                         {animal.eating}
                                     </td>
-                                    <td className="tabela__body__content">
+                                    <td className="table__body__content">
                                         {animal.location}
                                     </td>
-                                    <td className="tabela__body__content">
+                                    <td className="table__body__content">
                                         {animal.iucnState}
                                     </td>
-                                    <td className="tabela__body__content">
+                                    <td className="table__body__content">
                                         {animal.link}
                                         {/* {animal.link.substring(0, 15) +
                                             (animal.link.length > 15
                                                 ? "..."
                                                 : "")} */}
                                     </td>
-                                    {/* <td className="tabela__body__content">
+                                    {/* <td className="table__body__content">
                                         <DialogTrigger>
                                             <Button aria-label={animal.name}>
                                                 Exibir
@@ -293,7 +306,7 @@ function AdminPage() {
                                             </Modal>
                                         </DialogTrigger>
                                     </td> */}
-                                    <td className="tabela__body__content">
+                                    <td className="table__body__content--update">
                                         <Link
                                             href={{
                                                 pathname:
@@ -308,12 +321,12 @@ function AdminPage() {
                                             Editar
                                         </Link>
                                     </td>
-                                    <td className="tabela__body__content">
+                                    <td className="table__body__content--delete">
                                         <DialogTrigger>
                                             <Button aria-label={animal.name}>
                                                 Excluir
                                             </Button>
-                                            <Modal>
+                                            <Modal className="react-aria-DialogModal">
                                                 <Dialog>
                                                     {({ close }) => (
                                                         <Form>
@@ -332,11 +345,13 @@ function AdminPage() {
                                                                 excluídas.
                                                             </p>
                                                             <Button
+                                                                className="cancelButton"
                                                                 onPress={close}
                                                             >
                                                                 Cancelar
                                                             </Button>
                                                             <Button
+                                                                className="deleteButton"
                                                                 onPress={function handleClick() {
                                                                     animalController
                                                                         .deleteById(
@@ -387,12 +402,22 @@ function AdminPage() {
                         })}
                         {isLoading && (
                             <tr>
-                                <td>Carregando...</td>
+                                <td
+                                    className="table__body__content--loading"
+                                    colSpan={12}
+                                >
+                                    Carregando...
+                                </td>
                             </tr>
                         )}
                         {hasNoAnimals && (
                             <tr>
-                                <td>Nenhum animal encontrado.</td>
+                                <td
+                                    className="table__body__content--notFound"
+                                    colSpan={12}
+                                >
+                                    Nenhum animal encontrado.
+                                </td>
                             </tr>
                         )}
                     </tbody>
