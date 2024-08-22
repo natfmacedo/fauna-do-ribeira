@@ -4,6 +4,7 @@ import type { AppProps } from "next/app";
 import { Layout } from "@components/Layout";
 import "@ui/theme/styles.css";
 import "@ui/theme/styles-admin.css";
+import "@ui/theme/styles-create-update.css";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
     return (

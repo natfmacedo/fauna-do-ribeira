@@ -324,12 +324,17 @@ function AdminPage() {
                                     <td className="table__body__content--delete">
                                         <DialogTrigger>
                                             <Button aria-label={animal.name}>
-                                                Excluir
+                                                <a
+                                                    href="#deleteAnimal"
+                                                    role="button"
+                                                >
+                                                    Excluir
+                                                </a>
                                             </Button>
                                             <Modal className="react-aria-DialogModal">
                                                 <Dialog>
                                                     {({ close }) => (
-                                                        <Form>
+                                                        <Form id="deleteAnimal">
                                                             <Heading slot="title">
                                                                 Excluir animal
                                                             </Heading>

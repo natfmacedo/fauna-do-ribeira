@@ -78,41 +78,8 @@ function HomePage() {
                     <img src="" alt="" />
                 </div>
             </section>
-            <section className="intro">
-                <h3 className="intro__title">Catálogo de espécies</h3>
-                {/* <div className="intro__search">
-                    <SearchField
-                        className="intro__search__field"
-                        id="animal"
-                        type="search"
-                        inputMode="text"
-                    >
-                        <Label>Buscar animal:</Label>
-                        <Input
-                            className="intro__search__field__input"
-                            aria-placeholder="Digite um nome, exemplo: Onça-parda."
-                            onChange={function handleSearch(event) {
-                                setSearch(event.target.value);
-                            }}
-                        />
-                        <Button>✕</Button>
-                        <Text aria-hidden="true" slot="description">
-                            Digite um nome, exemplo: Onça-parda.
-                        </Text>
-                        {isLoading && (
-                            <p className="cards__busca--carregando">
-                                Carregando...
-                            </p>
-                        )}
-                        {hasNoAnimals && (
-                            <p className="cards__busca--nao-encontrada">
-                                Nenhum animal encontrado.
-                            </p>
-                        )}
-                    </SearchField>
-                </div> */}
-            </section>
             <section className="cards" id="animals">
+                <h3 className="cards__title">Catálogo de espécies</h3>
                 {homeAnimals.map((animal) => {
                     return (
                         <div className="card" key={animal.id}>

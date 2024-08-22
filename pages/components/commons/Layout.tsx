@@ -18,6 +18,7 @@ export const Layout = ({ children }: LayoutProps) => {
                 </h1>
             </header>
             {children}
+
             <footer className="footer">
                 <h5 className="footer__logo">
                     Fauna do <br />

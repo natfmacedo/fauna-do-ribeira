@@ -1,0 +1,97 @@
+@import url("styles.css");
+
+.create {
+    background-color: var(--tertiary-text-color);
+    border-radius: .5rem;
+    -webkit-box-shadow: 0px 0px 23px 0px rgb(128, 128, 128, 0.332);
+    -moz-box-shadow: 0px 0px 23px 0px rgba(128, 128, 128, 0.332);
+    box-shadow: 0px 0px 23px 0px rgba(128, 128, 128, 0.332);
+    padding: 4rem;
+    min-width: 420px;
+    margin: 2rem 4rem;
+}
+
+.create__title {
+    color: var(--primary-color);
+}
+
+.create__form fieldset {
+    border-radius: .25rem;
+    margin-bottom: 2rem;
+    padding: 1rem 1.5rem;
+}
+
+.create__form fieldset legend{
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.react-aria-Label, label {
+    font-weight: 500;
+    margin-right: .5rem;
+}
+
+.react-aria-Input, input, textarea, select {
+    padding: .125rem .25rem;
+    border-radius: .25rem;
+    border: .063rem solid var(--primary-color);
+    font-family: var(--text-font);
+    font-weight: 500;
+    margin-bottom: .5rem;
+}
+
+.react-aria-Input:focus, input:focus, textarea:focus, select:focus {
+    border: .125rem solid var(--primary-color);
+}
+
+.react-aria-Input, input, select {
+    width: 50%;
+}
+
+input[type="file"], select {
+    background-color: var(--primary-color);
+    color: var(--tertiary-text-color);
+}
+
+input[type="file"]:focus, select:focus {
+    border: .125rem solid var(--primary-text-color);
+
+}
+
+textarea {
+    width: 100%;
+    height: 70%;
+}
+
+.create__form__buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: right;
+}
+
+.create__form__buttons Button{ 
+    padding: .5rem .875rem; 
+    justify-content: center; 
+    align-items: center; 
+    border-radius: .25rem; 
+    border: none;
+    cursor: pointer;        
+    line-height: 1.5rem; 
+    font-family: var(--text-font);
+    font-size: .75rem;
+    font-weight: 600; 
+}
+
+.create__form__buttons--cancel {
+    background-color: #D9D9D9;
+    color: var(--primary-text-color);
+}
+
+.create__form__buttons--create {
+    background-color: var(--primary-color);
+    color: var(--tertiary-text-color);
+}
+
+.create__form__buttons Button:hover {
+    text-decoration: underline;
+}
