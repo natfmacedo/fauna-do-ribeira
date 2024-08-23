@@ -78,8 +78,8 @@ function HomePage() {
                     <img src="" alt="" />
                 </div>
             </section>
+            <h3 className="title">Catálogo de espécies</h3>
             <section className="cards" id="animals">
-                <h3 className="cards__title">Catálogo de espécies</h3>
                 {homeAnimals.map((animal) => {
                     return (
                         <div className="card" key={animal.id}>

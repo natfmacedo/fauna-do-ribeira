@@ -38,6 +38,19 @@
       "location": "Cananéia, Iguape, Ilha Comprida, Itariri, Jacupiranga e Pariquera-Açu.",
       "iucnState": "Quase ameaçada (NT)",
       "link": "https://www.wikiaves.com.br/wiki/papagaio-de-cara-roxa"
+    },
+    {
+      "id": "ae2cfd75-a68a-4a7b-afd4-729d4aa5e529",
+      "date": "2024-08-23T16:18:03.378Z",
+      "name": "Jacutinga",
+      "scientificName": "Aburria jacutinga",
+      "image": "jacutinga.png",
+      "imageDescription": "Ave com tamanho entre sessenta e quatro e setenta e quatro centímetros, possui plumagem e calda predominantemente pretas com manchas esbranquiçadas nas laterais do corpo, no topo da cabeça e ao redor dos olhos escuros. Possui bico curto em tons de azul e branco com uma barbela (semelhante a de uma galinha) vermelha abaixo do bico com leves manchas azuis. Foto por Cayo Môra.",
+      "characteristics": "Pertencente ao Reino Animalia e à Ordem dos Galliformes, possui entre 64 e 74 centímetros de comprimento e pesa cerca de 1,1 a 1,4 quilogramas.",
+      "eating": "Polpa de frutos carnosos e palmito-juçara.",
+      "location": "Apiaí, Cananéia, Iporanga e Pedro de Toledo.",
+      "iucnState": "Em perigo (EN)",
+      "link": "https://www.wikiaves.com.br/wiki/jacutinga"
     }
   ]
 }
