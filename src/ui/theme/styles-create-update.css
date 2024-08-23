@@ -1,27 +1,64 @@
 @import url("styles.css");
 
-.create {
+.react-aria-Breadcrumbs {
+    display: flex;
+    align-items: flex-start;
+    padding: 2rem;
+    list-style: none;
+    gap: .5rem;
+    font-weight: 500;
+}
+
+.react-aria-Breadcrumb:not(:last-child)::after {
+    content: "<";
+    padding-left: .75rem;
+}
+
+.menu__options__linkToPreviousPage, .menu__options__currentPage {
+    color: var(--primary-text-color);
+    text-decoration: none;
+}
+
+.menu__options__linkToPreviousPage:hover {
+    text-decoration: underline;
+}
+
+.menu__options__currentPage {
+    font-weight: 700;
+    cursor: default;
+}
+
+.create, .update {
     background-color: var(--tertiary-text-color);
     border-radius: .5rem;
     -webkit-box-shadow: 0px 0px 23px 0px rgb(128, 128, 128, 0.332);
     -moz-box-shadow: 0px 0px 23px 0px rgba(128, 128, 128, 0.332);
     box-shadow: 0px 0px 23px 0px rgba(128, 128, 128, 0.332);
-    padding: 4rem;
-    min-width: 420px;
-    margin: 2rem 4rem;
+    padding: 0;
+    min-width: 320px;
+    margin: 0;
+    margin-bottom: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 }
 
-.create__title {
+.create__form, .update__form {
+    padding: 2rem;
+}
+
+.create__title, .update__title {
     color: var(--primary-color);
+    padding-left: 2rem;
+    padding-top: 1.5rem;
 }
 
-.create__form fieldset {
+.create__form fieldset, .update__form fieldset {
     border-radius: .25rem;
     margin-bottom: 2rem;
     padding: 1rem 1.5rem;
+    display: grid;
 }
 
-.create__form fieldset legend{
+.create__form fieldset legend, .update__form fieldset legend{
     color: var(--primary-color);
     font-weight: 700;
 }
@@ -59,17 +96,19 @@ input[type="file"]:focus, select:focus {
 }
 
 textarea {
+    margin-bottom: 3rem;
+    resize: none;
     width: 100%;
     height: 70%;
 }
 
-.create__form__buttons {
+.create__form__buttons, .update__form__buttons {
     display: flex;
     gap: 1.5rem;
     justify-content: right;
 }
 
-.create__form__buttons Button{ 
+.create__form__buttons Button, .update__form__buttons Button{ 
     padding: .5rem .875rem; 
     justify-content: center; 
     align-items: center; 
@@ -82,16 +121,17 @@ textarea {
     font-weight: 600; 
 }
 
-.create__form__buttons--cancel {
+.create__form__buttons Button:hover, .update__form__buttons Button:hover {
+    text-decoration: underline;
+}
+
+.create__form__buttons--cancel, .update__form__buttons--cancel {
     background-color: #D9D9D9;
     color: var(--primary-text-color);
 }
 
-.create__form__buttons--create {
+.create__form__buttons--create, .update__form__buttons--update {
     background-color: var(--primary-color);
     color: var(--tertiary-text-color);
 }
 
-.create__form__buttons Button:hover {
-    text-decoration: underline;
-}

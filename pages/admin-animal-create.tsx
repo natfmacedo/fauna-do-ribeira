@@ -80,14 +80,19 @@ function CreateAnimalPage() {
                     <Breadcrumbs>
                         <Breadcrumb>
                             <Link
-                                className="create__menu__linkToPreviousPage"
+                                className="menu__options__linkToPreviousPage"
                                 href="/admin"
                             >
                                 Tabela
                             </Link>
                         </Breadcrumb>
                         <Breadcrumb>
-                            <Link href="">Cadastro</Link>
+                            <Link
+                                className="menu__options__currentPage"
+                                href=""
+                            >
+                                Cadastro
+                            </Link>
                         </Breadcrumb>
                     </Breadcrumbs>
                 </div>

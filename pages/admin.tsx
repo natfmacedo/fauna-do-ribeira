@@ -96,7 +96,7 @@ function AdminPage() {
             <section className="table">
                 <div className="table__createButton">
                     <Link href="/admin-animal-create" role="button">
-                        + Cadastrar animal
+                        <span aria-hidden="true">+</span> Cadastrar animal
                     </Link>
                 </div>
                 <table>
@@ -158,6 +158,7 @@ function AdminPage() {
                                             src={`images/fauna-do-ribeira-${animal.image}`}
                                             alt=""
                                         />
+                                        {animal.image}
                                     </td>
                                     <td className="table__body__content">
                                         {animal.imageDescription}
@@ -182,130 +183,7 @@ function AdminPage() {
                                     </td>
                                     <td className="table__body__content">
                                         {animal.link}
-                                        {/* {animal.link.substring(0, 15) +
-                                            (animal.link.length > 15
-                                                ? "..."
-                                                : "")} */}
                                     </td>
-                                    {/* <td className="table__body__content">
-                                        <DialogTrigger>
-                                            <Button aria-label={animal.name}>
-                                                Exibir
-                                            </Button>
-                                            <Modal>
-                                                <Dialog>
-                                                    {({ close }) => (
-                                                        <div className="table__body__content__card">
-                                                            <h4
-                                                                slot="title"
-                                                                className="table__body__content__title"
-                                                            >
-                                                                {animal.name}
-                                                            </h4>
-                                                            <img
-                                                                src={`/images/fauna-do-ribeira-${animal.image}`}
-                                                                alt={
-                                                                    animal.imageDescription
-                                                                }
-                                                                className="table__body__content__image"
-                                                            />
-                                                            <div className="table__body__content__card__content">
-                                                                <dl className="card__content__list">
-                                                                    <dt className="card__content__list__topic">
-                                                                        Id
-                                                                    </dt>
-                                                                    <dd className="card__content__list__text">
-                                                                        {
-                                                                            animal.id
-                                                                        }
-                                                                    </dd>
-                                                                    <dt className="card__content__list__topic">
-                                                                        Nome
-                                                                        científico
-                                                                    </dt>
-                                                                    <dd className="card__content__list__text">
-                                                                        {
-                                                                            animal.scientificName
-                                                                        }
-                                                                    </dd>
-                                                                    <dt className="card__content__list__topic">
-                                                                        Descrição
-                                                                        da
-                                                                        imagem
-                                                                    </dt>
-                                                                    <dd className="card__content__list__text">
-                                                                        {
-                                                                            animal.imageDescription
-                                                                        }
-                                                                    </dd>
-                                                                    <dt className="card__content__list__topic">
-                                                                        Características
-                                                                    </dt>
-                                                                    <dd className="card__content__list__text">
-                                                                        {
-                                                                            animal.characteristics
-                                                                        }
-                                                                    </dd>
-                                                                    <dt className="card__content__list__topic">
-                                                                        Alimentação
-                                                                    </dt>
-                                                                    <dd className="card__content__list__text">
-                                                                        {
-                                                                            animal.eating
-                                                                        }
-                                                                    </dd>
-                                                                    <dt className="card__content__list__topic">
-                                                                        Locais
-                                                                        de
-                                                                        avistamento
-                                                                    </dt>
-                                                                    <dd className="card__ccontent__list__text">
-                                                                        {
-                                                                            animal.location
-                                                                        }
-                                                                    </dd>
-                                                                    <dt className="card__content__list__topic">
-                                                                        Estado
-                                                                        de
-                                                                        Conservação
-                                                                        IUCN
-                                                                    </dt>
-                                                                    <dd className="card__content__list__text">
-                                                                        {
-                                                                            animal.iucnState
-                                                                        }
-                                                                    </dd>
-                                                                    <dt className="card__content__list__topic">
-                                                                        Link
-                                                                        para
-                                                                        mais
-                                                                        informações
-                                                                    </dt>
-                                                                    <dd className="card__content__list__text">
-                                                                        <Link
-                                                                            href={
-                                                                                animal.link
-                                                                            }
-                                                                            target="_blank"
-                                                                        >
-                                                                            {
-                                                                                animal.link
-                                                                            }
-                                                                        </Link>
-                                                                    </dd>
-                                                                </dl>
-                                                            </div>
-                                                            <Button
-                                                                onPress={close}
-                                                            >
-                                                                Fechar
-                                                            </Button>
-                                                        </div>
-                                                    )}
-                                                </Dialog>
-                                            </Modal>
-                                        </DialogTrigger>
-                                    </td> */}
                                     <td className="table__body__content--update">
                                         <Link
                                             href={{
