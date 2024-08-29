@@ -1,13 +1,6 @@
 import { animalController } from "@ui/controller/animal";
 import React, { useEffect, useRef, useState } from "react";
-import {
-    SearchField,
-    Label,
-    Input,
-    Button,
-    Text,
-    Link,
-} from "react-aria-components";
+import { Button, Link } from "react-aria-components";
 
 interface HomeAnimal {
     id: string;
@@ -26,17 +19,7 @@ function HomePage() {
     const initialLoadComplete = useRef(false);
 
     // HomePage infos
-    const [isLoading, setIsLoading] = useState(true);
-    const [search, setSearch] = useState("");
     const [animals, setAnimals] = useState<HomeAnimal[]>([]);
-
-    // search
-    const homeAnimals = animals.filter((animal) => {
-        const searchNormalized = search.toLowerCase();
-        const nameNormalized = animal.name.toLowerCase();
-        return nameNormalized.includes(searchNormalized);
-    });
-    const hasNoAnimals = homeAnimals.length === 0 && !isLoading;
 
     // accordion
     const [isOpen, setIsOpen] = useState(false);
@@ -50,7 +33,6 @@ function HomePage() {
                     setAnimals(animals);
                 })
                 .finally(() => {
-                    setIsLoading(false);
                     initialLoadComplete.current = true;
                 });
         }
@@ -80,7 +62,7 @@ function HomePage() {
             </section>
             <h3 className="title">Catálogo de espécies</h3>
             <section className="cards" id="animals">
-                {homeAnimals.map((animal) => {
+                {animals.map((animal) => {
                     return (
                         <div className="card" key={animal.id}>
                             <h4 className="card__title">{animal.name}</h4>
@@ -173,9 +155,6 @@ function HomePage() {
                                         aria-label={`Saiba mais sobre o(a) ${animal.name}`}
                                     >
                                         Saiba mais
-                                        {/* <span className="card__content__link--emphasis">
-                                        sobre o(a) {animal.name}
-                                    </span> */}
                                     </Link>
                                 </div>
                             </div>
