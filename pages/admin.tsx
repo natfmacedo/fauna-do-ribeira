@@ -13,7 +13,6 @@ import {
     Dialog,
     Heading,
 } from "react-aria-components";
-import axios from "axios";
 import Link from "next/link";
 
 interface AdminAnimal {
