@@ -149,11 +149,6 @@ tr:nth-child(even) {
     text-decoration: underline;
 }
 
-
-/* .table__body__content--delete Button:enabled {
-    backdrop-filter: 
-} */
-
 .react-aria-Dialog {
     display: flex;
     flex-direction: row;
@@ -186,6 +181,11 @@ tr:nth-child(even) {
 
 .react-aria-Dialog p {
     font-weight: 600;
+}
+
+.react-aria-Buttons {
+    display: flex;
+    justify-content: right;
 }
 
 .react-aria-Dialog Button, .yesButton {

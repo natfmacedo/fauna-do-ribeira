@@ -83,9 +83,7 @@ function HomePage() {
                 {homeAnimals.map((animal) => {
                     return (
                         <div className="card" key={animal.id}>
-                            <h4 className="card__title" id="nomeAnimal">
-                                {animal.name}
-                            </h4>
+                            <h4 className="card__title">{animal.name}</h4>
                             <img
                                 src={`/images/fauna-do-ribeira-${animal.image}`}
                                 alt={animal.imageDescription}
@@ -120,6 +118,7 @@ function HomePage() {
                                     <dt className="card__content__list__topic">
                                         Estado de Conservação IUCN
                                         <span
+                                            id="iucn-tooltip"
                                             aria-hidden="false"
                                             className="tooltip-trigger"
                                             aria-describedby="tooltip-description"
@@ -164,7 +163,10 @@ function HomePage() {
                                         </span>
                                     </dd>
                                 </dl>
-                                <div className="card__content__link">
+                                <div
+                                    className="card__content__link"
+                                    id="cardLink"
+                                >
                                     <Link
                                         href={animal.link}
                                         target="_blank"

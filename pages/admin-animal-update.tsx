@@ -99,6 +99,7 @@ function UpdateAnimalPage() {
                     <Breadcrumbs>
                         <Breadcrumb>
                             <Link
+                                id="backToTable"
                                 className="menu__options__linkToPreviousPage"
                                 href="/admin"
                             >
@@ -386,19 +387,21 @@ function UpdateAnimalPage() {
                                                     informações inseridas em{" "}
                                                     {`"${animalName}"`}?
                                                 </p>
-                                                <Button
-                                                    className="noButton"
-                                                    onPress={close}
-                                                >
-                                                    Não
-                                                </Button>
-                                                <Link
-                                                    className="yesButton"
-                                                    href="/admin"
-                                                    role="button"
-                                                >
-                                                    Sim
-                                                </Link>
+                                                <div className="react-aria-Buttons">
+                                                    <Button
+                                                        className="noButton"
+                                                        onPress={close}
+                                                    >
+                                                        Não
+                                                    </Button>
+                                                    <Link
+                                                        className="yesButton"
+                                                        href="/admin"
+                                                        role="button"
+                                                    >
+                                                        Sim
+                                                    </Link>
+                                                </div>
                                             </Form>
                                         )}
                                     </Dialog>

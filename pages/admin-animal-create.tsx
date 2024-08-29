@@ -80,6 +80,7 @@ function CreateAnimalPage() {
                     <Breadcrumbs>
                         <Breadcrumb>
                             <Link
+                                id="backToTable"
                                 className="menu__options__linkToPreviousPage"
                                 href="/admin"
                             >
@@ -322,7 +323,7 @@ function CreateAnimalPage() {
                                 <Label>Descrição da imagem:</Label>
                                 <TextArea
                                     value={newAnimalImageDescription}
-                                    placeholder="Ex.: Mamífero semelhante a uma onça-pintada, pesa cerca de cinquenta e três a setenta e dois quilos, mede até cento e cinquenta centímetros e possui entre sessenta e noventa e sete centímetros de cauda (que é cilíndrica e no formato da letra j). Apresenta pelagem curta, olhos arredondados e coloração que varia entre cinza e marrom-avermelhado (com exceção do rosto que costuma ser mais claro em tons de bege). Foto via Pixabay."
+                                    placeholder="Ex.: Mamífero semelhante a uma onça-pintada (mas sem as manchas), pesa cerca de 53 a 72 quilos, mede até 150 centímetros e possui entre 60 e 97 centímetros de cauda (que é cilíndrica e no formato da letra 'j'). Apresenta pelagem curta, olhos arredondados e coloração que varia entre cinza e marrom-avermelhado (com exceção do rosto que costuma ser mais claro em tons de bege). Foto via Pixabay."
                                     onChange={function newAnimalHandler(event) {
                                         setNewAnimalImageDescription(
                                             event.target.value
@@ -371,41 +372,53 @@ function CreateAnimalPage() {
                                                     informações preenchidas
                                                     nesse cadastro?
                                                 </p>
-                                                <Button
-                                                    className="noButton"
-                                                    onPress={close}
-                                                >
-                                                    Não
-                                                </Button>
-                                                <Button
-                                                    className="yesButton"
-                                                    type="reset"
-                                                    onPress={function resetAnimalImage() {
-                                                        setNewAnimalName("");
-                                                        setNewAnimalScientificName(
-                                                            ""
-                                                        );
-                                                        setNewAnimalImage("");
-                                                        setSelectedImage("");
-                                                        setNewAnimalImageDescription(
-                                                            ""
-                                                        );
-                                                        setNewAnimalCharacteristics(
-                                                            ""
-                                                        );
-                                                        setNewAnimalEating("");
-                                                        setNewAnimalLocation(
-                                                            ""
-                                                        );
-                                                        setNewAnimalIUCNState(
-                                                            ""
-                                                        );
-                                                        setNewAnimalLink("");
-                                                        close();
-                                                    }}
-                                                >
-                                                    Sim
-                                                </Button>
+                                                <div className="react-aria-Buttons">
+                                                    <Button
+                                                        className="noButton"
+                                                        onPress={close}
+                                                    >
+                                                        Não
+                                                    </Button>
+                                                    <Button
+                                                        className="yesButton"
+                                                        type="reset"
+                                                        onPress={function resetAnimalImage() {
+                                                            setNewAnimalName(
+                                                                ""
+                                                            );
+                                                            setNewAnimalScientificName(
+                                                                ""
+                                                            );
+                                                            setNewAnimalImage(
+                                                                ""
+                                                            );
+                                                            setSelectedImage(
+                                                                ""
+                                                            );
+                                                            setNewAnimalImageDescription(
+                                                                ""
+                                                            );
+                                                            setNewAnimalCharacteristics(
+                                                                ""
+                                                            );
+                                                            setNewAnimalEating(
+                                                                ""
+                                                            );
+                                                            setNewAnimalLocation(
+                                                                ""
+                                                            );
+                                                            setNewAnimalIUCNState(
+                                                                ""
+                                                            );
+                                                            setNewAnimalLink(
+                                                                ""
+                                                            );
+                                                            close();
+                                                        }}
+                                                    >
+                                                        Sim
+                                                    </Button>
+                                                </div>
                                             </Form>
                                         )}
                                     </Dialog>

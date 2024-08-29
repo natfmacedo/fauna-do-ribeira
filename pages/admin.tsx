@@ -95,7 +95,11 @@ function AdminPage() {
             </section>
             <section className="table">
                 <div className="table__createButton">
-                    <Link href="/admin-animal-create" role="button">
+                    <Link
+                        href="/admin-animal-create"
+                        role="button"
+                        id="createAnimalTableButton"
+                    >
                         <span aria-hidden="true">+</span> Cadastrar animal
                     </Link>
                 </div>
@@ -163,7 +167,10 @@ function AdminPage() {
                                     <td className="table__body__content">
                                         {animal.imageDescription}
                                     </td>
-                                    <td className="table__body__content">
+                                    <td
+                                        className="table__body__content"
+                                        id="tableAnimalName"
+                                    >
                                         {animal.name}
                                     </td>
                                     <td className="table__body__content">
@@ -195,6 +202,7 @@ function AdminPage() {
                                             }}
                                             role="button"
                                             aria-label={animal.name}
+                                            id="updateAnimalTableButton"
                                         >
                                             Editar
                                         </Link>
@@ -203,6 +211,7 @@ function AdminPage() {
                                         <DialogTrigger>
                                             <Button aria-label={animal.name}>
                                                 <a
+                                                    id="deleteAnimalTableButton"
                                                     href="#deleteAnimal"
                                                     role="button"
                                                 >
@@ -227,53 +236,58 @@ function AdminPage() {
                                                                 permanentemente
                                                                 excluídas.
                                                             </p>
-                                                            <Button
-                                                                className="cancelButton"
-                                                                onPress={close}
-                                                            >
-                                                                Cancelar
-                                                            </Button>
-                                                            <Button
-                                                                className="deleteButton"
-                                                                onPress={function handleClick() {
-                                                                    animalController
-                                                                        .deleteById(
-                                                                            animal.id
-                                                                        )
-                                                                        .then(
-                                                                            () => {
-                                                                                setAnimals(
-                                                                                    (
-                                                                                        currentAnimals
-                                                                                    ) => {
-                                                                                        return currentAnimals.filter(
-                                                                                            (
-                                                                                                currentAnimal
-                                                                                            ) => {
-                                                                                                if (
-                                                                                                    currentAnimal.id ===
-                                                                                                    animal.id
-                                                                                                )
-                                                                                                    return false;
+                                                            <div className="react-aria-Buttons">
+                                                                <Button
+                                                                    className="cancelButton"
+                                                                    onPress={
+                                                                        close
+                                                                    }
+                                                                >
+                                                                    Cancelar
+                                                                </Button>
+                                                                <Button
+                                                                    name="deleteAnimal"
+                                                                    className="deleteButton"
+                                                                    onPress={function handleClick() {
+                                                                        animalController
+                                                                            .deleteById(
+                                                                                animal.id
+                                                                            )
+                                                                            .then(
+                                                                                () => {
+                                                                                    setAnimals(
+                                                                                        (
+                                                                                            currentAnimals
+                                                                                        ) => {
+                                                                                            return currentAnimals.filter(
+                                                                                                (
+                                                                                                    currentAnimal
+                                                                                                ) => {
+                                                                                                    if (
+                                                                                                        currentAnimal.id ===
+                                                                                                        animal.id
+                                                                                                    )
+                                                                                                        return false;
 
-                                                                                                return true;
-                                                                                            }
-                                                                                        );
-                                                                                    }
-                                                                                );
-                                                                            }
-                                                                        )
-                                                                        .catch(
-                                                                            () => {
-                                                                                console.error(
-                                                                                    "Failed to delete"
-                                                                                );
-                                                                            }
-                                                                        );
-                                                                }}
-                                                            >
-                                                                Excluir
-                                                            </Button>
+                                                                                                    return true;
+                                                                                                }
+                                                                                            );
+                                                                                        }
+                                                                                    );
+                                                                                }
+                                                                            )
+                                                                            .catch(
+                                                                                () => {
+                                                                                    console.error(
+                                                                                        "Failed to delete"
+                                                                                    );
+                                                                                }
+                                                                            );
+                                                                    }}
+                                                                >
+                                                                    Excluir
+                                                                </Button>
+                                                            </div>
                                                         </Form>
                                                     )}
                                                 </Dialog>
