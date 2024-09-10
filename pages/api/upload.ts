@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextApiHandler, NextApiRequest } from "next";
 import formidable from "formidable";
 import { promises as fs } from "fs";
