@@ -48,16 +48,19 @@ function HomePage() {
                         <strong className="banner__text--emphasis">
                             fauna nativa da região do Vale do Ribeira{" "}
                         </strong>
-                        e o Estado de Conservação de cada espécie segundo a
-                        União Internacional para a Conservação da Natureza e dos
-                        Recursos Naturais (IUCN).
+                        no Estado de São Paulo e o Estado de Conservação de cada
+                        espécie segundo a União Internacional para a Conservação
+                        da Natureza e dos Recursos Naturais (IUCN).
                     </p>
                     <Link className="banner__link" href="#animals">
                         Conhecer animais
                     </Link>
                 </article>
                 <div className="banner__image">
-                    <img src="" alt="" />
+                    <img
+                        src="/images/fauna-do-ribeira-mapa.png"
+                        alt="Mapa da região do Vale do Ribeira no Estado de São Paulo com algumas das espécies pertencentes à fauna nativa da região em seu interior, são elas: Maria-leque-do-sudeste, Tucano-de-bico-preto, Papagaio-de-cara-roxa, Anta (albina), Boto-cinza e Jiboia-do-ribeira. Todas as espécies serão descritas detalhadamente na seção 'Catálogo de espécies'. Ilustração por Natália Félix."
+                    />
                 </div>
             </section>
             <h3 className="title">Catálogo de espécies</h3>

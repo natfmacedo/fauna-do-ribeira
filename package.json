@@ -39,6 +39,7 @@
     "start-server-and-test": "^2.0.5"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.45.2",
     "axios": "^1.7.2",
     "cypress": "^13.13.2",
     "formidable": "^3.5.1",
