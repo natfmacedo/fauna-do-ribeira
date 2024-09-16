@@ -6,12 +6,12 @@ Website que exibe alguns dos animais pertences à fauna nativa da região do Val
 
 ## Índice
 - <a href="#funcionalidades-do-projeto">Funcionalidades do projeto</a>
-- <a href="#tecnologias">Tecnologias utilizadas</a>
+- <a href="#tecnologias-utilizadas">Tecnologias utilizadas</a>
 - <a href="#layout">Layout</a>
 - <a href="#demonstração">Demonstração</a>
-- <a href="#rodar">Como rodar o projeto na sua máquina</a>
-- <a href="#autora">Pessoas autoras</a>
-- <a href="#passos">Próximos passos</a>
+- <a href="#como-rodar-o-projeto-na-sua-máquina">Como rodar o projeto na sua máquina</a>
+- <a href="#pessoas-autoras">Pessoas autoras</a>
+- <a href="#próximos-passos">Próximos passos</a>
 
 ## Funcionalidades do projeto
 - [x] Cadastro das espécies de animais
