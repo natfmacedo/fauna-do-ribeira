@@ -83,7 +83,6 @@ function AdminPage() {
                                 setSearch(event.target.value);
                             }}
                         />
-                        {/* <Button>✕</Button> */}
                         <div className="intro__admin__search__text">
                             <Text aria-hidden="true" slot="description">
                                 Digite um nome, exemplo: Onça-parda.
