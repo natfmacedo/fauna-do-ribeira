@@ -5,22 +5,22 @@
 Website que exibe alguns dos animais pertences à fauna nativa da região do Vale do Ribeira no Estado de São Paulo. São apresentadas as seguintes informações a respeito de cada espécie: nome científico, características, alimentação, locais de avistamento, estado de conservação segundo a União Internacional para a Conservação da Natureza e dos Recursos Naturais (IUCN) e link para mais informações. 🦜
 
 ## Índice
-- <a href="#funcionalidades">Funcionalidades do projeto</a>
-- <a href="#tecnologias">Tecnologias utilizadas</a>
+- <a href="#funcionalidades-do-projeto">Funcionalidades do projeto</a>
+- <a href="#tecnologias-utilizadas">Tecnologias utilizadas</a>
 - <a href="#layout">Layout</a>
-- <a href="#demonstracao">Demonstração</a>
-- <a href="#rodar">Como rodar o projeto na sua máquina</a>
-- <a href="#autora">Pessoas autoras</a>
-- <a href="#passos">Próximos passos</a>
+- <a href="#demonstração">Demonstração</a>
+- <a href="#como-rodar-o-projeto-na-sua-máquina">Como rodar o projeto na sua máquina</a>
+- <a href="#pessoas-autoras">Pessoas autoras</a>
+- <a href="#próximos-passos">Próximos passos</a>
 
-## 💻📱 Funcionalidades do projeto
+## Funcionalidades do projeto
 - [x] Cadastro das espécies de animais
 - [x] Campo de busca das espécies cadastradas
 - [x] Edição das espécies 
 - [x] Exclusão das espécies
 - [x] Exibição das espécies no formato de cards
 
-## 🛠️ Tecnologias utilizadas
+## Tecnologias utilizadas
 - Linguagens de programação
 
     ![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC.svg?style=flat-square&logo=typescript&logoColor=white)
@@ -103,14 +103,14 @@ Website que exibe alguns dos animais pertences à fauna nativa da região do Val
         npm run dev
         npm run test
         ```
-## 👩‍💻 Pessoas autoras
+## Pessoas autoras
 ### Natália Félix Macedo
 <img src="https://avatars.githubusercontent.com/u/126514540?s=400&u=1912c3c0fed305105e7246b1724daea8a3ed0b1b&v=4" alt="Mulher de 22 anos, branca, com olhos castanhos escuros e cabelo ondulado nas cores preto e vermelho. Na foto, está sorrindo e utilizando uma blusa de alcinha na cor vermelha." style="width: 100px"> 
 
 [![Linkedin: nataliafelixm](https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nataliafelixm/)
 [![Gmail: nfelixmacedo@gmail.com](https://img.shields.io/badge/Gmail-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:nfelixmacedo@gmail.com)
 
-## 👟 Próximos passos
+## Próximos passos
 
 - [ ] Implementação do algoritmo de paginação
 - [ ] Aprimoramento do Banco de Dados
