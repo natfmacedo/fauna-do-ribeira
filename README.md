@@ -13,7 +13,7 @@ Website que exibe alguns dos animais pertences à fauna nativa da região do Val
 - <a href="#autora">Pessoas autoras</a>
 - <a href="#passos">Próximos passos</a>
 
-## 💻📱 Funcionalidades do projeto
+## Funcionalidades do projeto
 - [x] Cadastro das espécies de animais
 - [x] Campo de busca das espécies cadastradas
 - [x] Edição das espécies 
