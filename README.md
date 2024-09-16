@@ -5,10 +5,10 @@
 Website que exibe alguns dos animais pertences à fauna nativa da região do Vale do Ribeira no Estado de São Paulo. São apresentadas as seguintes informações a respeito de cada espécie: nome científico, características, alimentação, locais de avistamento, estado de conservação segundo a União Internacional para a Conservação da Natureza e dos Recursos Naturais (IUCN) e link para mais informações. 🦜
 
 ## Índice
-- <a href="#funcionalidades">Funcionalidades do projeto</a>
+- <a href="#funcionalidades-do-projeto">Funcionalidades do projeto</a>
 - <a href="#tecnologias">Tecnologias utilizadas</a>
 - <a href="#layout">Layout</a>
-- <a href="#demonstracao">Demonstração</a>
+- <a href="#demonstração">Demonstração</a>
 - <a href="#rodar">Como rodar o projeto na sua máquina</a>
 - <a href="#autora">Pessoas autoras</a>
 - <a href="#passos">Próximos passos</a>
@@ -20,7 +20,7 @@ Website que exibe alguns dos animais pertences à fauna nativa da região do Val
 - [x] Exclusão das espécies
 - [x] Exibição das espécies no formato de cards
 
-## 🛠️ Tecnologias utilizadas
+## Tecnologias utilizadas
 - Linguagens de programação
 
     ![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC.svg?style=flat-square&logo=typescript&logoColor=white)
