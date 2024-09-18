@@ -89,7 +89,7 @@ Website que exibe alguns dos animais pertences à fauna nativa da região do Val
   - Clique em `API`:
 
       ![AnimalAPI](./public/extra-images/animal-bd-api.png)
-  - Copie a `URL` e a chave do tipo `secret`/`secret`:
+  - Copie a `URL` e a chave `secret`:
   ![AnimalKeys](./public/extra-images/animal-bd-keys.png)
   - Crie um arquivo chamado `.env` na raiz do projeto e defina as variáveis de ambiente da seguinte forma:
     ```bash
@@ -105,7 +105,7 @@ Website que exibe alguns dos animais pertences à fauna nativa da região do Val
         ```
 ## Pessoas autoras
 ### Natália Félix Macedo
-<img src="https://avatars.githubusercontent.com/u/126514540?s=400&u=1912c3c0fed305105e7246b1724daea8a3ed0b1b&v=4" alt="Mulher de 22 anos, branca, com olhos castanhos escuros e cabelo ondulado nas cores preto e vermelho. Na foto, está sorrindo e utilizando uma blusa de alcinha na cor vermelha." style="width: 100px"> 
+<img src="https://avatars.githubusercontent.com/u/126514540?s=400&u=1912c3c0fed305105e7246b1724daea8a3ed0b1b&v=4" alt="Mulher de 22 anos, branca, com olhos castanhos escuros e cabelo ondulado nas cores preto e vermelho. Na foto, Natália está sorrindo e utilizando uma blusa de alcinha na cor vermelha." style="width: 100px"> 
 
 [![Linkedin: nataliafelixm](https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nataliafelixm/)
 [![Gmail: nfelixmacedo@gmail.com](https://img.shields.io/badge/Gmail-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:nfelixmacedo@gmail.com)
@@ -113,4 +113,5 @@ Website que exibe alguns dos animais pertences à fauna nativa da região do Val
 ## Próximos passos
 
 - [ ] Implementação do algoritmo de paginação
+- [ ] Aprimoramento do algoritmo de upload das imagens
 - [ ] Aprimoramento do Banco de Dados
