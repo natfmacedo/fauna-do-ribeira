@@ -45,7 +45,7 @@ body {
     font-family: var(--logo-font);
     font-size: var(--logo-size-font);
     font-weight: var(--logo-weight-font);
-    line-height: 2.55rem;
+    line-height: 2.70rem;
     text-align: center;
     text-transform: uppercase;
 }
@@ -290,9 +290,15 @@ body {
     font-family: var(--logo-font);
     font-size: var(--logo-size-font);
     font-weight: var(--logo-weight-font);
-    line-height: 2.55rem;
+    line-height: 2.70rem;
     margin-top: .125rem;
     text-align: center;
     text-transform: uppercase;    
 }
 
+.footer__logo--emphasis {
+    color: var(--tertiary-text-color);
+    font-size: var(--logo-emphasis-size-font);
+    font-weight: var(--logo-emphasis-weight-font);
+    text-align: center;
+}

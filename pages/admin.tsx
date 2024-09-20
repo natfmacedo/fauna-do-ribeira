@@ -92,9 +92,7 @@ function AdminPage() {
                         </div>
                     </SearchField>
                 </div>
-            </section>
-            <section className="table">
-                <div className="table__createButton">
+                <div className="intro__admin__createButton">
                     <Link
                         href="/admin-animal-create"
                         role="button"
@@ -103,6 +101,8 @@ function AdminPage() {
                         <span aria-hidden="true">+</span> Cadastrar animal
                     </Link>
                 </div>
+            </section>
+            <section className="table">
                 <table>
                     <caption className="table__subtitle">
                         Animais cadastrados no site Fauna do Ribeira

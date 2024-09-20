@@ -20,10 +20,10 @@ export const Layout = ({ children }: LayoutProps) => {
             {children}
 
             <footer className="footer">
-                <h5 className="footer__logo">
+                <p className="footer__logo">
                     Fauna do <br />
                     <span className="footer__logo--emphasis">Ribeira</span>
-                </h5>
+                </p>
             </footer>
         </>
     );
