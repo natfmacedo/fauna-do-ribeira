@@ -42,7 +42,7 @@ Website que exibe alguns dos animais pertences à fauna nativa da região do Val
 
 - Testes E2E
 
-    ![Cypress](https://img.shields.io/badge/-Cypress-%23E5E5E5?style=flat-square&logo=cypress&logoColor=058a5e)
+    ![Cypresss](https://img.shields.io/badge/-Cypress-%23E5E5E5?style=flat-square&logo=cypress&logoColor=058a5e)
 
 - CI/CD
 
