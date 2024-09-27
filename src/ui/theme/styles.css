@@ -54,6 +54,7 @@ body {
     color: var(--secundary-color);
     font-size: var(--logo-emphasis-size-font);
     font-weight: var(--logo-emphasis-weight-font);
+    text-align: center;
 }
 
 .banner {
@@ -61,7 +62,6 @@ body {
     color: var(--tertiary-text-color);
     display: grid;
     align-items: center;
-    flex-direction: column;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     padding: 4rem 2rem;
 }
@@ -100,6 +100,10 @@ body {
     color: var(--primary-color);
 }
 
+.banner__image img{
+    width: 100%;
+}
+
 .title {
     text-align: center;
     margin-bottom: .125rem;
@@ -109,7 +113,7 @@ body {
 }
 
 .cards {
-    padding: 2rem;
+    padding: 1rem;
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));;

@@ -3,8 +3,8 @@ import { z as schema } from "zod";
 import { animalRepository } from "@server/repository/animal";
 import { HttpNotFoundError } from "@server/infra/errors";
 
-function get(_: NextApiRequest, res: NextApiResponse) {
-    const output = animalRepository.get();
+async function get(_: NextApiRequest, res: NextApiResponse) {
+    const output = await animalRepository.get();
 
     res.status(200).json({
         animals: output.animals,
@@ -43,21 +43,29 @@ async function create(req: NextApiRequest, res: NextApiResponse) {
         return;
     }
 
-    const createdAnimal = await animalRepository.createAnimal(
-        body.data.name,
-        body.data.scientificName,
-        body.data.image,
-        body.data.imageDescription,
-        body.data.characteristics,
-        body.data.eating,
-        body.data.location,
-        body.data.iucnState,
-        body.data.link
-    );
+    try {
+        const createdAnimal = await animalRepository.createAnimal(
+            body.data.name,
+            body.data.scientificName,
+            body.data.image,
+            body.data.imageDescription,
+            body.data.characteristics,
+            body.data.eating,
+            body.data.location,
+            body.data.iucnState,
+            body.data.link
+        );
 
-    res.status(201).json({
-        animal: createdAnimal,
-    });
+        res.status(201).json({
+            animal: createdAnimal,
+        });
+    } catch {
+        res.status(400).json({
+            error: {
+                message: "Failed to create animal",
+            },
+        });
+    }
 }
 
 async function getAnimalById(req: NextApiRequest, res: NextApiResponse) {

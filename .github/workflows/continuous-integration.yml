@@ -1,0 +1,32 @@
+name: "[CI] - Continuous Integration"
+
+on:
+    pull_request:
+        types: [opened, synchronize]
+
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+           - uses: actions/checkout@v3
+           - name: "Debug"
+             run: "ls -la"
+           - name: "Install Dependencies"
+             run: "npm install"
+           - name: "Lint"
+             run: "npm run lint"
+    test:
+        runs-on: ubuntu-latest
+        container:
+            image: cypress/browsers:node-20.14.0-chrome-126.0.6478.114-1-ff-127.0.1-edge-126.0.2592.61-1
+        steps:
+           - uses: actions/checkout@v3
+           - name: "Install Dependencies"
+             run: "npm install"
+           - name: "Test - Cypress"
+             env:
+                SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+                SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+             run: "npm run test"
+
+            

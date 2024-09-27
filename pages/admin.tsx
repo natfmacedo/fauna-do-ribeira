@@ -13,7 +13,6 @@ import {
     Dialog,
     Heading,
 } from "react-aria-components";
-import axios from "axios";
 import Link from "next/link";
 
 interface AdminAnimal {
@@ -84,7 +83,6 @@ function AdminPage() {
                                 setSearch(event.target.value);
                             }}
                         />
-                        {/* <Button>✕</Button> */}
                         <div className="intro__admin__search__text">
                             <Text aria-hidden="true" slot="description">
                                 Digite um nome, exemplo: Onça-parda.

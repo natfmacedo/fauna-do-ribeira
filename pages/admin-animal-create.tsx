@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import { NextSeo } from "next-seo";
 import { animalController } from "@ui/controller/animal";

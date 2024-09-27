@@ -1,20 +1,27 @@
-import {
-    read,
-    create,
-    update,
-    getAnimalById as dbGetAnimalById,
-    deleteById as dbDeleteById,
-} from "@db-crud-animals";
+import { supabase } from "@server/infra/db/supabase";
 import { HttpNotFoundError } from "@server/infra/errors";
+import { Animal, AnimalSchema } from "@server/schema/animal";
 
 interface AnimalRepositoryGetOutput {
     animals: Animal[];
 }
 
-function get(): AnimalRepositoryGetOutput {
-    const ALL_ANIMALS = read().reverse();
+async function get(): Promise<AnimalRepositoryGetOutput> {
+    const { data, error } = await supabase
+        .from("animal")
+        .select("*")
+        .order("date", { ascending: false });
+    if (error) throw new Error("Failed to fetch data");
+
+    const parsedData = AnimalSchema.array().safeParse(data);
+
+    if (!parsedData.success) {
+        throw new Error("Failed to parse animal from database");
+    }
+
+    const animals = parsedData.data;
     return {
-        animals: ALL_ANIMALS,
+        animals,
     };
 }
 
@@ -29,27 +36,44 @@ async function createAnimal(
     iucnState: string,
     link: string
 ): Promise<Animal> {
-    const newAnimal = create(
-        name,
-        scientificName,
-        image,
-        imageDescription,
-        characteristics,
-        eating,
-        location,
-        iucnState,
-        link
-    );
-    return newAnimal;
+    const { data, error } = await supabase
+        .from("animal")
+        .insert([
+            {
+                name,
+                scientificName,
+                image,
+                imageDescription,
+                characteristics,
+                eating,
+                location,
+                iucnState,
+                link,
+            },
+        ])
+        .select()
+        .single();
+
+    if (error) throw new Error("Failed to create animal");
+
+    const parsedData = AnimalSchema.parse(data);
+
+    return parsedData;
 }
 
 async function getAnimalById(id: string): Promise<Animal> {
-    const ALL_ANIMALS = read();
-    const animalId = ALL_ANIMALS.find((animal) => animal.id === id);
-    if (!animalId)
-        throw new HttpNotFoundError(`Animal with id "${id}" not found`);
-    dbGetAnimalById(JSON.stringify(animalId));
-    return animalId;
+    const { data, error } = await supabase
+        .from("animal")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+    if (error) throw new Error("Failed to get animal by id");
+
+    const parsedData = AnimalSchema.safeParse(data);
+    if (!parsedData.success) throw new Error("Failed to parse animal created");
+
+    return parsedData.data;
 }
 
 async function animalUpdate(
@@ -64,35 +88,39 @@ async function animalUpdate(
     iucnState: string,
     link: string
 ): Promise<Animal> {
-    const ALL_ANIMALS = read();
+    const { data, error } = await supabase
+        .from("animal")
+        .update({
+            name,
+            scientificName,
+            image,
+            imageDescription,
+            characteristics,
+            eating,
+            location,
+            iucnState,
+            link,
+        })
+        .eq("id", id)
+        .select()
+        .single();
 
-    const animal = ALL_ANIMALS.find((currentAnimal) => currentAnimal.id === id);
+    if (error) throw new Error("Failed to get animal by id");
 
-    if (!animal)
-        throw new HttpNotFoundError(`Animal with id "${id}" not found`);
+    const parsedData = AnimalSchema.safeParse(data);
+    if (!parsedData.success) {
+        throw new Error("Failed to return updated animal");
+    }
 
-    const updatedAnimal = update(animal.id, {
-        name,
-        scientificName,
-        image,
-        imageDescription,
-        characteristics,
-        eating,
-        location,
-        iucnState,
-        link,
-    });
-
-    return updatedAnimal;
+    return parsedData.data;
 }
 
 async function deleteById(id: string) {
-    const ALL_ANIMALS = read();
-    const animal = ALL_ANIMALS.find((animal) => animal.id === id);
+    const { error } = await supabase.from("animal").delete().match({
+        id,
+    });
 
-    if (!animal)
-        throw new HttpNotFoundError(`Animal with id "${id}" not found`);
-    dbDeleteById(id);
+    if (error) throw new HttpNotFoundError(`Animal with id "${id}" not found`);
 }
 
 export const animalRepository = {
@@ -102,18 +130,3 @@ export const animalRepository = {
     animalUpdate,
     deleteById,
 };
-
-// Model/Schema
-interface Animal {
-    id: string;
-    date: string;
-    image: string;
-    imageDescription: string;
-    name: string;
-    scientificName: string;
-    characteristics: string;
-    eating: string;
-    location: string;
-    iucnState: string;
-    link: string;
-}

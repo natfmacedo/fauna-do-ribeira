@@ -1,12 +1,12 @@
 import { animalController } from "@server/controller/animal";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default function handler(
+export default async function handler(
     request: NextApiRequest,
     response: NextApiResponse
 ) {
     if (request.method === "DELETE") {
-        animalController.deleteById(request, response);
+        await animalController.deleteById(request, response);
         return;
     }
 
