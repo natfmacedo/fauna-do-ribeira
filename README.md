@@ -39,6 +39,10 @@ Website que exibe alguns dos animais pertences à fauna nativa da região do Val
 - Banco de Dados
 
     ![Supabase](https://img.shields.io/badge/Supabase-black?style=flat-square&logo=supabase&logoColor=3ECF8E)
+
+- Testes E2E
+
+    ![Cypress](https://img.shields.io/badge/-Cypress-%23E5E5E5?style=flat-square&logo=cypress&logoColor=058a5e)
     
 - CI/CD
 
